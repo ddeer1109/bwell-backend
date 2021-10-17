@@ -1,13 +1,13 @@
-package com.bwell.project.eatwell.recipes.ingredients.service;
+package com.bwell.modules.eatwell.recipes.ingredients.service;
 
-import com.bwell.project.eatwell.recipes.ingredients.SpoonacularApi.RequestingService;
-import com.bwell.project.eatwell.recipes.ingredients.model.Ingredient;
-import com.bwell.project.eatwell.recipes.ingredients.model.Unit;
-import com.bwell.project.eatwell.recipes.ingredients.repositories.CommonIngredientsRepository;
-import com.bwell.project.eatwell.recipes.ingredients.repositories.DetailedIngredientsRepository;
-import com.bwell.project.eatwell.recipes.ingredients.repositories.IngredientsRepository;
-import com.bwell.project.eatwell.recipes.ingredients.repositories.UnitRepository;
-import com.bwell.project.eatwell.recipes.ingredients.model.DetailedIngredient;
+import com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi.RequestingService;
+import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.modules.eatwell.recipes.ingredients.model.Unit;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.CommonIngredientsRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.DetailedIngredientsRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientsRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.UnitRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.example.students.eatwell.recipes.ingredients.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

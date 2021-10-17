@@ -1,4 +1,4 @@
-package com.bwell.project.eatwell.recipes.ingredients.model;
+package com.bwell.modules.eatwell.recipes.ingredients.model;
 
 import lombok.Getter;
 import lombok.Setter;

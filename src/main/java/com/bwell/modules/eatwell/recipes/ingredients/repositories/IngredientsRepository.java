@@ -1,6 +1,6 @@
-package com.bwell.project.eatwell.recipes.ingredients.repositories;
+package com.bwell.modules.eatwell.recipes.ingredients.repositories;
 
-import com.bwell.project.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

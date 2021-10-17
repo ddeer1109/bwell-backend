@@ -1,4 +1,4 @@
-package com.bwell.project;
+package com.bwell.modules;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

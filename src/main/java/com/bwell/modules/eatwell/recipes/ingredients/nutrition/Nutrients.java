@@ -1,4 +1,4 @@
-package com.bwell.project.eatwell.recipes.ingredients.nutrition;
+package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
