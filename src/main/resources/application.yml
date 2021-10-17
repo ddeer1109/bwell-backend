@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    port: 5432
+    host: localhost
+    databaseName: student
+    url: jdbc:postgresql://localhost:5432/bwell
+    username: postgres
+    password: 123456
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
