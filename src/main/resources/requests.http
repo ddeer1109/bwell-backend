@@ -1,0 +1,50 @@
+#GET http://localhost:8080/addStudents
+#
+####
+#
+#GET http://localhost:8080/students
+#
+####
+#
+#GET http://localhost:8080/test
+#
+####
+#
+#GET https://api.spoonacular.com/food/ingredients/5062/information?apiKey=1eac70c6679646c495c10b490246131b&amount=100&unit=grams
+#
+####
+#
+#GET http://localhost:8080/api/query/5062
+#
+
+###
+
+GET http://localhost:8080/api/query?query=banana
+
+###
+
+GET http://localhost:8080/api/query/19400?unit=ounce&amount=333
+
+###
+
+GET http://localhost:8080/api/query/19400?amount=2
+
+###
+
+GET http://localhost:8080/api/query/10011677?amount=200
+
+###
+
+GET http://localhost:8080/test/2
+
+###
+
+GET http://localhost/api/query/19400
+
+###
+
+GET http://localhost/api/query/19400?amount=200&unit=ounce
+
+###
+
+GET http://localhost/api/query?query=chicken

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    "ports":
+      - 127.0.0.1:80:8080
+    image: apijar:latest
+    container_name: app2
+    depends_on:
+      - db3
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db3:5432/bwell
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=poki123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db3:
+    image: 'postgres:13.1-alpine'
+    container_name: db3
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=poki123
