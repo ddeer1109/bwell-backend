@@ -1,4 +1,4 @@
-package com.example.students.eatwell.recipes.ingredients.nutrition;
+package com.bwell.project.eatwell.recipes.ingredients.nutrition;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.example.students.eatwell.recipes.ingredients.SpoonacularApi;
+package com.bwell.project.eatwell.recipes.ingredients.SpoonacularApi;
 
 public class UrlBuilder {
     private String API_KEY = "1eac70c6679646c495c10b490246131b";

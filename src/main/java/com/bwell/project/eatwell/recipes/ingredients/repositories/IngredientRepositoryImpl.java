@@ -1,8 +1,8 @@
-package com.example.students.eatwell.recipes.ingredients.repositories;
+package com.bwell.project.eatwell.recipes.ingredients.repositories;
 
-import com.example.students.eatwell.recipes.ingredients.model.DetailedIngredient;
-import com.example.students.eatwell.recipes.ingredients.model.Ingredient;
-import com.example.students.eatwell.recipes.ingredients.model.Unit;
+import com.bwell.project.eatwell.recipes.ingredients.model.DetailedIngredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.Unit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

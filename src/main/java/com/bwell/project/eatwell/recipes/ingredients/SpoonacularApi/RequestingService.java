@@ -1,7 +1,7 @@
-package com.example.students.eatwell.recipes.ingredients.SpoonacularApi;
+package com.bwell.project.eatwell.recipes.ingredients.SpoonacularApi;
 
-import com.example.students.eatwell.recipes.ingredients.model.DetailedIngredient;
-import com.example.students.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.DetailedIngredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.Ingredient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;

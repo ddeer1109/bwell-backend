@@ -1,6 +1,6 @@
-package com.example.students.eatwell.recipes.ingredients.model;
+package com.bwell.project.eatwell.recipes.ingredients.model;
 
-import com.example.students.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.project.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

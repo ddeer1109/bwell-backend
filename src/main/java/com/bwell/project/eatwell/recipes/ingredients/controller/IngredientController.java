@@ -1,11 +1,10 @@
-package com.example.students.eatwell.recipes.ingredients.controller;
+package com.bwell.project.eatwell.recipes.ingredients.controller;
 
-import com.example.students.eatwell.recipes.ingredients.model.DetailedIngredient;
-import com.example.students.eatwell.recipes.ingredients.model.Ingredient;
-import com.example.students.eatwell.recipes.ingredients.model.Unit;
-import com.example.students.eatwell.recipes.ingredients.repositories.IngredientRepositoryImpl;
-import com.example.students.eatwell.recipes.ingredients.service.IngredientService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.bwell.project.eatwell.recipes.ingredients.repositories.IngredientRepositoryImpl;
+import com.bwell.project.eatwell.recipes.ingredients.model.DetailedIngredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.project.eatwell.recipes.ingredients.model.Unit;
+import com.bwell.project.eatwell.recipes.ingredients.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
