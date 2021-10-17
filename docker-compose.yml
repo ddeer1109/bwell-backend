@@ -5,7 +5,7 @@ services:
     "ports":
       - 127.0.0.1:80:8080
     image: apijar:latest
-    container_name: app2
+    container_name: app3
     depends_on:
       - db3
     environment:

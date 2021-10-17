@@ -1,17 +1,4 @@
 
-###
-
-GET http://localhost/api/ingredients
-
-###
-
-GET http://localhost/api/detailed
-
-###
-
-GET http://localhost/api/query/10219
-
-###
 
 GET http://localhost/api/eatwell/ingredient/19400?amount=200&unit=ounce
 
@@ -19,6 +6,3 @@ GET http://localhost/api/eatwell/ingredient/19400?amount=200&unit=ounce
 
 GET http://localhost/api/eatwell/ingredient/q?query=pork
 
-###
-
-GET http://localhost/api/units
