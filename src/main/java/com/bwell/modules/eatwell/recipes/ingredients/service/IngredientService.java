@@ -8,7 +8,6 @@ import com.bwell.modules.eatwell.recipes.ingredients.repositories.DetailedIngred
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientsRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.UnitRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
-import com.example.students.eatwell.recipes.ingredients.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

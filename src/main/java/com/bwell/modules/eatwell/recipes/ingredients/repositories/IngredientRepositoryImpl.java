@@ -14,30 +14,18 @@ import java.util.stream.Collectors;
 
 @Repository
 public class IngredientRepositoryImpl implements CommonIngredientsRepository {
-    private Logger logger = LoggerFactory.getLogger(IngredientRepositoryImpl.class);
-    private DetailedIngredientsRepository detailedIngredientsRepository;
+    private final Logger logger = LoggerFactory.getLogger(IngredientRepositoryImpl.class);
+    private final DetailedIngredientsRepository detailedIngredientsRepository;
 
-    private IngredientsRepository ingredientsRepository;
+    private final IngredientsRepository ingredientsRepository;
 
-    private UnitRepository unitRepository;
+    private final UnitRepository unitRepository;
 
     @Autowired
     public IngredientRepositoryImpl(DetailedIngredientsRepository custom, IngredientsRepository standard, UnitRepository unit) {
         this.detailedIngredientsRepository = custom;
         this.ingredientsRepository = standard;
         this.unitRepository = unit;
-    }
-
-    public UnitRepository getUnitRepository() {
-        return unitRepository;
-    }
-
-    public DetailedIngredientsRepository getDetailedIngredientsRepository() {
-        return detailedIngredientsRepository;
-    }
-
-    public IngredientsRepository getIngredientsRepository() {
-        return ingredientsRepository;
     }
 
     @Override
@@ -97,16 +85,24 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
         }).collect(Collectors.toSet());
     }
     private Ingredient saveIngredientIfNotExist(Ingredient ingredient) {
-        return getIngredientsRepository()
+        return ingredientsRepository
                 .findById(ingredient.getId())
                 .orElseGet(() -> {
-                    long id = getIngredientsRepository().insertWithoutUnits(ingredient.getId(), ingredient.getName());
-                    return getIngredientsRepository().findById(id).orElse(ingredient);
+                    long id = ingredientsRepository
+                            .insertWithoutUnits(ingredient.getId(), ingredient.getName());
+                    return ingredientsRepository
+                            .findById(id)
+                            .orElse(ingredient);
         });
     }
     private void saveIngredientUnitPair(long ingredientId, long unitId) {
         try {
-            unitRepository.insertUnitIngredientPair(ingredientId, unitId);
+            unitRepository.getIdByIngredientUnitIdPair(ingredientId, unitId)
+                    .ifPresentOrElse(
+                            (id) -> System.out.println("ALready present " + id),
+                            () -> unitRepository.insertUnitIngredientPair(ingredientId, unitId)
+                    );
+
         } catch (Exception e){
             logger.error("FAILED TO INSERT PAIR ", e);
         }

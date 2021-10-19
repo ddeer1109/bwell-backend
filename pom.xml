@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>students</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>students</name>
-    <description>Demo project for Spring Boot</description>
+    <name>bwell</name>
+    <description>Bwell project</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -50,6 +50,21 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.21.0</version>
         </dependency>
 
 

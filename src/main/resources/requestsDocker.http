@@ -1,8 +1,13 @@
 
 
-GET http://localhost/api/eatwell/ingredient/19400?amount=200&unit=ounce
+GET http://localhost/api/eatwell/ingredient/19400?amount=100&unit=g
 
 ###
 
-GET http://localhost/api/eatwell/ingredient/q?query=pork
+GET http://localhost/api/eatwell/ingredient/19400
 
+###
+
+GET http://localhost/api/eatwell/ingredient/units
+
+###

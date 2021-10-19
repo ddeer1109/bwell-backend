@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NutritionElement {
 
     @JsonIgnore
-    private NUTRIENT type;
+    private Nutrient type;
     @JsonIgnore
-    public NUTRIENT getType() {
+    public Nutrient getType() {
         return type;
     }
 
@@ -28,7 +29,7 @@ public class NutritionElement {
 
     public void setTitle(String title) {
         this.title = title;
-        type = NUTRIENT.ofName(title);
+        type = Nutrient.valueOf(title);
     }
 
     public BigDecimal getAmount() {
@@ -48,9 +49,24 @@ public class NutritionElement {
     }
 
 
-    public BigDecimal inCalories(){
-        return amount.multiply(type.kcalMultiplier);
+    /**
+     * @return BigDecimal multiplied by
+     */
+    public NutritionElement gramsToKcal(){
+        amount = amount.multiply(type.kcalMultiplier);
+        setUnit(NAMES.KCAL_UNIT.name);
+        return this;
     }
+
+    public NutritionElement kcalToGrams() {
+        amount = BigDecimal.ONE
+                .divide(type.kcalMultiplier, new MathContext(8))
+                .multiply(amount);
+        setUnit(NAMES.GRAMS_UNIT.name);
+        return this;
+    }
+
+
 
     @Override
     public String toString() {
@@ -73,4 +89,5 @@ public class NutritionElement {
     public int hashCode() {
         return Objects.hash(title);
     }
+
 }

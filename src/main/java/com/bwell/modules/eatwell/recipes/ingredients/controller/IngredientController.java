@@ -32,7 +32,6 @@ public class IngredientController {
             @RequestParam(value = "amount", defaultValue = "100") int amount
     ){
         DetailedIngredient detailedIngredient = service.API_requestIngredientOfId(id, amount, unit);
-        System.out.println(detailedIngredient);
         return detailedIngredient;
     }
     @GetMapping("/q")
