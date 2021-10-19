@@ -16,6 +16,8 @@ services:
 
   db3:
     image: 'postgres:13.1-alpine'
+    ports:
+    - 127.0.0.1:5432:5432
     container_name: db3
     environment:
       - POSTGRES_USER=postgres

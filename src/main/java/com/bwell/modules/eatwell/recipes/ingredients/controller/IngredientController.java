@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/eatwell/ingredient")
+@RequestMapping("/api/v1/eatwell/ingredient")
 public class IngredientController {
     private IngredientService service;
 

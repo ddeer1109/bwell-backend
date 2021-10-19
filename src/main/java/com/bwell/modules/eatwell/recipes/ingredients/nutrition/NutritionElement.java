@@ -29,7 +29,11 @@ public class NutritionElement {
 
     public void setTitle(String title) {
         this.title = title;
-        type = Nutrient.valueOf(title);
+        try {
+            type = Nutrient.valueOf(title);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public BigDecimal getAmount() {

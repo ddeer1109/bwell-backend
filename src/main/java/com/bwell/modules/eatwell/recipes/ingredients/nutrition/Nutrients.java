@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Nutrients {
     @JsonIgnore
-    private List<Nutrient> PROCESSED_NUTRIENTS = Arrays.asList(Nutrient.Calories, Nutrient.Protein, Nutrient.Fat, Nutrient.Carbohydrates);
+    private List<String> PROCESSED_NUTRIENTS = Arrays.asList("Calories", "Protein", "Fat", "Carbohydrates");
 
     private List<NutritionElement> nutrients;
 
@@ -36,7 +36,7 @@ public class Nutrients {
     public void setNutrients(List<NutritionElement> nutrients) {
         this.nutrients = nutrients
                 .stream()
-                .filter(nutrient -> PROCESSED_NUTRIENTS.contains(nutrient.getType()))
+                .filter(nutrient -> PROCESSED_NUTRIENTS.contains(nutrient.getTitle()))
                 .collect(Collectors.toList());
     }
 

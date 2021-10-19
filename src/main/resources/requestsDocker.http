@@ -1,13 +1,23 @@
 
 
-GET http://localhost/api/eatwell/ingredient/19400?amount=100&unit=g
+GET http://localhost:8080/api/v1/eatwell/ingredient/19400?amount=100&unit=g
 
 ###
 
-GET http://localhost/api/eatwell/ingredient/19400
+GET http://localhost:8080/api/v1/eatwell/ingredient/19400
 
 ###
 
-GET http://localhost/api/eatwell/ingredient/units
+GET http://localhost:8080/api/v1/eatwell/ingredient/units
 
 ###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/detailed/
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=banana

@@ -56,7 +56,14 @@ public class IngredientService {
 
     public DetailedIngredient API_requestIngredientOfId(int id, int amount, String unit){
         DetailedIngredient apiDetailedIngredient = spoonacularApi.getIngredient(id, amount, unit);
-        return commonRepository.persistentSave(apiDetailedIngredient);
+        try {
+            DetailedIngredient detailedIngredient = commonRepository.persistentSave(apiDetailedIngredient);
+            return detailedIngredient;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+
     }
 
 
