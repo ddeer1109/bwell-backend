@@ -1,5 +1,6 @@
 package com.bwell.modules.eatwell.calculator;
 
+import com.bwell.modules.eatwell.calculator.model.CalculatorData;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,18 @@ public class CalculatorController {
             service.setFakeData();
 
             return service.getDemandForUser(id);
+    }
+
+    @GetMapping
+    public CalculatorData getSchema() {
+        return new CalculatorData();
+    }
+
+    @PostMapping
+    @ResponseBody
+    public NutrientsDemandDao setDemandForUser(@RequestBody CalculatorData calculatorData) {
+
+        return service.calculateUserDemand(calculatorData);
     }
 
 }

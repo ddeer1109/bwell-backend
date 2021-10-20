@@ -24,3 +24,21 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=banana
 
 ###
 GET http://localhost:8080/api/v1/eatwell/calculator/1234
+
+###
+POST http://localhost:8080/api/v1/eatwell/calculator/
+Content-Type: application/json Cookie: key=first-value
+
+{
+  "id": 12,
+  "bodyMassInKg": 70,
+  "heightInCm": 170,
+  "age": 27,
+  "activityRatio": 1.5,
+  "strategy": "HarrisBenedict",
+  "goal": "GainMass",
+  "man": true
+}
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/

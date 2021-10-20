@@ -46,4 +46,17 @@ public class CalculatorService {
 
         resultsRepository.save(dao);
     }
+
+    public NutrientsDemandDao calculateUserDemand(CalculatorData calculatorData) {
+        NutritionStatisticsCalculator calculator = new NutritionStatisticsCalculator();
+
+        calculator.setCalculator(StrategyCodes.valueOf(calculatorData.getStrategy()));
+        calculator.setData(calculatorData);
+
+        NutrientsDemand nutrientsDemand = calculator.calculateCaloriesDemand();
+        NutrientsDemandDao dao = nutrientsDemand.createDao();
+        dao.setUserId(calculatorData.getId());
+
+        return resultsRepository.save(dao);
+    }
 }
