@@ -1,4 +1,4 @@
-package com.bwell.modules.eatwell.calculator.Strategies;
+package com.bwell.modules.eatwell.calculator.model.Strategies;
 
 import java.util.HashMap;
 import java.util.Map;

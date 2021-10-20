@@ -1,4 +1,4 @@
-package com.bwell.modules.eatwell.calculator;
+package com.bwell.modules.eatwell.calculator.model;
 
 import lombok.Data;
 

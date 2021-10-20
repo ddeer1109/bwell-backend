@@ -21,3 +21,6 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/detailed/
 ###
 
 GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=banana
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/1234

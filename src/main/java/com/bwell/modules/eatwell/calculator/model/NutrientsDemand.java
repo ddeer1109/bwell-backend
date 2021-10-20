@@ -1,9 +1,12 @@
-package com.bwell.modules.eatwell.calculator;
+package com.bwell.modules.eatwell.calculator.model;
 
+import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.HashMap;
@@ -61,6 +64,15 @@ public class NutrientsDemand {
         });
     }
 
+    public NutrientsDemandDao createDao() {
+        NutrientsDemandDao nutrientsDemandDao = new NutrientsDemandDao();
+        nutrientsDemandDao.setCaloriesDemand(caloriesDemand);
+        nutrientsDemandDao.setProteinDemand(getElementDemand(Nutrient.Protein).getAmount());
+        nutrientsDemandDao.setCarbohydratesDemand(getElementDemand(Nutrient.Carbohydrates).getAmount());
+        nutrientsDemandDao.setFatDemand(getElementDemand(Nutrient.Fat).getAmount());
+
+        return nutrientsDemandDao;
+    }
 
 
 }

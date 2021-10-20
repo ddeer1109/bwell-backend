@@ -1,8 +1,8 @@
-package com.bwell.modules.eatwell.calculator;
+package com.bwell.modules.eatwell.calculator.model;
 
-import com.bwell.modules.eatwell.calculator.Strategies.CalculatorFactory;
-import com.bwell.modules.eatwell.calculator.Strategies.CalculatorStrategy;
-import com.bwell.modules.eatwell.calculator.Strategies.StrategyCodes;
+import com.bwell.modules.eatwell.calculator.model.Strategies.CalculatorFactory;
+import com.bwell.modules.eatwell.calculator.model.Strategies.CalculatorStrategy;
+import com.bwell.modules.eatwell.calculator.model.Strategies.StrategyCodes;
 
 public class NutritionStatisticsCalculator {
     private CalculatorFactory factory = new CalculatorFactory();
@@ -29,6 +29,4 @@ public class NutritionStatisticsCalculator {
     public void setData(CalculatorData data) {
         this.data = data;
     }
-
-
 }
