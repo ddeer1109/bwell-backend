@@ -9,6 +9,7 @@ public class BwellApplication {
     public static void main(String[] args) {
         SpringApplication.run(BwellApplication.class, args);
         System.out.println("STARTING MODIFIE 11111111D");
+        System.out.println("check github");
     }
 
 }
