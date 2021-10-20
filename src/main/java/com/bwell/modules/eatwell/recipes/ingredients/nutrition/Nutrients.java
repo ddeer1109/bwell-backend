@@ -13,9 +13,9 @@ public class Nutrients {
     @JsonIgnore
     private List<String> PROCESSED_NUTRIENTS = Arrays.asList("Calories", "Protein", "Fat", "Carbohydrates");
 
-    private List<NutritionElement> nutrients;
+    private Set<NutritionElement> nutrients;
 
-    public List<NutritionElement> getNutrients() {
+    public Set<NutritionElement> getNutrients() {
         return nutrients;
     }
 
@@ -33,11 +33,11 @@ public class Nutrients {
     }
 
 
-    public void setNutrients(List<NutritionElement> nutrients) {
+    public void setNutrients(Set<NutritionElement> nutrients) {
         this.nutrients = nutrients
                 .stream()
                 .filter(nutrient -> PROCESSED_NUTRIENTS.contains(nutrient.getTitle()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public BigDecimal getPercentageFat(){

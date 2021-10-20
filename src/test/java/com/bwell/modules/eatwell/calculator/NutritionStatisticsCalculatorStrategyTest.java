@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 class NutritionStatisticsCalculatorStrategyTest {
 
@@ -49,7 +50,7 @@ class NutritionStatisticsCalculatorStrategyTest {
         System.out.println(       );
         DetailedIngredient ingredient = new DetailedIngredient();
         Nutrients nutrients = new Nutrients();
-        nutrients.setNutrients(List.of(
+        nutrients.setNutrients(Set.of(
                 Nutrient.Carbohydrates.create(0),
                 Nutrient.Fat.create(2.59),
                 Nutrient.Protein.create(21.23),

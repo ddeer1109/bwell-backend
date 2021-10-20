@@ -14,20 +14,18 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
 //    @Query("select new com.foo.bar.entity.Document(d.docId, d.filename) from Document d where d.filterCol = ?1")
     Optional<Unit> findUnitByNameEquals(String name);
 
+    @Query(
+            value =
+                    "insert into ingredient_unit (ingredient_id, unit_id) values (:ingr_id, :unit_id) returning ingredient_id as id ",
+            nativeQuery = true)
+    long insertUnitIngredientPair(@Param("ingr_id") long ingredient_id, @Param("unit_id") long unit_id);
 
 
     @Query(
             value =
-                    "insert into ingredient_unit (ingredient_id, unit_id) values (:ingredient_id, :unit_id) returning ingredient_id as id;",
+                    "SELECT unit_id FROM ingredient_unit WHERE unit_id=:unit_id AND ingredient_id=:ingr_id ",
             nativeQuery = true)
-    long insertUnitIngredientPair(@Param("ingredient_id") long ingredientId, @Param("unit_id") long unitId);
-
-
-    @Query(
-            value =
-                    "SELECT unit_id FROM ingredient_unit WHERE unit_id=:unit_id AND ingredient_id=:ingredient_id;",
-            nativeQuery = true)
-    Optional<Long> getIdByIngredientUnitIdPair(@Param("ingredient_id") long ingredient_id, @Param("unit_id") long unit_id);
+    Optional<Long> getIdByIngredientUnitIdPair(@Param("ingr_id") long ingredient_id, @Param("unit_id") long unit_id);
 
 
     @Query(

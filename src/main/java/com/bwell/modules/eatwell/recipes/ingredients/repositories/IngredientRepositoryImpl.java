@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
         this.detailedIngredientsRepository = custom;
         this.ingredientsRepository = standard;
         this.unitRepository = unit;
+
     }
 
     @Override
@@ -33,8 +35,9 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
         Ingredient ingredientCompliantWithDB = persistentSave(detailedIngr.getIngredient());
 
         detailedIngr.setUnit(
-                unitRepository.findUnitByNameEquals(detailedIngr.getUnit().getName())
-                    .orElse(ingredientCompliantWithDB
+                unitRepository
+                        .findUnitByNameEquals(detailedIngr.getUnit().getName())
+                        .orElse(ingredientCompliantWithDB
                             .getUnits().stream()
                             .filter(unit -> unit.equals(detailedIngr.getUnit()))
                             .findFirst()
@@ -79,7 +82,7 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
 
             saveIngredientUnitPair(compliantIngredientId, unitCompliantWithDb.getId());
 
-            logger.warn("END UNIT ----> ", unitCompliantWithDb);
+            logger.warn("END UNIT ----> {} ", unitCompliantWithDb);
             return unitCompliantWithDb;
 
         }).collect(Collectors.toSet());
@@ -97,14 +100,20 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
     }
     private void saveIngredientUnitPair(long ingredientId, long unitId) {
         try {
-            unitRepository.getIdByIngredientUnitIdPair(ingredientId, unitId)
+            logger.debug("CHECKING SELECT BY PAIR : ${} ${}", ingredientId, unitId);
+            Optional<Long> idByIngredientUnitIdPair = unitRepository.getIdByIngredientUnitIdPair(ingredientId, unitId);
+            logger.debug("CHECKING SELECT BY PAIR ---- RESULT : ${}", idByIngredientUnitIdPair);
+            idByIngredientUnitIdPair
                     .ifPresentOrElse(
-                            (id) -> System.out.println("ALready present " + id),
-                            () -> unitRepository.insertUnitIngredientPair(ingredientId, unitId)
+                            (id) -> System.out.println("ALready present ${} " + id),
+                            () -> {
+                                logger.debug("Check those ids: ${} ${}", ingredientId, unitId);
+                                unitRepository.insertUnitIngredientPair(ingredientId, unitId);
+                            }
                     );
 
         } catch (Exception e){
-            logger.error("FAILED TO INSERT PAIR ", e);
+            logger.debug("FAILED TO INSERT PAIR ${}", e.toString());
         }
     }
     private Unit saveUnit(Unit unit) {
