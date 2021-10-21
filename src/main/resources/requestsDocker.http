@@ -16,18 +16,18 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/detailed/
+GET http://localhost:8080/api/v1/eatwell/ingredient/5062
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=banana
+GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=brocco
 
 ###
-GET http://localhost:8080/api/v1/eatwell/calculator/1234
+GET http://localhost:8080/api/v1/eatwell/calculator/12/
 
 ###
 POST http://localhost:8080/api/v1/eatwell/calculator/
-Content-Type: application/json Cookie: key=first-value
+Content-Type: application/json
 
 {
   "id": 12,
@@ -35,10 +35,12 @@ Content-Type: application/json Cookie: key=first-value
   "heightInCm": 170,
   "age": 27,
   "activityRatio": 1.5,
-  "strategy": "HarrisBenedict",
-  "goal": "GainMass",
-  "man": true
+  "strategy": "Complete",
+  "man": true,
+  "goal": "IntenseMass"
 }
+
+###
 
 ###
 GET http://localhost:8080/api/v1/eatwell/calculator/

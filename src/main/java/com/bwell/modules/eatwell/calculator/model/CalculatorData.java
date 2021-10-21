@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @Entity
@@ -24,6 +26,9 @@ public class CalculatorData {
     private Double activityRatio;
     private String strategy;
     private DietGoal goal;
+    private Double proteinPercentage;
+    private Double fatPercentage;
+    private Double carbohydratesPercentage;
 
     public void setGoal(String goal) {
         this.goal = DietGoal.valueOf(goal);

@@ -19,7 +19,9 @@ public class NutritionStatisticsCalculator {
 
     public NutrientsDemand calculateCaloriesDemand(){
         setupCalculator();
-        return new NutrientsDemand(calculator.calculate());
+        NutrientsDemand nutrientsDemand = new NutrientsDemand(calculator.calculate());
+
+        return nutrientsDemand;
     }
 
     public CalculatorData getData() {
@@ -28,5 +30,6 @@ public class NutritionStatisticsCalculator {
 
     public void setData(CalculatorData data) {
         this.data = data;
+        setCalculator(StrategyCodes.valueOf(data.getStrategy()));
     }
 }

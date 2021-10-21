@@ -16,14 +16,14 @@ public class CompleteDemandCalculator_ implements CalculatorStrategy{
         basalMetabolismCalculator.extractRequiredData(data);
         basalMetabolism = basalMetabolismCalculator.calculate();
         physicalActivityMultiplier = BigDecimal.valueOf(data.getActivityRatio());
-        caloriesModifierForGoal = data.getGoal().caloriesModifier;
+//        caloriesModifierForGoal = data.getGoal().caloriesModifier;
     }
 
     @Override
     public BigDecimal calculate() {
         return basalMetabolism
                 .multiply(physicalActivityMultiplier)
-                .add(basalMetabolism.multiply(metabolismDemand))
-                .add(caloriesModifierForGoal);
+                .add(basalMetabolism.multiply(metabolismDemand));
+//                .add(caloriesModifierForGoal);
     }
 }

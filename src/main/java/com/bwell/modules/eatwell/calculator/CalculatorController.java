@@ -2,8 +2,15 @@ package com.bwell.modules.eatwell.calculator;
 
 import com.bwell.modules.eatwell.calculator.model.CalculatorData;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
+import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -19,8 +26,7 @@ public class CalculatorController {
 
     @GetMapping("/{id}")
     public NutrientsDemandDao getDemandForUser(@PathVariable(value = "id") long id) {
-            service.setFakeData();
-
+//            service.setFakeData();
             return service.getDemandForUser(id);
     }
 

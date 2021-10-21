@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface UnitRepository extends JpaRepository<Unit, Long> {
+public interface UnitRepository extends JpaRepository<Unit, String> {
 //    @Query("select new com.foo.bar.entity.Document(d.docId, d.filename) from Document d where d.filterCol = ?1")
     Optional<Unit> findUnitByNameEquals(String name);
 

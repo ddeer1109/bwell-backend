@@ -38,4 +38,11 @@ public enum Nutrient {
         nutritionElement.setUnit(this == Calories ? NAMES.KCAL_UNIT.name : NAMES.GRAMS_UNIT.name);
         return nutritionElement;
     }
+    public NutritionElement create(BigDecimal amount) {
+        NutritionElement nutritionElement = new NutritionElement();
+        nutritionElement.setTitle(this.name);
+        nutritionElement.setAmount(amount);
+        nutritionElement.setUnit(this == Calories ? NAMES.KCAL_UNIT.name : NAMES.GRAMS_UNIT.name);
+        return nutritionElement;
+    }
 }

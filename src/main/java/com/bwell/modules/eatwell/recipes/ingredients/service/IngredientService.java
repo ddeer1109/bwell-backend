@@ -2,6 +2,7 @@ package com.bwell.modules.eatwell.recipes.ingredients.service;
 
 import com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi.RequestingService;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Unit;
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.CommonIngredientsRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.DetailedIngredientsRepository;
@@ -54,8 +55,13 @@ public class IngredientService {
         return commonRepository.persistentSave(ingredientsFromApi);
     }
 
-    public DetailedIngredient API_requestIngredientOfId(int id, int amount, String unit){
+    public DetailedIngredient getIngredientDetails_API(int id, int amount, String unit){
         DetailedIngredient apiDetailedIngredient = spoonacularApi.getIngredient(id, amount, unit);
+        DetailedIngredient detailedIngredient = commonRepository.persistentSave(apiDetailedIngredient);
+        return detailedIngredient;
+    }
+    public DetailedIngredient getIngredientDetails_API(IngredientDto dto){
+        DetailedIngredient apiDetailedIngredient = spoonacularApi.getIngredient(dto.getId(), dto.getAmount(), dto.getUnit());
         DetailedIngredient detailedIngredient = commonRepository.persistentSave(apiDetailedIngredient);
         return detailedIngredient;
     }
