@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "id": 12,
-  "bodyMassInKg": 95,
+  "bodyMassInKg": 94,
   "heightInCm": 179,
   "age": 41,
   "activityRatio": 1.2,

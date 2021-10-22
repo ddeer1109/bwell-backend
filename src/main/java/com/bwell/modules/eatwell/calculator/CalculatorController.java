@@ -57,6 +57,8 @@ public class CalculatorController {
     @PostMapping
     @ResponseBody
     public NutrientsDemandDao setDemandForUser(@RequestBody CalculatorData calculatorData) {
+        System.out.println(calculatorData);
+
 
         return service.calculateUserDemand(calculatorData);
     }
