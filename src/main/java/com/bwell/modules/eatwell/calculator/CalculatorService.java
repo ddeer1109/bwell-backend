@@ -5,6 +5,7 @@ import com.bwell.modules.eatwell.calculator.model.DietGoal;
 import com.bwell.modules.eatwell.calculator.model.NutrientsDemand;
 import com.bwell.modules.eatwell.calculator.model.NutritionStatisticsCalculator;
 import com.bwell.modules.eatwell.calculator.model.Strategies.StrategyCodes;
+import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
@@ -61,4 +62,29 @@ public class CalculatorService {
         return resultsRepository.save(dao);
     }
 
+
+
+    public IngredientCoverageDto getCoverageFor(long userId, IngredientDto ingredientDto) {
+
+        NutrientsDemandDao dao = getDemandForUser(userId);
+        DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(ingredientDto);
+
+        NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
+
+        return nutrientsDemand.getIngredientCoverage(ingredientDetails_api);
+    }
+
+    public IngredientCoverageDto getCoverageFor(long userId, List<IngredientDto> ingredientsDto) {
+
+        NutrientsDemandDao dao = getDemandForUser(userId);
+
+        List<DetailedIngredient> detailedIngredients = ingredientsDto
+                .stream()
+                .map(ingredientService::getIngredientDetails_API)
+                .collect(Collectors.toList());
+
+        NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
+
+        return nutrientsDemand.getIngredientsCoverage(detailedIngredients);
+    }
 }

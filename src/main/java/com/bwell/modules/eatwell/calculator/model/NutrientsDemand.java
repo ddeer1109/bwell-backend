@@ -1,5 +1,6 @@
 package com.bwell.modules.eatwell.calculator.model;
 
+import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
@@ -92,7 +93,7 @@ public class NutrientsDemand {
         return nutrient.create(inGrams.doubleValue());
     }
 
-    public Map<String, BigDecimal> getIngredientCoverage(DetailedIngredient ingredient){
+    public IngredientCoverageDto getIngredientCoverage(DetailedIngredient ingredient){
         Map<String, BigDecimal> map = new HashMap<>();
         ingredient
                 .getNutrition()
@@ -100,7 +101,14 @@ public class NutrientsDemand {
                 .forEach(
                         nutrient -> map.put(nutrient.getTitle(), getNutrientCoverage(nutrient))
                 );
-        return map;
+
+        System.out.println("Map: " + map);
+
+        IngredientCoverageDto dto = new IngredientCoverageDto(map);
+
+        System.out.println("Dto: " + dto);
+
+        return dto;
     }
 
     private BigDecimal getNutrientCoverage(NutritionElement nutrient){
@@ -108,16 +116,16 @@ public class NutrientsDemand {
         return nutrientAmount.divide(getElementDemand(nutrient.getType()).getAmount(), new MathContext(4));
     }
 
-    public Map<String, BigDecimal> getIngredientsCoverage(List<DetailedIngredient> ingredients){
-        Map<String, BigDecimal> map = new HashMap<>();
+    public IngredientCoverageDto getIngredientsCoverage(List<DetailedIngredient> ingredients){
+        IngredientCoverageDto dto = new IngredientCoverageDto();
+
         ingredients.forEach(ingredient -> {
-            System.out.println("----- " + ingredient.getNutrition().getNutrients());
-            Map<String, BigDecimal> ingredientCoverage = getIngredientCoverage(ingredient);
-            ingredientCoverage.forEach((title, coverage) -> {
-               map.compute(title, (sumTitle, sumCoverage) -> sumCoverage == null ? coverage : sumCoverage.add(coverage));
-            });
+            IngredientCoverageDto ingredientCoverage = getIngredientCoverage(ingredient);
+
+            dto.addCoverage(ingredientCoverage);
+
         });
-        return map;
+        return dto;
     }
 
     public NutrientsDemandDao createDao() {

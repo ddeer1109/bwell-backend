@@ -1,6 +1,7 @@
 package com.bwell.modules.eatwell.calculator;
 
 import com.bwell.modules.eatwell.calculator.model.CalculatorData;
+import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
@@ -22,6 +23,24 @@ public class CalculatorController {
     @Autowired
     public CalculatorController(CalculatorService service) {
         this.service = service;
+    }
+
+    @GetMapping("/{userId}/ingredient")
+    public IngredientCoverageDto getCoverageFor(
+            @RequestBody IngredientDto ingredientDto,
+            @PathVariable(value = "userId") long userId) {
+
+        return service.getCoverageFor(userId, ingredientDto);
+
+    }
+
+    @GetMapping("/{userId}/recipe")
+    public IngredientCoverageDto getCoverageFor(
+            @RequestBody List<IngredientDto> ingredientsDto,
+            @PathVariable(value = "userId") long userId) {
+
+        return service.getCoverageFor(userId, ingredientsDto);
+
     }
 
     @GetMapping("/{id}")

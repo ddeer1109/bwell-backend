@@ -20,7 +20,7 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/1077?unit=g&amount=500
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=milk
+GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=apple
 
 ###
 GET http://localhost:8080/api/v1/eatwell/calculator/12/
@@ -31,16 +31,46 @@ Content-Type: application/json
 
 {
   "id": 12,
-  "bodyMassInKg": 70,
-  "heightInCm": 170,
-  "age": 27,
-  "activityRatio": 1.5,
+  "bodyMassInKg": 95,
+  "heightInCm": 179,
+  "age": 41,
+  "activityRatio": 1.2,
   "strategy": "Complete",
   "man": true,
-  "goal": "IntenseMass"
+  "goal": "Reduction"
 }
 
 ###
+GET http://localhost:8080/api/v1/eatwell/calculator/
 
 ###
-GET http://localhost:8080/api/v1/eatwell/calculator/
+GET http://localhost:8080/api/v1/eatwell/calculator/12/ingredient
+Content-Type: application/json
+
+{
+  "id": 1077,
+  "unit": "g",
+  "amount": 500
+}
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/12/recipe
+Content-Type: application/json
+
+[
+{
+  "id": 1082,
+  "unit": "g",
+  "amount": 500
+},
+  {
+    "id": 9040,
+    "unit": "large",
+    "amount": 1
+  },
+  {
+    "id": 9003,
+    "unit": "medium",
+    "amount": 1
+  }
+]
