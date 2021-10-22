@@ -33,6 +33,20 @@ public class NutrientsDemand {
         setNutrientPercentage(Nutrient.Calories, 1);
     }
 
+    public void  setProportion(CalculatorData calculatorData) {
+        System.out.println(calculatorData);
+        boolean proportionsAreProvided =
+                !Stream.of(calculatorData.getCarbohydratesPercentage(), calculatorData.getFatPercentage(), calculatorData.getProteinPercentage()).anyMatch(n -> n == null);
+
+        if (proportionsAreProvided){
+            setProportion(
+                    calculatorData.getProteinPercentage(),
+                    calculatorData.getFatPercentage(),
+                    calculatorData.getCarbohydratesPercentage()
+            );
+        }
+    }
+
     public void setProportion(double proteinPercentage, double fatsPercentage, double carbsPercentage) {
         setNutrientPercentage(Nutrient.Carbohydrates, carbsPercentage);
         setNutrientPercentage(Nutrient.Fat, fatsPercentage);
@@ -57,6 +71,13 @@ public class NutrientsDemand {
 
     public BigDecimal getNutrientPercentage(Nutrient nutrient) {
             return elementsPercentage.get(nutrient);
+    }
+
+    public void applyGoalIfProvided(CalculatorData calculatorData) {
+        DietGoal goal = calculatorData.getGoal();
+        if (goal != null) {
+            applyGoalModifiers(goal);
+        }
     }
 
     public NutritionElement getCaloriesDemand() {

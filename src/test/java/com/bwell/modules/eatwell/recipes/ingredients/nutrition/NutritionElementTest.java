@@ -20,19 +20,19 @@ class NutritionElementTest {
 
     void setupConfig(){
         calories = new NutritionElement();
-        calories.setTitle(NAMES.KCAL.name);
+        calories.setTitle(Names.KCAL.name);
         calories.setAmount(BigDecimal.valueOf(200));
         calories.setUnit("kcal");
         protein = new NutritionElement();
-        protein.setTitle(NAMES.PROTEIN.name);
+        protein.setTitle(Names.PROTEIN.name);
         protein.setAmount(BigDecimal.valueOf(20));
         protein.setUnit("g");
         carbs = new NutritionElement();
-        carbs.setTitle(NAMES.CARBS.name);
+        carbs.setTitle(Names.CARBS.name);
         carbs.setAmount(BigDecimal.valueOf(4));
         carbs.setUnit("kcal");
         fats = new NutritionElement();
-        fats.setTitle(NAMES.FAT.name);
+        fats.setTitle(Names.FAT.name);
         fats.setAmount(BigDecimal.valueOf(12));
         fats.setUnit("kcal");
     }

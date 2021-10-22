@@ -49,23 +49,13 @@ public class CalculatorService {
 
         calculator.setData(calculatorData);
         NutrientsDemand nutrientsDemand = calculator.calculateCaloriesDemand();
-        System.out.println(calculatorData);
-        boolean proportionsAreProvided =
-                !Stream.of(calculatorData.getCarbohydratesPercentage(), calculatorData.getFatPercentage(), calculatorData.getProteinPercentage()).anyMatch(n -> n == null);
 
-        if (proportionsAreProvided){
-            nutrientsDemand.setProportion(
-                    calculatorData.getProteinPercentage(),
-                    calculatorData.getFatPercentage(),
-                    calculatorData.getCarbohydratesPercentage()
-                    );
-        }
-        DietGoal goal = calculatorData.getGoal();
-//        goal.setModifiers(700, 0.6, 0, 0.4);
-        if (goal != null) {
-            nutrientsDemand.applyGoalModifiers(goal);
-        }
+        nutrientsDemand.setProportion(calculatorData);
+
+        nutrientsDemand.applyGoalIfProvided(calculatorData);
+
         NutrientsDemandDao dao = nutrientsDemand.createDao();
+
         dao.setUserId(calculatorData.getId());
 
         return resultsRepository.save(dao);

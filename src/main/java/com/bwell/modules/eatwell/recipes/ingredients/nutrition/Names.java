@@ -1,6 +1,6 @@
 package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
-public enum NAMES {
+public enum Names {
     FAT("Fat"),
     CARBS("Carbohydrates"),
     PROTEIN("Protein"),
@@ -13,7 +13,7 @@ public enum NAMES {
     public final String name;
 
 
-    NAMES(String name) {
+    Names(String name) {
         this.name = name;
     }
 }

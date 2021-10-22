@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 public enum Nutrient {
 
-    Fat(NAMES.FAT.name, 9),
-    Carbohydrates(NAMES.CARBS.name, 4),
-    Protein(NAMES.PROTEIN.name, 4),
-    Calories(NAMES.KCAL.name, 1),
-    UNKNOWN(NAMES.UNKNOWN.name, 1);
+    Fat(Names.FAT.name, 9),
+    Carbohydrates(Names.CARBS.name, 4),
+    Protein(Names.PROTEIN.name, 4),
+    Calories(Names.KCAL.name, 1),
+    UNKNOWN(Names.UNKNOWN.name, 1);
 
 
     public final String name;
@@ -20,13 +20,13 @@ public enum Nutrient {
     }
 
     public static Nutrient ofName(String name) {
-        if (name.equals(NAMES.FAT.name))
+        if (name.equals(Names.FAT.name))
             return Fat;
-        else if (name.equals(NAMES.CARBS.name))
+        else if (name.equals(Names.CARBS.name))
             return Carbohydrates;
-        else if (name.equals(NAMES.PROTEIN.name))
+        else if (name.equals(Names.PROTEIN.name))
             return Protein;
-        else if (name.equals(NAMES.KCAL.name))
+        else if (name.equals(Names.KCAL.name))
             return Calories;
         return UNKNOWN;
     }
@@ -35,14 +35,15 @@ public enum Nutrient {
         NutritionElement nutritionElement = new NutritionElement();
         nutritionElement.setTitle(this.name);
         nutritionElement.setAmount(BigDecimal.valueOf(amount));
-        nutritionElement.setUnit(this == Calories ? NAMES.KCAL_UNIT.name : NAMES.GRAMS_UNIT.name);
+        nutritionElement.setUnit(this == Calories ? Names.KCAL_UNIT.name : Names.GRAMS_UNIT.name);
+
         return nutritionElement;
     }
     public NutritionElement create(BigDecimal amount) {
         NutritionElement nutritionElement = new NutritionElement();
         nutritionElement.setTitle(this.name);
         nutritionElement.setAmount(amount);
-        nutritionElement.setUnit(this == Calories ? NAMES.KCAL_UNIT.name : NAMES.GRAMS_UNIT.name);
+        nutritionElement.setUnit(this == Calories ? Names.KCAL_UNIT.name : Names.GRAMS_UNIT.name);
         return nutritionElement;
     }
 }

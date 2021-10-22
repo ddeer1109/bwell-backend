@@ -41,21 +41,21 @@ public class Nutrients {
     }
 
     public BigDecimal getPercentageFat(){
-        return get(NAMES.FAT.name)
+        return get(Names.FAT.name)
                 .gramsToKcal()
                 .getAmount()
-                .divide(get(NAMES.KCAL.name).getAmount(), new MathContext(2));
+                .divide(get(Names.KCAL.name).getAmount(), new MathContext(2));
     }
     public BigDecimal getPercentageProtein(){
-        return get(NAMES.PROTEIN.name)
+        return get(Names.PROTEIN.name)
                 .gramsToKcal()
                 .getAmount()
-                .divide(get(NAMES.KCAL.name).getAmount(), new MathContext(2));
+                .divide(get(Names.KCAL.name).getAmount(), new MathContext(2));
     }
     public BigDecimal getPercentageCarbohydrates(){
-        return get(NAMES.CARBS.name)
+        return get(Names.CARBS.name)
                 .gramsToKcal()
                 .getAmount()
-                .divide(get(NAMES.KCAL.name).getAmount(), new MathContext(2));
+                .divide(get(Names.KCAL.name).getAmount(), new MathContext(2));
     }
 }

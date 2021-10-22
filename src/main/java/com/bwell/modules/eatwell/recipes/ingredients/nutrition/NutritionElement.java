@@ -58,7 +58,7 @@ public class NutritionElement {
      */
     public NutritionElement gramsToKcal(){
         amount = amount.multiply(type.kcalMultiplier);
-        setUnit(NAMES.KCAL_UNIT.name);
+        setUnit(Names.KCAL_UNIT.name);
         return this;
     }
 
@@ -66,7 +66,7 @@ public class NutritionElement {
         amount = BigDecimal.ONE
                 .divide(type.kcalMultiplier, new MathContext(8))
                 .multiply(amount);
-        setUnit(NAMES.GRAMS_UNIT.name);
+        setUnit(Names.GRAMS_UNIT.name);
         return this;
     }
 

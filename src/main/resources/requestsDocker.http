@@ -16,11 +16,11 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/5062
+GET http://localhost:8080/api/v1/eatwell/ingredient/1077?unit=g&amount=500
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=brocco
+GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=milk
 
 ###
 GET http://localhost:8080/api/v1/eatwell/calculator/12/
