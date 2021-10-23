@@ -1,0 +1,39 @@
+
+Entry
+    id
+    title
+    description
+    Rating
+    content: Set<EntryContent<T>>
+
+    EntryContentDto:
+        module: "eatWell",
+        entry_id (recipe_id):
+        entry_content_type: "ingredient_list"
+        content_id: 11529
+        order: 1
+
+    EntryContent:
+        header,
+        type,
+        text
+
+
+recipes
+    Recipe
+        id
+        title
+        description
+        Rating
+
+activities
+Activity
+
+exercises
+Exercise
+
+ideas
+Idea
+
+users
+User

@@ -125,6 +125,16 @@ public class DetailedIngredient {
         this.nutrition = nutrition;
     }
 
+    @Transient
+    public DetailedIngredientDto createDto(){
+        DetailedIngredientDto detailedIngredientDto = new DetailedIngredientDto();
+        detailedIngredientDto.setId(ingredient.getId());
+        detailedIngredientDto.setIngredient(ingredient.getName());
+        detailedIngredientDto.setMeasure(unit.getName());
+        detailedIngredientDto.setPossibleMeasures(ingredient.getUnits());
+
+        return detailedIngredientDto;
+    }
 
     @Override
     public String toString() {
