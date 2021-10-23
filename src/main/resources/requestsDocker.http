@@ -30,7 +30,7 @@ POST http://localhost:8080/api/v1/eatwell/calculator/
 Content-Type: application/json
 
 {
-  "id": 12,
+  "id": 11,
   "bodyMassInKg": 94,
   "heightInCm": 179,
   "age": 41,
@@ -38,6 +38,21 @@ Content-Type: application/json
   "strategy": "Complete",
   "man": true,
   "goal": "Reduction"
+}
+
+###
+POST http://localhost:8080/api/v1/eatwell/calculator/
+Content-Type: application/json
+
+{
+  "id": 111,
+  "bodyMassInKg": 70,
+  "heightInCm": 170,
+  "age": 25,
+  "activityRatio": 1.5,
+  "strategy": "Complete",
+  "man": true,
+  "goal": "GainMass"
 }
 
 ###

@@ -23,12 +23,19 @@ public class CalculatorData {
     private int heightInCm;
     private int age;
     private boolean isMan;
-    private Double activityRatio;
+    private double activityRatio;
     private String strategy;
     private DietGoal goal;
-    private Double proteinPercentage;
-    private Double fatPercentage;
-    private Double carbohydratesPercentage;
+    private double proteinPercentage;
+    private double fatPercentage;
+    private double carbohydratesPercentage;
+
+    public boolean isMan() {
+        return isMan;
+    }
+    public void setIsMan(boolean man) {
+        isMan = man;
+    }
 
     public void setGoal(String goal) {
         this.goal = DietGoal.valueOf(goal);

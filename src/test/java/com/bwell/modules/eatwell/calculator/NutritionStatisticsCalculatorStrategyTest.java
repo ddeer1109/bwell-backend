@@ -23,7 +23,7 @@ class NutritionStatisticsCalculatorStrategyTest {
         CalculatorData data = new CalculatorData();
         data.setAge(25);
         data.setHeightInCm(170);
-        data.setMan(true);
+        data.setIsMan(true);
         data.setBodyMassInKg(70);
         data.setActivityRatio(1.5);
         data.setGoal("GainMass");

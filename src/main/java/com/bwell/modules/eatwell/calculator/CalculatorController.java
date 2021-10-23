@@ -5,6 +5,8 @@ import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Map;
 public class CalculatorController {
 
     private CalculatorService service;
+    Logger logger = LoggerFactory.getLogger(CalculatorController.class);
 
     @Autowired
     public CalculatorController(CalculatorService service) {
@@ -59,8 +62,13 @@ public class CalculatorController {
     public NutrientsDemandDao setDemandForUser(@RequestBody CalculatorData calculatorData) {
         System.out.println(calculatorData);
 
+        logger.info("-------------------");
+        logger.info("Hello data {} ", calculatorData);
+        logger.info("-------------------");
 
-        return service.calculateUserDemand(calculatorData);
+        NutrientsDemandDao nutrientsDemandDao = service.calculateUserDemand(calculatorData);
+        logger.info("Hello results {} ", nutrientsDemandDao);
+        return nutrientsDemandDao;
     }
 
 }

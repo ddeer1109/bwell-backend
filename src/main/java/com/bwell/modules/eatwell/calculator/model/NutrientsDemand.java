@@ -37,7 +37,7 @@ public class NutrientsDemand {
     public void  setProportion(CalculatorData calculatorData) {
         System.out.println(calculatorData);
         boolean proportionsAreProvided =
-                !Stream.of(calculatorData.getCarbohydratesPercentage(), calculatorData.getFatPercentage(), calculatorData.getProteinPercentage()).anyMatch(n -> n == null);
+                Stream.of(calculatorData.getCarbohydratesPercentage(), calculatorData.getFatPercentage(), calculatorData.getProteinPercentage()).allMatch(n -> n != null && n != 0.0);
 
         if (proportionsAreProvided){
             setProportion(
@@ -66,7 +66,6 @@ public class NutrientsDemand {
 
     private void setNutrientPercentage(Nutrient nutrient, double percentage) {
         BigDecimal asBigDecimal = BigDecimal.valueOf(percentage);
-//        BigDecimal proportion = asBigDecimal.divide(BigDecimal.valueOf(100), new MathContext(4));
         elementsPercentage.put(nutrient, asBigDecimal);
     }
 
