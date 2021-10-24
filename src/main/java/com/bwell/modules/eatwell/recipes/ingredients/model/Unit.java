@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +14,7 @@ import java.util.Objects;
         uniqueConstraints=
             @UniqueConstraint(columnNames = {"name"})
 )
-public class Unit {
+public class Unit implements Serializable {
 
     public Unit() {
     }

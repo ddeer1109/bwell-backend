@@ -2,11 +2,13 @@ package com.bwell.modules.base;
 
 import com.fasterxml.jackson.annotation.*;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.Set;
 
 @JsonTypeName("custom_list")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
 public class CustomList extends ContentElement{
 
 
