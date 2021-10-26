@@ -2,9 +2,8 @@ package com.bwell.modules.eatwell.recipes;
 
 import com.bwell.modules.base.*;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.eatwell.recipes.service.IRecipeService;
-import com.bwell.modules.eatwell.recipes.service.RecipeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.bwell.modules.eatwell.recipes.service.IRecipesService;
+import com.bwell.modules.eatwell.recipes.service.RecipesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +16,10 @@ import java.util.List;
 @RequestMapping("/api/v1/eatwell/recipes")
 public class RecipesController {
 
-    private final IRecipeService service;
+    private final IRecipesService service;
 
     @Autowired
-    public RecipesController(RecipeService service) {
+    public RecipesController(RecipesService service) {
         this.service = service;
     }
 

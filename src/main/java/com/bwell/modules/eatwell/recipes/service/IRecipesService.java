@@ -5,7 +5,7 @@ import com.bwell.modules.eatwell.recipes.model.Recipe;
 
 import java.util.List;
 
-public interface IRecipeService {
+public interface IRecipesService {
     Recipe getRecipe(Long id);
     List<Entry> getAllRecipes();
     Recipe addRecipe(Recipe recipe);

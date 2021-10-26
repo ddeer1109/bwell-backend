@@ -13,14 +13,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class RecipeService implements IRecipeService{
+public class RecipesService implements IRecipesService {
 
     ContentRepository content;
     EntryRepository entry;
     RatingRepository rating;
 
     @Autowired
-    public RecipeService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
+    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
         this.content = content;
         this.entry = entry;
         this.rating = rating;
@@ -33,7 +33,7 @@ public class RecipeService implements IRecipeService{
 
     @Override
     public List<Entry> getAllRecipes() {
-        return entry.findAll();
+        return entry.findAllByModuleEquals("recipe");
     }
 
     @Override
