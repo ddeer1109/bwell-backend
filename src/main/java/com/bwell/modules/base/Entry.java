@@ -1,14 +1,10 @@
 package com.bwell.modules.base;
 
-import com.bwell.modules.eatwell.recipes.Recipe;
+import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.fasterxml.jackson.annotation.*;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;

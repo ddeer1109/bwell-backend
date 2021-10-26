@@ -1,9 +1,9 @@
-package com.bwell.modules.eatwell.recipes.ingredients.controller;
+package com.bwell.modules.eatwell.recipes.ingredients;
 
-import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientRepositoryImpl;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Unit;
+import com.bwell.modules.eatwell.recipes.ingredients.service.IIngredientService;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,10 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/v1/eatwell/ingredient")
 public class IngredientController {
-    private IngredientService service;
+    private final IIngredientService service;
 
     @Autowired
-    public IngredientController(IngredientService requestService, IngredientRepositoryImpl repository) {
+    public IngredientController(IngredientService requestService) {
         this.service = requestService;
     }
 
@@ -38,7 +38,7 @@ public class IngredientController {
     public List<Ingredient> getHintsOnQueryBase(
             @RequestParam(required = false) String query
     ){
-        return service.API_requestIngredientsQuery(query);
+        return service.queryIngredients_API(query);
     }
     @GetMapping("/detailed")
     public List<DetailedIngredient> getDetailedIngredients(){

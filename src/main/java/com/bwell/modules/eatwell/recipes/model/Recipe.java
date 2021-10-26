@@ -1,4 +1,4 @@
-package com.bwell.modules.eatwell.recipes;
+package com.bwell.modules.eatwell.recipes.model;
 
 import com.bwell.modules.base.Entry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

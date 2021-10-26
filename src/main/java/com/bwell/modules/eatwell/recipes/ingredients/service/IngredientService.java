@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IngredientService {
+public class IngredientService implements IIngredientService {
     private Logger logger = LoggerFactory.getLogger(IngredientService.class);
     private RequestingService spoonacularApi;
     private CommonIngredientsRepository commonRepository;
@@ -50,7 +50,7 @@ public class IngredientService {
         return unitRepository.findAll();
     }
 
-    public List<Ingredient> API_requestIngredientsQuery(String query){
+    public List<Ingredient> queryIngredients_API(String query){
         List<Ingredient> ingredientsFromApi = spoonacularApi.queryIngredient(query);
         return commonRepository.persistentSave(ingredientsFromApi);
     }
