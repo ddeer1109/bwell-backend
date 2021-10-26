@@ -14,9 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class ActivitiesService implements IActivitiesService {
-    ContentRepository content;
-    EntryRepository entry;
-    RatingRepository rating;
+    private final ContentRepository content;
+    private final EntryRepository entry;
+    private final RatingRepository rating;
 
     @Autowired
     public ActivitiesService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
@@ -27,10 +27,7 @@ public class ActivitiesService implements IActivitiesService {
 
     @Override
     public List<Entry> getAllActivities() {
-        List<Entry> activity = entry.findAllByModuleEquals("activity");
-
-
-        return activity;
+        return entry.findAllByModuleEquals("activity");
     }
 
     @Override
