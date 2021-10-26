@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity(name="Activity")
 public class Activity extends Entry {
 
-
     public Activity() {
         setModule("activity");
     }
