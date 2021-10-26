@@ -1,6 +1,7 @@
 package com.bwell.modules.base;
 
 import com.bwell.modules.eatwell.recipes.model.Recipe;
+import com.bwell.modules.fitwell.activities.model.Activity;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 

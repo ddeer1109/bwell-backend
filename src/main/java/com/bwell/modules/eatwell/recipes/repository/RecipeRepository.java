@@ -1,4 +1,4 @@
-package com.bwell.modules.base;
+package com.bwell.modules.eatwell.recipes.repository;
 
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
