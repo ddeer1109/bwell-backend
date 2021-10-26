@@ -1,11 +1,20 @@
 package com.bwell.modules.thinkwell.exercises;
 
+import com.bwell.modules.base.Entry;
+import com.bwell.modules.fitwell.activities.model.Activity;
+import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.bwell.modules.thinkwell.exercises.service.ExerciseService;
 import com.bwell.modules.thinkwell.exercises.service.IExerciseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
+@CrossOrigin("http://localhost:3000")
+@RequestMapping("/api/v1/restwell/exercises")
 public class ExercisesController {
 
     private final IExerciseService service;
@@ -13,5 +22,15 @@ public class ExercisesController {
     @Autowired
     public ExercisesController(ExerciseService service) {
         this.service = service;
+    }
+
+    @GetMapping("/")
+    public List<Entry> getAllExercises() {
+        return service.getAllExercises();
+    }
+
+    @PostMapping("/")
+    public Exercise addExercise(@RequestBody Exercise exercise) {
+        return service.addExercise(exercise);
     }
 }
