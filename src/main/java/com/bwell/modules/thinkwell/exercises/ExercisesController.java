@@ -33,4 +33,9 @@ public class ExercisesController {
     public Exercise addExercise(@RequestBody Exercise exercise) {
         return service.addExercise(exercise);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteExercise(@PathVariable("id") Long id) {
+        return service.deleteExercise(id);
+    }
 }

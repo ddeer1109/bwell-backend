@@ -9,4 +9,5 @@ import java.util.List;
 public interface IIdeasService {
     List<Entry> getAllIdeas();
     Idea addIdea(Idea idea);
+    boolean deleteIdea(Long id);
 }

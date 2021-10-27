@@ -33,4 +33,9 @@ public class ActivitiesController {
     public Activity addActivity(@RequestBody Activity activity) {
         return service.addActivity(activity);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteActivity(@PathVariable("id") Long id) {
+        return service.deleteActivity(id);
+    }
 }

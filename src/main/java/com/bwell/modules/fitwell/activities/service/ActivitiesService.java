@@ -40,4 +40,11 @@ public class ActivitiesService implements IActivitiesService {
 
         return tempActivity;
     }
+
+    @Override
+    public boolean deleteActivity(Long id) {
+        entry.deleteById(id);
+
+        return true;
+    }
 }

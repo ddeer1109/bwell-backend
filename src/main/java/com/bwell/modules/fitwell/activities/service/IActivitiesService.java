@@ -8,4 +8,5 @@ import java.util.List;
 public interface IActivitiesService {
     List<Entry> getAllActivities();
     Activity addActivity(Activity activity);
+    boolean deleteActivity(Long id);
 }

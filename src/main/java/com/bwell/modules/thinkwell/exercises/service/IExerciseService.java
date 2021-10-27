@@ -9,4 +9,5 @@ import java.util.List;
 public interface IExerciseService {
     Exercise addExercise(Exercise exercise);
     List<Entry> getAllExercises();
+    boolean deleteExercise(Long id);
 }

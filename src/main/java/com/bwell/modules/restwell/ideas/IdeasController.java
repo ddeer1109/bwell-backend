@@ -33,4 +33,9 @@ public class IdeasController {
     public Idea addIdea(@RequestBody Idea idea) {
         return service.addIdea(idea);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteIdea(@PathVariable("id") Long id) {
+        return service.deleteIdea(id);
+    }
 }

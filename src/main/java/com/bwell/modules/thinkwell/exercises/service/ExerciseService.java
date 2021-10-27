@@ -38,4 +38,10 @@ public class ExerciseService implements IExerciseService{
     public List<Entry> getAllExercises() {
         return entry.findAllByModuleEquals("exercise");
     }
+
+    @Override
+    public boolean deleteExercise(Long id) {
+        entry.deleteById(id);
+        return true;
+    }
 }

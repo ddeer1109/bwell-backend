@@ -39,4 +39,10 @@ public class IdeasService implements IIdeasService {
 
         return tempIdea;
     }
+
+    @Override
+    public boolean deleteIdea(Long id) {
+        entry.deleteById(id);
+        return true;
+    }
 }
