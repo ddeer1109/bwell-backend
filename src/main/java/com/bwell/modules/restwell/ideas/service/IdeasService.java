@@ -1,27 +1,21 @@
 package com.bwell.modules.restwell.ideas.service;
 
-import com.bwell.modules.base.ContentRepository;
-import com.bwell.modules.base.Entry;
-import com.bwell.modules.base.EntryRepository;
-import com.bwell.modules.base.RatingRepository;
+import com.bwell.modules.base.*;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @Service
-public class IdeasService implements IIdeasService {
-    private final ContentRepository content;
-    private final EntryRepository entry;
-    private final RatingRepository rating;
+public class IdeasService extends BaseService implements IIdeasService {
 
+    @Autowired
     public IdeasService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
-        this.content = content;
-        this.entry = entry;
-        this.rating = rating;
+        super(content, entry, rating);
     }
 
     @Override

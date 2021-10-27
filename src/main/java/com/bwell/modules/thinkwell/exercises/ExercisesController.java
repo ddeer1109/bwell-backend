@@ -1,7 +1,6 @@
 package com.bwell.modules.thinkwell.exercises;
 
 import com.bwell.modules.base.Entry;
-import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.bwell.modules.thinkwell.exercises.service.ExerciseService;
 import com.bwell.modules.thinkwell.exercises.service.IExerciseService;
