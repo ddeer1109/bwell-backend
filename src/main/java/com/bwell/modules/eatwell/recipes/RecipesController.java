@@ -1,6 +1,6 @@
 package com.bwell.modules.eatwell.recipes;
 
-import com.bwell.modules.base.*;
+import com.bwell.modules.base.Entry;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.eatwell.recipes.service.IRecipesService;
 import com.bwell.modules.eatwell.recipes.service.RecipesService;
