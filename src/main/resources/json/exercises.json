@@ -1,0 +1,87 @@
+[
+  {
+    "module": "exercise",
+    "title": "Valuable quotes",
+    "description": "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 13,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  },
+  {
+    "module": "exercise",
+    "title": "Visualise",
+    "description": "2Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 14,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  },
+  {
+    "module": "exercise",
+    "title": "Food for thought",
+    "type": "text_area",
+    "description": "3Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 15,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  },
+  {
+    "module": "exercise",
+    "title": "Puzzles",
+    "description": "4Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 15,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  }
+]

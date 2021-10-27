@@ -1,7 +1,6 @@
 package com.bwell.modules.restwell.ideas.service;
 
 import com.bwell.modules.base.*;
-import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
