@@ -11,7 +11,7 @@
       {
         "header": "Sample Exercises",
         "type": "custom_list",
-        "text": [
+        "content": [
           {
             "order": 0,
             "cells": [
