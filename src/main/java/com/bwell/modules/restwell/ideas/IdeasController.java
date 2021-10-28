@@ -29,6 +29,11 @@ public class IdeasController {
         return service.getAllIdeas();
     }
 
+    @GetMapping("/{id}")
+    public Idea getIdea(@PathVariable("id") Long id) {
+        return service.getIdea(id);
+    }
+
     @PostMapping("/")
     public Idea addIdea(@RequestBody Idea idea) {
         return service.addIdea(idea);

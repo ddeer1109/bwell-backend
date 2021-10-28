@@ -29,24 +29,13 @@ public class RecipesController {
     }
 
     @GetMapping("/{id}")
-    public Recipe getAllRecipes(@PathVariable("id") Long id){
+    public Recipe getRecipe(@PathVariable("id") Long id){
         return service.getRecipe(id);
     }
 
     @PostMapping("/")
     public Recipe addRecipe(@RequestBody Recipe recipe){
-
-//        rating.save(element.getRating());
-//        log.error("=---------------->               {}", element);
-//        Recipe save = recipes.save(element);
-////        content.saveAll(save.getContents());
-//
-//        content.saveAll(element.getContent());
-//        Entry save = entry.save(element);
-//
-//        log.error("=--------------dfasdfad-->               {}", save);
-//        log.error("=--------------dfasdfad-->               {}", save);
-//        log.error("=--------------dfasdfad-->               {}", save);
+        log.info("recipe: {}", recipe);
 
         return service.addRecipe(recipe);
     }

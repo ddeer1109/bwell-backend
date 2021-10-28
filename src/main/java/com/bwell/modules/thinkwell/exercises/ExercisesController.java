@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/v1/restwell/exercises")
+@RequestMapping("/api/v1/thinkwell/exercises")
 public class ExercisesController {
 
     private final IExerciseService service;
@@ -26,6 +26,11 @@ public class ExercisesController {
     @GetMapping("/")
     public List<Entry> getAllExercises() {
         return service.getAllExercises();
+    }
+
+    @GetMapping("/{id}")
+    public Exercise getExercise(@PathVariable("id") Long id) {
+        return service.getExercise(id);
     }
 
     @PostMapping("/")

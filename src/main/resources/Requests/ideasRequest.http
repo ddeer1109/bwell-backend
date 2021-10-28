@@ -2,6 +2,10 @@ GET http://localhost:8080/api/v1/restwell/ideas/
 
 ###
 
+GET http://localhost:8080/api/v1/restwell/ideas/52
+
+###
+
 DELETE http://localhost:8080/api/v1/restwell/ideas/6
 
 ###

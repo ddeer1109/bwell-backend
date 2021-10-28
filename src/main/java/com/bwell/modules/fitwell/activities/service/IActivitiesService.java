@@ -9,4 +9,6 @@ public interface IActivitiesService {
     List<Entry> getAllActivities();
     Activity addActivity(Activity activity);
     boolean deleteActivity(Long id);
+
+    Activity getActivity(Long id);
 }

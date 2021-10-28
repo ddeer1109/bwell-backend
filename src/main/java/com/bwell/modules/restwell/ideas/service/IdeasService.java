@@ -1,6 +1,7 @@
 package com.bwell.modules.restwell.ideas.service;
 
 import com.bwell.modules.base.*;
+import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,12 @@ public class IdeasService extends BaseService implements IIdeasService {
     public boolean deleteIdea(Long id) {
         entry.deleteById(id);
         return true;
+    }
+
+    @Override
+    public Idea getIdea(Long id) {
+        return (Idea) entry
+                .findById(id)
+                .orElseThrow();
     }
 }

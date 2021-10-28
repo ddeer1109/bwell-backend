@@ -29,6 +29,11 @@ public class ActivitiesController {
         return service.getAllActivities();
     }
 
+    @GetMapping("/{id}")
+    public Activity getActivity(@PathVariable("id") Long id) {
+        return service.getActivity(id);
+    }
+
     @PostMapping("/")
     public Activity addActivity(@RequestBody Activity activity) {
         return service.addActivity(activity);

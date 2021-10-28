@@ -38,4 +38,11 @@ public class ExerciseService extends BaseService implements IExerciseService{
         entry.deleteById(id);
         return true;
     }
+
+    @Override
+    public Exercise getExercise(Long id) {
+        return (Exercise) entry
+                .findById(id)
+                .orElseThrow();
+    }
 }

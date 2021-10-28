@@ -39,4 +39,11 @@ public class ActivitiesService extends BaseService implements IActivitiesService
 
         return true;
     }
+
+    @Override
+    public Activity getActivity(Long id) {
+        return (Activity) entry
+                .findById(id)
+                .orElseThrow();
+    }
 }

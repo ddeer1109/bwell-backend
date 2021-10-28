@@ -10,4 +10,6 @@ public interface IExerciseService {
     Exercise addExercise(Exercise exercise);
     List<Entry> getAllExercises();
     boolean deleteExercise(Long id);
+
+    Exercise getExercise(Long id);
 }

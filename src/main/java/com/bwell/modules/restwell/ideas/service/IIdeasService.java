@@ -9,4 +9,6 @@ public interface IIdeasService {
     List<Entry> getAllIdeas();
     Idea addIdea(Idea idea);
     boolean deleteIdea(Long id);
+
+    Idea getIdea(Long id);
 }
