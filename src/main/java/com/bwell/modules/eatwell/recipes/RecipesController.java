@@ -28,6 +28,11 @@ public class RecipesController {
         return service.getAllRecipes();
     }
 
+    @GetMapping("/{id}")
+    public Recipe getAllRecipes(@PathVariable("id") Long id){
+        return service.getRecipe(id);
+    }
+
     @PostMapping("/")
     public Recipe addRecipe(@RequestBody Recipe recipe){
 
@@ -45,5 +50,7 @@ public class RecipesController {
 
         return service.addRecipe(recipe);
     }
+
+
 
 }

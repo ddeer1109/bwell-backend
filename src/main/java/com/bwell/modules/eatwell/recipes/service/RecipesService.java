@@ -20,7 +20,7 @@ public class RecipesService extends BaseService implements IRecipesService {
 
     @Override
     public Recipe getRecipe(Long id) {
-        return null;
+        return (Recipe)entry.getById(id);
     }
 
     @Override
