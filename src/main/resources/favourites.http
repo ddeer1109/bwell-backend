@@ -1,0 +1,35 @@
+POST http://localhost:8080/api/v1/users/
+Content-Type: application/json
+
+{
+  "id": 1,
+  "favourites": {
+    "recipes": [6],
+    "activities": [7,8],
+    "ideas": [9],
+    "exercises": [10]
+  }
+}
+
+###
+
+PUT http://localhost:8080/api/v1/users/
+Content-Type: application/json
+
+{
+  "id": 2,
+  "favourites": {
+    "recipes": [22],
+    "activities": [7,8],
+    "ideas": [9],
+    "exercises": [10]
+  }
+}
+
+###
+
+GET http://localhost:8080/api/v1/users/2
+
+###
+
+GET http://localhost:8080/api/v1/users/296325
