@@ -3,24 +3,22 @@ package com.bwell.modules.eatwell.calculator;
 import com.bwell.modules.eatwell.calculator.model.CalculatorData;
 import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
+import com.bwell.modules.eatwell.calculator.service.CalculatorService;
+import com.bwell.modules.eatwell.calculator.service.ICalculatorService;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
-import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/v1/eatwell/calculator")
 public class CalculatorController {
 
-    private CalculatorService service;
+    private final ICalculatorService service;
     Logger logger = LoggerFactory.getLogger(CalculatorController.class);
 
     @Autowired

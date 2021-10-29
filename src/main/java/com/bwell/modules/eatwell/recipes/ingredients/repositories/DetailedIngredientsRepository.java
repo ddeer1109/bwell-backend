@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DetailedIngredientsRepository extends JpaRepository<DetailedIngredient, Long> {
-
     DetailedIngredient findDetailedIngredientByIngredient(Ingredient ing);
     @Query(
             value =

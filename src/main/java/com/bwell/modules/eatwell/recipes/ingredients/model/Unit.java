@@ -1,9 +1,11 @@
 package com.bwell.modules.eatwell.recipes.ingredients.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +14,7 @@ import java.util.Objects;
         uniqueConstraints=
             @UniqueConstraint(columnNames = {"name"})
 )
-public class Unit {
+public class Unit implements Serializable {
 
     public Unit() {
     }
@@ -33,6 +35,7 @@ public class Unit {
     @GeneratedValue
     @Getter
     @Setter
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private long id;
 
     @Override

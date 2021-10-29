@@ -20,6 +20,11 @@ import java.util.List;
 public class RequestingService {
     private HttpClient client = HttpClient.newHttpClient();
     private ObjectMapper mapper = new ObjectMapper();
+
+    public ObjectMapper getMapper() {
+        return mapper;
+    }
+
     public RequestingService() {
         client = HttpClient.newHttpClient();
         mapper = new ObjectMapper();
