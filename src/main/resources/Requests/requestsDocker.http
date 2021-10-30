@@ -1,0 +1,464 @@
+
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/19400?amount=100&unit=g
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/19400
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/units
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/1077
+
+###
+
+GET http://localhost:8080/api/v1/eatwell/ingredient/q?query=pineapple
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/12/
+
+###
+POST http://localhost:8080/api/v1/eatwell/calculator/
+Content-Type: application/json
+
+{
+  "id": 11,
+  "bodyMassInKg": 94,
+  "heightInCm": 179,
+  "age": 41,
+  "activityRatio": 1.2,
+  "strategy": "Complete",
+  "man": true,
+  "goal": "Reduction"
+}
+
+###
+POST http://localhost:8080/api/v1/eatwell/calculator/
+Content-Type: application/json
+
+{
+  "id": 111,
+  "bodyMassInKg": 70,
+  "heightInCm": 170,
+  "age": 25,
+  "activityRatio": 1.5,
+  "strategy": "Complete",
+  "man": true,
+  "goal": "GainMass"
+}
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/
+
+###
+GET http://localhost:8080/api/v1/eatwell/calculator/111/ingredient
+Content-Type: application/json
+
+{
+  "id": 1077,
+  "unit": "g",
+  "amount": 500
+}
+
+###
+GET http://localhost:8080/api/units
+
+###
+GET http://localhost/api/units
+
+###
+GET http://localhost:8080/api/units
+
+###
+POST http://localhost:8080/api/v1/eatwell/calculator
+
+###
+
+###
+GET http://localhost:8080/api/v1/eatwell/recipes/
+Content-Type: application/json
+
+{
+  "header": "Sample Exercises",
+  "type": "custom_list",
+  "text": [
+    {
+      "id": 0,
+      "order": 0,
+      "cells": [
+        {
+          "id": 0,
+          "order": 0,
+          "value": "Dead lift"
+        },
+        {
+          "id": 1,
+          "order": 1,
+          "value": "2 series"
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "value": "10 repeats"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "order": 2,
+      "cells": [
+        {
+          "id": 0,
+          "order": 0,
+          "value": "Front squat"
+        },
+        {
+          "id": 1,
+          "order": 1,
+          "value": "3 series"
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "value": "18 repeats"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "order": 3,
+      "cells": [
+        {
+          "id": 0,
+          "order": 0,
+          "value": "Bench press"
+        },
+        {
+          "id": 1,
+          "order": 1,
+          "value": "2 series"
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "value": "10 repeats"
+        }
+      ]
+    }
+  ]
+}
+
+<> 2021-10-24T010922.200.json
+
+###
+GET http://localhost:8080/api/v1/eatwell/recipes/
+Content-Type: application/json
+
+{
+  "id": 2,
+  "header": "INGREDIENTS",
+  "ingredients": [
+    {
+      "id": 1001,
+      "ingredient": "Butter",
+      "quantity": "2",
+      "measure": "tablespoon",
+      "possibleMeasures": [
+        "pat",
+        "knob",
+        "g",
+        "stick",
+        "oz",
+        "teaspoon",
+        "cup",
+        "serving",
+        "tablespoon"
+      ]
+    },
+    {
+      "id": 11124,
+      "ingredient": "carrots",
+      "quantity": "3",
+      "measure": "unit",
+      "possibleMeasures": [
+        "small",
+        "strip medium",
+        "large",
+        "g",
+        "medium",
+        "oz",
+        "cup chopped",
+        "serving",
+        "tablespoon",
+        "cup grated",
+        "piece",
+        "slice",
+        "bunch",
+        "strip large",
+        "cup"
+      ]
+    },
+    {
+      "id": 5006,
+      "ingredient": "chicken",
+      "quantity": "1.5",
+      "measure": "unit",
+      "possibleMeasures": [
+        "chicken",
+        "unit",
+        "piece",
+        "g",
+        "oz",
+        "cup",
+        "serving"
+      ]
+    },
+    {
+      "id": 20081,
+      "ingredient": "flour",
+      "quantity": "20",
+      "measure": "unit",
+      "possibleMeasures": [
+        "g",
+        "oz",
+        "teaspoon",
+        "cup",
+        "serving",
+        "tablespoon"
+      ]
+    }
+  ],
+  "order": 1,
+  "type": "ingredients_list"
+}
+<> 2021-10-24T033043.200.json
+<> 2021-10-24T022930.200.json
+<> 2021-10-24T021305.200.json
+<> 2021-10-24T003800.200.json
+
+###
+GET http://localhost:8080/api/v1/eatwell/recipes/entry
+Content-Type: application/json
+
+{
+  "module": "recipe",
+  "title": "Chicken Stew",
+  "description": "Looking for a hearty, healthy dinner? This chicken stew takes under an hour, but it tastes like it's been simmering on the stove for hours. Serve with a hearty piece of toasted",
+  "rating": {
+    "up": 99,
+    "down": 1
+  },
+  "content": [
+    {
+      "header": "Sample Exercises",
+      "type": "custom_list",
+      "text": [
+        {
+          "id": 0,
+          "order": 0,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Dead lift"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "2 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "10 repeats"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Front squat"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "3 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "18 repeats"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "order": 3,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Bench press"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "2 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "10 repeats"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "header": "intro",
+      "text": "Looking for a hearty, healthy dinner? This chicken stew takes under an hour, but it tastes like it's been simmering on the stove for hours. Serve with a hearty piece of toasted",
+      "order": 0,
+      "type": "text_area"
+    },
+    {
+      "header": "INGREDIENTS",
+      "ingredients": [
+        {
+          "id": 1001,
+          "ingredient": "Butter",
+          "quantity": "2",
+          "measure": "tablespoon",
+          "possibleMeasures": [
+            "pat",
+            "knob",
+            "g",
+            "stick",
+            "oz",
+            "teaspoon",
+            "cup",
+            "serving",
+            "tablespoon"
+          ]
+        },
+        {
+          "id": 11124,
+          "ingredient": "carrots",
+          "quantity": "3",
+          "measure": "unit",
+          "possibleMeasures": [
+            "small",
+            "strip medium",
+            "large",
+            "g",
+            "medium",
+            "oz",
+            "cup chopped",
+            "serving",
+            "tablespoon",
+            "cup grated",
+            "piece",
+            "slice",
+            "bunch",
+            "strip large",
+            "cup"
+          ]
+        },
+        {
+          "id": 5006,
+          "ingredient": "chicken",
+          "quantity": "1.5",
+          "measure": "unit",
+          "possibleMeasures": [
+            "chicken",
+            "unit",
+            "piece",
+            "g",
+            "oz",
+            "cup",
+            "serving"
+          ]
+        },
+        {
+          "id": 20081,
+          "ingredient": "flour",
+          "quantity": "20",
+          "measure": "unit",
+          "possibleMeasures": [
+            "g",
+            "oz",
+            "teaspoon",
+            "cup",
+            "serving",
+            "tablespoon"
+          ]
+        }
+      ],
+      "order": 1,
+      "type": "ingredients_list"
+    },
+    {
+      "header": "dfg",
+      "text": "In a large pot over medium heat, melt butter. Add carrots and celery and season with salt and pepper. Cook, stirring often, until vegetables are tender, about 5 minutes. Add garlic and cook until fragrant, about 30 seconds.\n\nAdd flour and stir until vegetables are coated, then add chicken, thyme, bay leaf, potatoes, and broth. Season with salt and pepper. Bring mixture to a simmer and cook until the chicken is no longer pink and potatoes are tender, 15 minutes.\n\nRemove from heat and transfer chicken to a medium bowl. Using two forks, shred chicken into small pieces and return to pot. \nGarnish with parsley before serving.",
+      "order": 2,
+      "type": "text_area"
+    }
+  ]
+}
+
+<> 2021-10-24T033849.200.json
+<> 2021-10-24T033123.200.json
+<> 2021-10-24T032652.200.json
+<> 2021-10-24T032618.200.json
+<> 2021-10-24T032531.200.json
+<> 2021-10-24T032406.500.json
+<> 2021-10-24T031257.500.json
+<> 2021-10-24T030702.200.json
+<> 2021-10-24T025601.200.json
+<> 2021-10-24T025254.200.json
+<> 2021-10-24T025121.500.json
+<> 2021-10-24T025051.200.json
+<> 2021-10-24T023011.200.json
+<> 2021-10-24T012756.500.json
+<> 2021-10-24T011730.200.json
+<> 2021-10-24T010941.500.json
+<> 2021-10-24T005207.500.json
+<> 2021-10-24T004630.500.json
+<> 2021-10-24T004434.500.json
+<> 2021-10-24T004359.500.json
+<> 2021-10-24T004035.500.json
+<> 2021-10-24T003837.500.json
+<> 2021-10-24T002433.500.json
+<> 2021-10-24T001623.500.json
+<> 2021-10-24T001101.500.json
+<> 2021-10-24T001008.500.json
+<> 2021-10-24T000752.500.json
+<> 2021-10-24T000509.500.json
+<> 2021-10-23T235708.500.json
+<> 2021-10-23T235441.500.json
+<> 2021-10-23T235242.500.json
+<> 2021-10-23T235133.200.json
+<> 2021-10-23T233855.200.json
+<> 2021-10-23T233413.200.json
+<> 2021-10-23T233046.400.json
+<> 2021-10-23T233031.400.json
+<> 2021-10-23T233021.400.json
+<> 2021-10-23T232741.200.json
+<> 2021-10-23T232651.500.json
+<> 2021-10-23T232208.500.json
+<> 2021-10-23T231717.400.json
+<> 2021-10-23T231511.400.json
+<> 2021-10-23T231352.400.json
+<> 2021-10-23T230701.400.json
+<> 2021-10-23T230403.500.json

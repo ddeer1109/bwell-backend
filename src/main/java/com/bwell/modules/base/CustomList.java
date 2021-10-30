@@ -8,6 +8,7 @@ import java.util.Set;
 
 @JsonTypeName("custom_list")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public class CustomList extends ContentElement{
 
@@ -17,18 +18,27 @@ public class CustomList extends ContentElement{
     }
 
     @Override
-    @JsonIgnore
-    public Set<ListItem> getCustomList() {
-        return super.getCustomList();
+    public List<ListItem> getContent() {
+        return super.getContent();
     }
 
-    @JsonGetter("text")
-    public Set<ListItem> getContent() {
-        return getCustomList();
+    @Override
+    public void setContent(List<ListItem> content) {
+        super.setContent(content);
     }
 
-    @JsonSetter("text")
-    public void setContent(Set<ListItem> customList) {
-        setCustomList(customList);
-    }
+    //    @JsonGetter("text")
+//    public Set<ListItem> getCustomList() {
+//        return super.getContent();
+//    }
+//
+////    @JsonGetter("text")
+//    public Set<ListItem> getContent() {
+//        return getCustomList();
+//    }
+//
+//    @JsonSetter("text")
+//    public void setContent(Set<ListItem> customList) {
+//        setContent(customList);
+//    }
 }

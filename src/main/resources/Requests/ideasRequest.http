@@ -1,0 +1,185 @@
+GET http://localhost:8080/api/v1/restwell/ideas/
+
+###
+
+GET http://localhost:8080/api/v1/restwell/ideas/52
+
+###
+
+DELETE http://localhost:8080/api/v1/restwell/ideas/6
+
+###
+
+POST http://localhost:8080/api/v1/restwell/ideas/
+Content-Type: application/json
+
+{
+  "module": "idea",
+  "title": "Ideas",
+  "description": "but it tastes like it's been simmering on the stove for hours. Serve with a hearty piece of toasted",
+  "rating": {
+    "up": 99,
+    "down": 1
+  },
+  "content": [
+    {
+      "header": "Sample Exercises",
+      "type": "custom_list",
+      "text": [
+        {
+          "id": 0,
+          "order": 0,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Dead lift"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "2 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "10 repeats"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "order": 2,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Front squat"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "3 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "18 repeats"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "order": 3,
+          "cells": [
+            {
+              "id": 0,
+              "order": 0,
+              "value": "Bench press"
+            },
+            {
+              "id": 1,
+              "order": 1,
+              "value": "2 series"
+            },
+            {
+              "id": 2,
+              "order": 2,
+              "value": "10 repeats"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "header": "intro",
+      "text": "Looking for a hearty, healthy dinner? This chicken stew takes under an hour, but it tastes like it's been simmering on the stove for hours. Serve with a hearty piece of toasted",
+      "order": 0,
+      "type": "text_area"
+    },
+    {
+      "header": "INGREDIENTS",
+      "ingredients": [
+        {
+          "id": 1001,
+          "ingredient": "Butter",
+          "quantity": "2",
+          "measure": "tablespoon",
+          "possibleMeasures": [
+            "pat",
+            "knob",
+            "g",
+            "stick",
+            "oz",
+            "teaspoon",
+            "cup",
+            "serving",
+            "tablespoon"
+          ]
+        },
+        {
+          "id": 11124,
+          "ingredient": "carrots",
+          "quantity": "3",
+          "measure": "unit",
+          "possibleMeasures": [
+            "small",
+            "strip medium",
+            "large",
+            "g",
+            "medium",
+            "oz",
+            "cup chopped",
+            "serving",
+            "tablespoon",
+            "cup grated",
+            "piece",
+            "slice",
+            "bunch",
+            "strip large",
+            "cup"
+          ]
+        },
+        {
+          "id": 5006,
+          "ingredient": "chicken",
+          "quantity": "1.5",
+          "measure": "unit",
+          "possibleMeasures": [
+            "chicken",
+            "unit",
+            "piece",
+            "g",
+            "oz",
+            "cup",
+            "serving"
+          ]
+        },
+        {
+          "id": 20081,
+          "ingredient": "flour",
+          "quantity": "20",
+          "measure": "unit",
+          "possibleMeasures": [
+            "g",
+            "oz",
+            "teaspoon",
+            "cup",
+            "serving",
+            "tablespoon"
+          ]
+        }
+      ],
+      "order": 1,
+      "type": "ingredients_list"
+    },
+    {
+      "header": "dfg",
+      "text": "In a large pot over medium heat, melt butter. Add carrots and celery and season with salt and pepper. Cook, stirring often, until vegetables are tender, about 5 minutes. Add garlic and cook until fragrant, about 30 seconds.\n\nAdd flour and stir until vegetables are coated, then add chicken, thyme, bay leaf, potatoes, and broth. Season with salt and pepper. Bring mixture to a simmer and cook until the chicken is no longer pink and potatoes are tender, 15 minutes.\n\nRemove from heat and transfer chicken to a medium bowl. Using two forks, shred chicken into small pieces and return to pot. \nGarnish with parsley before serving.",
+      "order": 2,
+      "type": "text_area"
+    }
+  ]
+}
+
+###

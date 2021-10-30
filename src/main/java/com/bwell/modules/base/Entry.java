@@ -2,10 +2,13 @@ package com.bwell.modules.base;
 
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.fitwell.activities.model.Activity;
+import com.bwell.modules.restwell.ideas.model.Idea;
+import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -15,6 +18,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Recipe.class, name = "recipe"),
         @JsonSubTypes.Type(value = Activity.class, name = "activity"),
+        @JsonSubTypes.Type(value = Idea.class, name = "idea"),
+        @JsonSubTypes.Type(value = Exercise.class, name = "exercise"),
 })
 //@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Entity
@@ -44,15 +49,15 @@ public abstract class Entry {
     @JoinTable(name = "entry_content",
             joinColumns = @JoinColumn(name = "entry_id"),
             inverseJoinColumns = @JoinColumn(name = "content_id"))
-    private Set<ContentElement> content;
+    private List<ContentElement> content;
 
     @Column(name = "CONTENT")
     @JsonGetter("content")
-    public Set<ContentElement> getContents() {
+    public List<ContentElement> getContents() {
         return content;
     }
     @JsonSetter("content")
-    public void setContents(Set<ContentElement> content) {
+    public void setContents(List<ContentElement> content) {
         this.content = content;
     }
 

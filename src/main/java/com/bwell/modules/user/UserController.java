@@ -24,12 +24,12 @@ public class UserController {
         return service.getUserById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping("/{id}")
     public User addUser(@RequestBody User user) {
         return service.saveUser(user);
     }
 
-    @PutMapping("/")
+    @PutMapping("/{id}")
     public User updateUser(@RequestBody User user){
         return service.saveUser(user);
     }

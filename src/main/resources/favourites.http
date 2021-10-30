@@ -13,16 +13,16 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/api/v1/users/
+PUT http://localhost:8080/api/v1/users/73
 Content-Type: application/json
 
 {
-  "id": 2,
+  "id": 73,
   "favourites": {
-    "recipes": [22],
-    "activities": [7,8],
-    "ideas": [9],
-    "exercises": [10]
+    "recipes": [],
+    "activities": [],
+    "ideas": [],
+    "exercises": []
   }
 }
 

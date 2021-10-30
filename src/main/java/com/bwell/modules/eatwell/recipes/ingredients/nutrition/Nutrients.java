@@ -40,18 +40,21 @@ public class Nutrients {
                 .collect(Collectors.toSet());
     }
 
+    @JsonIgnore
     public BigDecimal getPercentageFat(){
         return get(Names.FAT.name)
                 .gramsToKcal()
                 .getAmount()
                 .divide(get(Names.KCAL.name).getAmount(), new MathContext(2));
     }
+    @JsonIgnore
     public BigDecimal getPercentageProtein(){
         return get(Names.PROTEIN.name)
                 .gramsToKcal()
                 .getAmount()
                 .divide(get(Names.KCAL.name).getAmount(), new MathContext(2));
     }
+    @JsonIgnore
     public BigDecimal getPercentageCarbohydrates(){
         return get(Names.CARBS.name)
                 .gramsToKcal()

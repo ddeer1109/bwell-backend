@@ -1,0 +1,345 @@
+[
+  {
+    "module": "activity",
+    "title": "Strenghts exercise",
+    "description": "1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 13,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Sample Exercises",
+        "type": "custom_list",
+        "content": [
+          {
+            "order": 0,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Dead lift"
+              },
+              {
+                "order": 1,
+                "value": "2 series"
+              },
+              {
+                "order": 2,
+                "value": "10 repeats"
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Front squat"
+              },
+              {
+                "order": 1,
+                "value": "3 series"
+              },
+              {
+                "order": 2,
+                "value": "18 repeats"
+              }
+            ]
+          },
+          {
+            "order": 3,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Bench press"
+              },
+              {
+                "order": 1,
+                "value": "2 series"
+              },
+              {
+                "order": 2,
+                "value": "10 repeats"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  },
+  {
+    "module": "activity",
+    "title": "Calistenics",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    "rating": {
+      "up": 14,
+      "down": 11
+    },
+    "content": [
+      {
+        "header": "Description",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph.",
+        "type": "text_area"
+      },
+      {
+        "header": "Description",
+        "type": "text_area",
+        "text": "How do you use Lorem Ipsum in VS code A tiny VS Code extension made up of a few commands that generate and insert lorem ipsum text into a text file. To use the extension, open the command palette (F1 or cmd/ctrl+shift+p, type and select to insert either a line or paragraph."
+      }
+    ]
+  },
+  {
+    "module": "activity",
+    "title": "Trening domatora",
+    "description": "This training can be done without any equipment to improve you wellbeing and overall performance.",
+    "rating": {
+      "up": 0,
+      "down": 0
+    },
+    "content": [
+      {
+        "header": "Introduction",
+        "text": "This training can be done without any equipment to improve you wellbeing and overall performance.",
+        "order": 0,
+        "type": "text_area"
+      },
+      {
+        "header": "Exercises",
+        "content": [
+          {
+            "order": 0,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Squats"
+              },
+              {
+                "order": 1,
+                "value": "2 series"
+              },
+              {
+                "order": 2,
+                "value": "20 repeats"
+              }
+            ]
+          },
+          {
+            "order": 1,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Push ups"
+              },
+              {
+                "order": 1,
+                "value": "3 series"
+              },
+              {
+                "order": 2,
+                "value": "30 repeats"
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Burpees"
+              },
+              {
+                "order": 1,
+                "value": "3 series"
+              },
+              {
+                "order": 2,
+                "value": "10 repeats"
+              }
+            ]
+          }
+        ],
+        "order": 1,
+        "type": "custom_list"
+      }
+    ]
+  },
+  {
+    "module": "activity",
+    "title": "Resistance training",
+    "description": "This will be some text about This will be some text about  This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about ",
+    "rating": {
+      "up": 0,
+      "down": 0
+    },
+    "content": [
+      {
+        "header": "This will be some text about ",
+        "text": "This will be some text about This will be some text about  This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about This will be some text about ",
+        "order": 0,
+        "type": "text_area"
+      },
+      {
+        "header": "Exercises",
+        "content": [
+          {
+            "order": 0,
+            "cells": [
+              {
+                "order": 0,
+                "value": "exercise"
+              },
+              {
+                "order": 1,
+                "value": "sets"
+              },
+              {
+                "order": 2,
+                "value": "repeats"
+              },
+              {
+                "order": 3,
+                "value": "break"
+              }
+            ],
+            "isHeaderRow": true
+          },
+          {
+            "order": 1,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Deadlift"
+              },
+              {
+                "order": 1,
+                "value": "4"
+              },
+              {
+                "order": 2,
+                "value": "10"
+              },
+              {
+                "order": 3,
+                "value": "60s"
+              }
+            ],
+            "isHeaderRow": false
+          },
+          {
+            "order": 2,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Squats"
+              },
+              {
+                "order": 1,
+                "value": "4"
+              },
+              {
+                "order": 2,
+                "value": "8"
+              },
+              {
+                "order": 3,
+                "value": "60s"
+              }
+            ],
+            "isHeaderRow": false
+          },
+          {
+            "order": 3,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Benchpress"
+              },
+              {
+                "order": 1,
+                "value": "4"
+              },
+              {
+                "order": 2,
+                "value": "10"
+              },
+              {
+                "order": 3,
+                "value": "60s"
+              }
+            ],
+            "isHeaderRow": false
+          }
+        ],
+        "order": 1,
+        "type": "custom_list"
+      }
+    ]
+  },
+  {
+    "module": "activity",
+    "title": "Asd",
+    "description": "No description",
+    "rating": {
+      "up": 0,
+      "down": 0
+    },
+    "content": [
+      {
+        "header": "header",
+        "content": [
+          {
+            "order": 0,
+            "cells": [
+              {
+                "order": 0,
+                "value": "Exercise"
+              },
+              {
+                "order": 1,
+                "value": "Series"
+              },
+              {
+                "order": 2,
+                "value": "Repeats"
+              },
+              {
+                "order": 3,
+                "value": "Break"
+              }
+            ],
+            "isHeaderRow": true
+          },
+          {
+            "order": 1,
+            "cells": [
+              {
+                "order": 0,
+                "value": "deadlift"
+              },
+              {
+                "order": 1,
+                "value": "3"
+              },
+              {
+                "order": 2,
+                "value": "10"
+              },
+              {
+                "order": 3,
+                "value": "60s"
+              }
+            ],
+            "isHeaderRow": false
+          }
+        ],
+        "order": 0,
+        "type": "custom_list"
+      }
+    ]
+  }
+]
