@@ -1,5 +1,6 @@
 [
   {
+    "id": 3,
     "module": "recipe",
     "title": "Spaghetti Bolognese",
     "description": "This is recipe for quick and healthy spaghetti bolognese.",
@@ -20,9 +21,9 @@
           {
             "id": 11529,
             "ingredient": "tomatoes",
-            "quantity": "200",
-            "measure": "g",
-            "possibleMeasures": [
+            "amount": "200",
+            "unit": "g",
+            "possibleUnits": [
               "small",
               "cherry",
               "large whole",
@@ -45,9 +46,9 @@
           {
             "id": 10219,
             "ingredient": "ground pork",
-            "quantity": "300",
-            "measure": "ounce",
-            "possibleMeasures": [
+            "amount": "300",
+            "unit": "ounce",
+            "possibleUnits": [
               "g",
               "ounce",
               "oz",
@@ -58,9 +59,9 @@
           {
             "id": 11215,
             "ingredient": "garlic",
-            "quantity": "2",
-            "measure": "unit",
-            "possibleMeasures": [
+            "amount": "2",
+            "unit": "unit",
+            "possibleUnits": [
               "clove",
               "head",
               "piece",
@@ -75,9 +76,9 @@
           {
             "id": 20420,
             "ingredient": "Pasta",
-            "quantity": "400",
-            "measure": "g",
-            "possibleMeasures": [
+            "amount": "400",
+            "unit": "g",
+            "possibleUnits": [
               "square",
               "package",
               "piece",
@@ -99,6 +100,7 @@
     ]
   },
   {
+    "id": 4,
     "module": "recipe",
     "title": "Chicken Stew",
     "description": "Looking for a hearty, healthy dinner? This chicken stew takes under an hour, but it tastes like it's been simmering on the stove for hours. Serve with a hearty piece of toasted",
@@ -119,9 +121,9 @@
           {
             "id": 1001,
             "ingredient": "Butter",
-            "quantity": "2",
-            "measure": "tablespoon",
-            "possibleMeasures": [
+            "amount": "2",
+            "unit": "tablespoon",
+            "possibleUnits": [
               "pat",
               "knob",
               "g",
@@ -136,9 +138,9 @@
           {
             "id": 11124,
             "ingredient": "carrots",
-            "quantity": "3",
-            "measure": "unit",
-            "possibleMeasures": [
+            "amount": "3",
+            "unit": "unit",
+            "possibleUnits": [
               "small",
               "strip medium",
               "large",
@@ -159,9 +161,9 @@
           {
             "id": 5006,
             "ingredient": "chicken",
-            "quantity": "1.5",
-            "measure": "unit",
-            "possibleMeasures": [
+            "amount": "1.5",
+            "unit": "unit",
+            "possibleUnits": [
               "chicken",
               "unit",
               "piece",
@@ -174,9 +176,9 @@
           {
             "id": 20081,
             "ingredient": "flour",
-            "quantity": "20",
-            "measure": "unit",
-            "possibleMeasures": [
+            "amount": "20",
+            "unit": "unit",
+            "possibleUnits": [
               "g",
               "oz",
               "teaspoon",
@@ -198,6 +200,7 @@
     ]
   },
   {
+    "id": 1,
     "module": "recipe",
     "title": "Pulled pork",
     "description": "It is easy to portion and can be eaten with nachos.",
@@ -218,9 +221,9 @@
           {
             "id": 1042046,
             "ingredient": "yellow mustard",
-            "quantity": "3",
-            "measure": "teaspoon",
-            "possibleMeasures": [
+            "amount": "3",
+            "unit": "teaspoon",
+            "possibleUnits": [
               "g",
               "oz",
               "teaspoon",
@@ -232,9 +235,9 @@
           {
             "id": 11935,
             "ingredient": "ketchup",
-            "quantity": "3",
-            "measure": "teaspoon",
-            "possibleMeasures": [
+            "amount": "3",
+            "unit": "teaspoon",
+            "possibleUnits": [
               "g",
               "oz",
               "packet",
@@ -247,9 +250,9 @@
           {
             "id": 2009,
             "ingredient": "chilli powder",
-            "quantity": "2",
-            "measure": "teaspoon",
-            "possibleMeasures": [
+            "amount": "2",
+            "unit": "teaspoon",
+            "possibleUnits": [
               "pinch",
               "piece",
               "g",
@@ -262,9 +265,9 @@
           {
             "id": 4582,
             "ingredient": "oil",
-            "quantity": "1",
-            "measure": "unit",
-            "possibleMeasures": [
+            "amount": "1",
+            "unit": "unit",
+            "possibleUnits": [
               "quart",
               "gallon",
               "g",
@@ -285,9 +288,9 @@
           {
             "id": 10072,
             "ingredient": "pork shoulder",
-            "quantity": "1000",
-            "measure": "g",
-            "possibleMeasures": [
+            "amount": "1000",
+            "unit": "g",
+            "possibleUnits": [
               "pound",
               "piece",
               "g",
@@ -300,9 +303,9 @@
           {
             "id": 11282,
             "ingredient": "onion",
-            "quantity": "5",
-            "measure": "medium",
-            "possibleMeasures": [
+            "amount": "5",
+            "unit": "medium",
+            "possibleUnits": [
               "small",
               "large",
               "tbsp chopped",
@@ -331,6 +334,7 @@
     ]
   },
   {
+    "id": 2,
     "module": "recipe",
     "title": "Jajecznica",
     "description": "asdfasdfadfasdfasdfas",
@@ -349,10 +353,11 @@
         "header": "asd",
         "ingredients": [
           {
+            "id": 10011111,
             "ingredient": "banana leaves",
-            "quantity": "3",
-            "measure": "g",
-            "possibleMeasures": [
+            "amount": "3",
+            "unit": "g",
+            "possibleUnits": [
               {
                 "id": 2,
                 "name": "piece"
@@ -368,10 +373,11 @@
             ]
           },
           {
+            "id": 9266,
             "ingredient": "pineapple",
-            "quantity": "3",
-            "measure": "piece",
-            "possibleMeasures": [
+            "amount": "3",
+            "unit": "piece",
+            "possibleUnits": [
               {
                 "id": 33,
                 "name": "fruit"

@@ -10,9 +10,9 @@ public class DetailedIngredientDto implements Serializable {
 //    private
     private long id;
     private String ingredient;
-    private double quantity;
-    private String measure;
-    private Set<Unit> possibleMeasures;
+    private double amount;
+    private Unit unit;
+    private Set<Unit> possibleUnits;
 
 
 }

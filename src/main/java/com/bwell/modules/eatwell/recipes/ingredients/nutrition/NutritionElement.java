@@ -2,6 +2,7 @@ package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -42,6 +43,11 @@ public class NutritionElement {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @JsonSetter("amount")
+    public void setAmount(double amount){
+        this.amount = BigDecimal.valueOf(amount);
     }
 
     public String getUnit() {

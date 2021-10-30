@@ -121,6 +121,7 @@ public class DetailedIngredient {
         return nutrition;
     }
 
+    @JsonPropertyOrder("1")
     public void setNutrition(Nutrients nutrition) {
         this.nutrition = nutrition;
     }
@@ -130,8 +131,9 @@ public class DetailedIngredient {
         DetailedIngredientDto detailedIngredientDto = new DetailedIngredientDto();
         detailedIngredientDto.setId(ingredient.getId());
         detailedIngredientDto.setIngredient(ingredient.getName());
-        detailedIngredientDto.setMeasure(unit.getName());
-        detailedIngredientDto.setPossibleMeasures(ingredient.getUnits());
+        detailedIngredientDto.setAmount(amount.doubleValue());
+        detailedIngredientDto.setUnit(unit);
+        detailedIngredientDto.setPossibleUnits(ingredient.getUnits());
 
         return detailedIngredientDto;
     }
