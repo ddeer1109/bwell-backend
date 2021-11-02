@@ -1,15 +1,17 @@
 <h2>bWell project - backend finished prototype</h2>
 
-<p>
-    It is Java/Sprign based backend for bWell application - full stack web application that allows user to share their wellbeing ideas for 4 areas: 
-</p>
 
 <h3>
 Tech stack
 </h3>
 
-<p>Java, Spring Boot, Jpa + Hibernate, PostgreSQL, Spoonacular API, Spring Security & OAuth2 (future)</p>
-<p><b>frontend: React + Material UI</b></p>
+<p><b>Backend:</b> Java, Spring Boot, Jpa + Hibernate, PostgreSQL, Spoonacular API, Spring Security & OAuth2 (future)</p>
+<p><b>Frontend:</b> React + Material UI</p>
+
+<p>
+    It is Java/Sprign based backend for bWell application - full stack web application that allows user to share their wellbeing ideas for 4 areas: 
+</p>
+
 
 
 <ul>
