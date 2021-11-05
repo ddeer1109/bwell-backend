@@ -6,7 +6,7 @@ Tech stack
 </h3>
 
 <p><b>Backend:</b> Java, Spring Boot, Jpa + Hibernate, PostgreSQL, Spoonacular API, Spring Security & OAuth2 (future)</p>
-<p><b>Frontend:</b> React + Material UI</p>
+<p><b>Frontend:</b> React + Material UI. Repo: https://github.com/DariuszOkonski/bwell-frontend</p>
 
 <p>
     It is Java/Sprign based backend for bWell application - full stack web application that allows user to share their wellbeing ideas for 4 areas: 
