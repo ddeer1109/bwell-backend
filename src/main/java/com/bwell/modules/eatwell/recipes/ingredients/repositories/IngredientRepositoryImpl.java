@@ -3,6 +3,8 @@ package com.bwell.modules.eatwell.recipes.ingredients.repositories;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Unit;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +16,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class IngredientRepositoryImpl implements CommonIngredientsRepository {
     private final Logger logger = LoggerFactory.getLogger(IngredientRepositoryImpl.class);
     private final DetailedIngredientsRepository detailedIngredientsRepository;
 
     private final IngredientsRepository ingredientsRepository;
-
     private final UnitRepository unitRepository;
-
+    private final NutrientsRepository nutrientsRepository;
     @Autowired
-    public IngredientRepositoryImpl(DetailedIngredientsRepository custom, IngredientsRepository standard, UnitRepository unit) {
+    public IngredientRepositoryImpl(DetailedIngredientsRepository custom,
+                                    IngredientsRepository standard,
+                                    UnitRepository unit, NutrientsRepository nutrientsRepository) {
         this.detailedIngredientsRepository = custom;
         this.ingredientsRepository = standard;
         this.unitRepository = unit;
-
+        this.nutrientsRepository = nutrientsRepository;
     }
 
     @Override
@@ -44,17 +48,30 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
                             .orElse(detailedIngr.getUnit())
                     )
         );
-        long id = detailedIngredientsRepository.insertWithExistingIngredient(
-                detailedIngr.getIngredientId(),
-                detailedIngr.getAmount().doubleValue(),
-                detailedIngr.getUnit().getId()
-        );
         DetailedIngredient byId = detailedIngredientsRepository
-                .findById(id)
-                .orElse(detailedIngr);
-        byId.setNutrition(detailedIngr.getNutrition());
+                .findById(detailedIngr.getId())
+                .orElseGet(() -> {
+                    long id = detailedIngredientsRepository
+                            .insertWithExistingIngredient(
+                                    detailedIngr.getIngredientId(),
+                                    detailedIngr.getAmount().doubleValue(),
+                                    detailedIngr.getUnit().getId());
+                    return detailedIngredientsRepository.getById(id);
+                });
 
-        return byId;
+        Nutrients nutrition = detailedIngr.getNutrition();
+//        nutrition.setIngredientId(byId.getIngredientId());
+        nutrition.setIngredient(byId);
+        Nutrients nutrientsSaved = nutrientsRepository.save(nutrition);
+        byId.setNutrition(nutrientsSaved);
+
+        try{
+            return detailedIngredientsRepository.save(byId);
+        }catch (Exception e){
+            log.error("Saving Detailed ingredient ====== > {} ======> {}", byId.getName(), e.getLocalizedMessage());
+            e.printStackTrace();
+            return byId;
+        }
     }
     @Override
     public List<Ingredient> persistentSave(List<Ingredient> ingredients) {
@@ -107,7 +124,7 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
                     .ifPresentOrElse(
                             (id) -> System.out.println("ALready present ${} " + id),
                             () -> {
-                                logger.debug("Check those ids: ${} ${}", ingredientId, unitId);
+                                logger.info("Check those ids: ${} ${}", ingredientId, unitId);
                                 unitRepository.insertUnitIngredientPair(ingredientId, unitId);
                             }
                     );

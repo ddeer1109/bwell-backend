@@ -5,6 +5,7 @@ import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.mapping.KeyValue;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
+@Slf4j
 public class NutrientsDemand {
     private BigDecimal caloriesDemand;
     private Map<Nutrient, BigDecimal> elementsPercentage = new HashMap<>();
@@ -112,19 +114,28 @@ public class NutrientsDemand {
 
     private BigDecimal getNutrientCoverage(NutritionElement nutrient){
         BigDecimal nutrientAmount = nutrient.getAmount();
-        return nutrientAmount.divide(getElementDemand(nutrient.getType()).getAmount(), new MathContext(4));
+        NutritionElement elementDemand = getElementDemand(nutrient.getType());
+        BigDecimal divide = nutrientAmount.divide(elementDemand.getAmount(), new MathContext(4));
+        return divide;
     }
 
     public IngredientCoverageDto getIngredientsCoverage(List<DetailedIngredient> ingredients){
         IngredientCoverageDto dto = new IngredientCoverageDto();
 
-        ingredients.forEach(ingredient -> {
-            IngredientCoverageDto ingredientCoverage = getIngredientCoverage(ingredient);
+        IngredientCoverageDto result = ingredients
+                .stream()
+                .map(this::getIngredientCoverage)
+                .reduce(dto, IngredientCoverageDto::addCoverage);
+        log.info("============= reduction effect : {} ", result);
+        //
+//        ingredients.forEach(ingredient -> {
+//            IngredientCoverageDto ingredientCoverage = getIngredientCoverage(ingredient);
+//
+//            dto.addCoverage(ingredientCoverage);
+//
+//        });
 
-            dto.addCoverage(ingredientCoverage);
-
-        });
-        return dto;
+        return result;
     }
 
     public NutrientsDemandDao createDao() {

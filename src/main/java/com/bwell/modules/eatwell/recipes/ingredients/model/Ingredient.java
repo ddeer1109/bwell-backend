@@ -4,6 +4,7 @@ package com.bwell.modules.eatwell.recipes.ingredients.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@ToString
 public class Ingredient {
     @Id
     private long id;

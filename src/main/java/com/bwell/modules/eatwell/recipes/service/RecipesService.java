@@ -1,6 +1,12 @@
 package com.bwell.modules.eatwell.recipes.service;
 
 import com.bwell.modules.base.*;
+import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
+import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +19,11 @@ import java.util.List;
 @Service
 public class RecipesService extends BaseService implements IRecipesService {
 
+    private final IngredientService ingredientService;
     @Autowired
-    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
+    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating, IngredientService ingrService) {
         super(content, entry, rating);
+        ingredientService = ingrService;
     }
 
     @Override
@@ -42,7 +50,21 @@ public class RecipesService extends BaseService implements IRecipesService {
     }
 
     @Override
+    public NutrientsDto sumIngredientsNutrition(long recipeId){
+        Nutrients nutrientsSum = Nutrients.empty();
+        List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
+        ingredients.forEach(dto -> {
+            log.info("now doing this {}", dto);
+            Nutrients ingredientNutrition = ingredientService.getIngredientDetails_API(dto).getNutrition();
+            nutrientsSum.addNutrients(ingredientNutrition);
+        });
+        return NutrientsDto.ofNutrients(nutrientsSum);
+    }
+
+    @Override
     public boolean deleteRecipe(Long id) {
-        return false;
+        entry.deleteById(id);
+
+        return true;
     }
 }

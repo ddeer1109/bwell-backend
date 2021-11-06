@@ -41,7 +41,7 @@ public abstract class ContentElement implements Serializable {
 
     @Type(type = "jsonb")
     @Column(columnDefinition =  "jsonb")
-    private Set<DetailedIngredientDto> ingredients;
+    private List<DetailedIngredientDto> ingredients;
     @Type(type = "text")
     private String text;
     @Type(type = "jsonb")

@@ -1,11 +1,11 @@
 package com.bwell.modules.eatwell.calculator.model;
 
+import com.bwell.modules.user.data.model.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +15,17 @@ import java.util.Map;
         name = "user_data"
 )
 public class CalculatorData {
+
     @Id
     @GeneratedValue
     private long id;
+
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JsonBackReference
+    @ToString.Exclude
+    private User user;
 
     private int bodyMassInKg;
     private int heightInCm;

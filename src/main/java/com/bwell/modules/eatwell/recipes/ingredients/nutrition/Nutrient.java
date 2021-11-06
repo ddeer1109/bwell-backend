@@ -1,8 +1,9 @@
 package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public enum Nutrient {
+public enum Nutrient implements Serializable {
 
     Fat(Names.FAT.name, 9),
     Carbohydrates(Names.CARBS.name, 4),

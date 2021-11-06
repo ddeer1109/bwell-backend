@@ -3,13 +3,18 @@ package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.Data;
+import lombok.ToString;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NutritionElement {
+@Data
+@ToString
+public class NutritionElement implements Serializable {
 
     @JsonIgnore
     private Nutrient type;
@@ -33,7 +38,7 @@ public class NutritionElement {
         try {
             type = Nutrient.valueOf(title);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
     }
 

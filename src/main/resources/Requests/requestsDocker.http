@@ -16,7 +16,7 @@ GET http://localhost:8080/api/v1/eatwell/ingredient/
 
 ###
 
-GET http://localhost:8080/api/v1/eatwell/ingredient/1077
+GET http://localhost:8080/api/v1/eatwell/ingredient/10219?amount=300&unit=ounce
 
 ###
 
@@ -46,26 +46,30 @@ Content-Type: application/json
 
 {
   "id": 111,
+  "user": {
+    "id": 3
+  },
   "bodyMassInKg": 70,
   "heightInCm": 170,
   "age": 25,
   "activityRatio": 1.5,
   "strategy": "Complete",
   "man": true,
-  "goal": "GainMass"
+  "goal": "KeepCurrent"
 }
 
 ###
 GET http://localhost:8080/api/v1/eatwell/calculator/
 
 ###
-GET http://localhost:8080/api/v1/eatwell/calculator/111/ingredient
+GET http://localhost:8080/api/v1/eatwell/calculator/35/ingredient
 Content-Type: application/json
 
 {
-  "id": 1077,
-  "unit": "g",
-  "amount": 500
+  "detailedId": 5,
+  "id": 10219,
+  "unit": "ounce",
+  "amount": 300
 }
 
 ###

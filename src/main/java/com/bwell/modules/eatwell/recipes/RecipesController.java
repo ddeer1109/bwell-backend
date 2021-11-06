@@ -2,6 +2,8 @@ package com.bwell.modules.eatwell.recipes;
 
 
 import com.bwell.modules.base.Entry;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.eatwell.recipes.service.IRecipesService;
 import com.bwell.modules.eatwell.recipes.service.RecipesService;
@@ -34,11 +36,21 @@ public class RecipesController {
         return service.getRecipe(id);
     }
 
+    @GetMapping("/{id}/nutrition")
+    public NutrientsDto getRecipeIngredients(@PathVariable("id") Long id){
+        return service.sumIngredientsNutrition(id);
+    }
+
     @PostMapping("/")
     public Recipe addRecipe(@RequestBody Recipe recipe){
         log.info("recipe: {}", recipe);
 
         return service.addRecipe(recipe);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteRecipe(@PathVariable("id") Long id) {
+        return service.deleteRecipe(id);
     }
 
 }

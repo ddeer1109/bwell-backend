@@ -34,4 +34,5 @@ public class Favourites {
     @ElementCollection
     private List<Integer> exercises;
 
+
 }

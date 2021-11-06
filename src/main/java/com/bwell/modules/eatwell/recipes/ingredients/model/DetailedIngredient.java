@@ -2,11 +2,15 @@ package com.bwell.modules.eatwell.recipes.ingredients.model;
 
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.fasterxml.jackson.annotation.*;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Set;
@@ -15,13 +19,10 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Entity
-public class DetailedIngredient {
+public class DetailedIngredient implements Serializable {
     @Id
-//    @SequenceGenerator(
-//            name = "my_sequence",
-//            allocationSize = 5
-//    )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
@@ -35,21 +36,24 @@ public class DetailedIngredient {
     private Unit unit = new Unit("g");
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
+    @OneToOne(cascade = CascadeType.ALL)
+    @Type(type = "jsonb")
+    @JsonManagedReference
     private Nutrients nutrition;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
-    private Ingredient ingredient = new Ingredient();
+    private Ingredient ingredient;
 
 
     public Ingredient getIngredient() {
         return ingredient;
     }
-
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
+
+
 
     @Transient
     @JsonIgnore
@@ -58,7 +62,11 @@ public class DetailedIngredient {
     }
 
     @JsonSetter("id")
+    @JsonPropertyOrder("1")
     public void setIngredientId(long id) {
+        if (ingredient == null) {
+            ingredient = new Ingredient();
+        }
         ingredient.setId(id);
     }
 
@@ -69,12 +77,17 @@ public class DetailedIngredient {
     }
     @JsonSetter("name")
     public void setName(String name) {
+        if (ingredient == null) {
+            ingredient = new Ingredient();
+        }
         this.ingredient.setName(name);
     }
 
+    @JsonGetter("detailedId")
     public long getId() {
         return id;
     }
+    @JsonSetter("detailedId")
     public void setId(long id) {
         this.id = id;
     }
@@ -114,14 +127,11 @@ public class DetailedIngredient {
         getIngredient().setUnits(units);
     }
 
-
-
-    @Transient
     public Nutrients getNutrition() {
         return nutrition;
     }
 
-    @JsonPropertyOrder("1")
+    @JsonPropertyOrder("2")
     public void setNutrition(Nutrients nutrition) {
         this.nutrition = nutrition;
     }
@@ -129,6 +139,7 @@ public class DetailedIngredient {
     @Transient
     public DetailedIngredientDto createDto(){
         DetailedIngredientDto detailedIngredientDto = new DetailedIngredientDto();
+        detailedIngredientDto.setDetailedId(id);
         detailedIngredientDto.setId(ingredient.getId());
         detailedIngredientDto.setIngredient(ingredient.getName());
         detailedIngredientDto.setAmount(amount.doubleValue());
@@ -138,15 +149,5 @@ public class DetailedIngredient {
         return detailedIngredientDto;
     }
 
-    @Override
-    public String toString() {
-        return "DetailedIngredient{ " +
-                "id=" + id +
-                ", ingredient_id=" + ingredient.getId() +
-                ", name='" + ingredient.getName() + '\'' +
-                ", unit='" + unit + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
 
 }

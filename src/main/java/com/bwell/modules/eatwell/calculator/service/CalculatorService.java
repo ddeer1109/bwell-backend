@@ -5,10 +5,13 @@ import com.bwell.modules.eatwell.calculator.model.NutrientsDemand;
 import com.bwell.modules.eatwell.calculator.model.NutritionStatisticsCalculator;
 import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
+import com.bwell.modules.eatwell.calculator.repository.CalculationDataRepository;
 import com.bwell.modules.eatwell.calculator.repository.CalculatorResultsRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
+import com.bwell.modules.user.data.model.User;
+import com.bwell.modules.user.data.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +25,25 @@ public class CalculatorService implements ICalculatorService {
 
     private final CalculatorResultsRepository resultsRepository;
     private final IngredientService ingredientService;
+    private final UserRepository usersRepository;
+    private final CalculationDataRepository calculationDataRepository;
     private final Logger logger = LoggerFactory.getLogger(CalculatorService.class);
 
-    @Autowired
-    public CalculatorService(CalculatorResultsRepository resultsRepository, IngredientService ingredientService) {
+    public CalculatorService(CalculatorResultsRepository resultsRepository, IngredientService ingredientService, UserRepository usersRepository, CalculationDataRepository calculationDataRepository) {
         this.resultsRepository = resultsRepository;
         this.ingredientService = ingredientService;
+        this.usersRepository = usersRepository;
+        this.calculationDataRepository = calculationDataRepository;
     }
+
 
     public NutrientsDemandDao getDemandForUser(long id) {
         NutrientsDemandDao byId = resultsRepository
-                .findById(id).orElseThrow();
+                .findById(id).orElseGet(() -> resultsRepository
+                        .findAll()
+                        .stream()
+                        .findAny()
+                        .orElse(NutrientsDemandDao.createDefault()));
 
         return byId;
     }
@@ -40,21 +51,31 @@ public class CalculatorService implements ICalculatorService {
 
     public NutrientsDemandDao calculateUserDemand(CalculatorData calculatorData) {
         NutritionStatisticsCalculator calculator = new NutritionStatisticsCalculator();
-
         calculator.setData(calculatorData);
+
         NutrientsDemand nutrientsDemand = calculator.calculateCaloriesDemand();
 
         nutrientsDemand.setProportion(calculatorData);
-
         nutrientsDemand.applyGoalIfProvided(calculatorData);
 
         NutrientsDemandDao dao = nutrientsDemand.createDao();
 
-        dao.setUserId(calculatorData.getId());
-
-        return resultsRepository.save(dao);
+        return updateUsersData(calculatorData, dao);
     }
 
+    private NutrientsDemandDao updateUsersData(CalculatorData calculatorData, NutrientsDemandDao dao) {
+        User user = usersRepository.getById(calculatorData.getUser().getId());
+        dao.setUser(user);
+        NutrientsDemandDao resultsSaved = resultsRepository.save(dao);
+        CalculatorData calcDataSaved = calculationDataRepository.save(calculatorData);
+
+        user.setCalculatorData(calcDataSaved);
+        user.setNutrientsDemand(resultsSaved);
+
+        usersRepository.save(user);
+
+        return resultsSaved;
+    }
 
 
     public IngredientCoverageDto getCoverageFor(long userId, IngredientDto ingredientDto) {

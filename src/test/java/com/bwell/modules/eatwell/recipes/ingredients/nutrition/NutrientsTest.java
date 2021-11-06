@@ -10,7 +10,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +27,7 @@ class NutrientsTest {
         nutrients = new Nutrients();
         initAmountCalories = 344;
         initAmount = 15;
-        nutrients.setNutrients(Set.of(
+        nutrients.setNutrients(List.of(
                 Nutrient.Calories.create(initAmountCalories),
                 Nutrient.Protein.create(initAmount),
                 Nutrient.Carbohydrates.create(initAmount),

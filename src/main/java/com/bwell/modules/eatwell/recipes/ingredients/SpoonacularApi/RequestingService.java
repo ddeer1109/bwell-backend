@@ -63,6 +63,12 @@ public class RequestingService {
         return stringJson;
     }
 
+    private String requestIngredient(int id, double amount, String unit){
+        String url = new UrlBuilder(id, amount, unit).build();
+        String stringJson = sendRequest(url);
+        return stringJson;
+    }
+
     private String requestIngredientsQuery(String query){
         String url = new UrlBuilder(query).build();
         String stringJson = sendRequest(url);
@@ -81,6 +87,16 @@ public class RequestingService {
     }
 
     public DetailedIngredient getIngredient(int id, int amount, String unit) {
+        String stringJson = requestIngredient(id, amount, unit);
+        try {
+            return mapper.readValue(stringJson, DetailedIngredient.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public DetailedIngredient getIngredient(int id, double amount, String unit) {
         String stringJson = requestIngredient(id, amount, unit);
         try {
             return mapper.readValue(stringJson, DetailedIngredient.class);

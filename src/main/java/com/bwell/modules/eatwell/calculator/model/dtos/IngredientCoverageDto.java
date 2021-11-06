@@ -33,6 +33,6 @@ public class IngredientCoverageDto {
         this.fat = this.fat.add(dto.getFat());
         this.carbohydrates = this.carbohydrates.add(dto.getCarbohydrates());
 
-        return dto;
+        return this;
     }
 }

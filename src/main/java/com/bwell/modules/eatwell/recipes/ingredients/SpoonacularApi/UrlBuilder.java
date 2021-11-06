@@ -1,8 +1,8 @@
 package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 
 public class UrlBuilder {
-    private String API_KEY = "1eac70c6679646c495c10b490246131b";
-//    private String API_KEY = "11e7a27c2c6c4d3abb6617b3c7521887";
+//    private String API_KEY = "1eac70c6679646c495c10b490246131b";
+    private String API_KEY = "c78a5fafd707476389cd614fcbfc24bf";
     private int MAX_RESULTS = 10;
 
     private String baseUrl = "https://api.spoonacular.com/food/ingredients/";
@@ -16,18 +16,18 @@ public class UrlBuilder {
     private String numberParam = "number=%d&";
     private String attachMetaInfo = "metaInformation=true";
 
-    private String basicAmount = "amount=%d&unit=%s";
+    private String basicAmount = "amount=%s&unit=%s";
 
     private int ingrId;
     private String query;
-    private int amount;
+    private double amount;
     private String unit;
 
     public UrlBuilder(int ingrId) {
         this.ingrId = ingrId;
     }
 
-    public UrlBuilder(int ingrId, int amount, String unit) {
+    public UrlBuilder(int ingrId, double amount, String unit) {
         this.ingrId = ingrId;
         this.amount = amount;
         this.unit = unit;
@@ -52,7 +52,7 @@ public class UrlBuilder {
         } else {
             stringBuilder.append(String.format(ingredientUrl, ingrId));
             stringBuilder.append(String.format(apiParam, API_KEY));
-            stringBuilder.append(String.format(basicAmount, amount, unit));
+            stringBuilder.append(String.format(basicAmount, String.valueOf(amount), unit));
         }
 
         return stringBuilder.toString();

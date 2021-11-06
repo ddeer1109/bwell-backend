@@ -24,6 +24,11 @@ public class UserController {
         return service.getUserById(id);
     }
 
+    @GetMapping("/default")
+    public User getDefaultUser() {
+        return service.getUserById(User.defaultUserId);
+    }
+
     @PostMapping("/{id}")
     public User addUser(@RequestBody User user) {
         return service.saveUser(user);
@@ -33,5 +38,6 @@ public class UserController {
     public User updateUser(@RequestBody User user){
         return service.saveUser(user);
     }
+
 
 }

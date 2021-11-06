@@ -35,7 +35,7 @@ public class CalculatorController {
 
     }
 
-    @GetMapping("/{userId}/recipe")
+    @PostMapping("/{userId}/recipe")
     public IngredientCoverageDto getCoverageFor(
             @RequestBody List<IngredientDto> ingredientsDto,
             @PathVariable(value = "userId") long userId) {
@@ -58,15 +58,8 @@ public class CalculatorController {
     @PostMapping
     @ResponseBody
     public NutrientsDemandDao setDemandForUser(@RequestBody CalculatorData calculatorData) {
-        System.out.println(calculatorData);
 
-        logger.info("-------------------");
-        logger.info("Hello data {} ", calculatorData);
-        logger.info("-------------------");
-
-        NutrientsDemandDao nutrientsDemandDao = service.calculateUserDemand(calculatorData);
-        logger.info("Hello results {} ", nutrientsDemandDao);
-        return nutrientsDemandDao;
+        return service.calculateUserDemand(calculatorData);
     }
 
 }
