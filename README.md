@@ -1,5 +1,6 @@
 <h1>bWell</h1>
 <p>Modular user-content based platform for people that constantly look for new ideas for improving their wellbeing and also for those who enjoy with sharing their knowledge</p>
+<img src="./img.png"/>
 <p>Application is divided on 4 theme modules:</p>
 <p><b>eatWell, fitWell, restWell, thinkWell</b></p> 
 <p>Each one contains standard CRUD functionalities. Entry creator is elastic and allows user to create well organized and customizable content.</p>

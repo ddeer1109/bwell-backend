@@ -1,9 +1,13 @@
 package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 
+import com.bwell.modules.configuration.ApiKeyConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
+@Component
 public class UrlBuilder {
-//    private String API_KEY = "1eac70c6679646c495c10b490246131b";
-//    private String API_KEY = "c78a5fafd707476389cd614fcbfc24bf";
-    private String API_KEY = "11e7a27c2c6c4d3abb6617b3c7521887";
+    private String API_KEY;
     private int MAX_RESULTS = 10;
 
     private String baseUrl = "https://api.spoonacular.com/food/ingredients/";
@@ -23,19 +27,32 @@ public class UrlBuilder {
     private String query;
     private double amount;
     private String unit;
+    private final ApiKeyConfig config;
 
-    public UrlBuilder(int ingrId) {
-        this.ingrId = ingrId;
+    @Autowired
+    public UrlBuilder(@Lazy ApiKeyConfig config){
+        this.config = config;
     }
 
-    public UrlBuilder(int ingrId, double amount, String unit) {
-        this.ingrId = ingrId;
-        this.amount = amount;
-        this.unit = unit;
-    }
-
-    public UrlBuilder(String query) {
+    public UrlBuilder query(String query){
         this.query = query;
+        return this;
+    }
+    public UrlBuilder ingredient(int ingrdId){
+        this.ingrId = ingrdId;
+        return this;
+    }
+    public UrlBuilder amount(int amount){
+        this.amount = amount;
+        return this;
+    }
+    public UrlBuilder amount(double amount){
+        this.amount = amount;
+        return this;
+    }
+    public UrlBuilder unit(String unit){
+        this.unit = unit;
+        return this;
     }
 
 
@@ -46,16 +63,22 @@ public class UrlBuilder {
 
         if (query != null) {
             stringBuilder.append(queryUrl);
-            stringBuilder.append(String.format(apiParam, API_KEY));
+            stringBuilder.append(String.format(apiParam, config.getApiKey()));
             stringBuilder.append(String.format(queryParam, query));
             stringBuilder.append(String.format(numberParam, MAX_RESULTS));
             stringBuilder.append(attachMetaInfo);
         } else {
             stringBuilder.append(String.format(ingredientUrl, ingrId));
-            stringBuilder.append(String.format(apiParam, API_KEY));
+            stringBuilder.append(String.format(apiParam, config.getApiKey()));
             stringBuilder.append(String.format(basicAmount, String.valueOf(amount), unit));
         }
+        query = "";
+        ingrId = 0;
+        amount = 0;
+        unit = "";
 
+        System.out.println(config.getApiKey());
+        System.out.println(config.getApiKey());
         return stringBuilder.toString();
 
 

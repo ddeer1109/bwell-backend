@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,19 +18,21 @@ import java.util.List;
 
 @Service
 public class RequestingService {
-    private HttpClient client = HttpClient.newHttpClient();
-    private ObjectMapper mapper = new ObjectMapper();
+    private final HttpClient client;
+    private final ObjectMapper mapper;
+    private final UrlBuilder urlBuilder;
+
+    @Autowired
+    public RequestingService(UrlBuilder urlBuilder) {
+        this.client = HttpClient.newHttpClient();
+        this.mapper = new ObjectMapper();
+        this.urlBuilder = urlBuilder;
+    }
 
     public ObjectMapper getMapper() {
         return mapper;
     }
 
-    public RequestingService() {
-        client = HttpClient.newHttpClient();
-        mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
-    }
 
     private String sendRequest(String url) {
         HttpRequest request = HttpRequest.newBuilder()
@@ -52,27 +54,33 @@ public class RequestingService {
 
 
     private String requestIngredient(int id){
-        String url = new UrlBuilder(id).build();
-        String stringJson = sendRequest(url);
-        return stringJson;
+        String url = urlBuilder.ingredient(id).build();
+        return sendRequest(url);
     }
 
     private String requestIngredient(int id, int amount, String unit){
-        String url = new UrlBuilder(id, amount, unit).build();
-        String stringJson = sendRequest(url);
-        return stringJson;
+        String url = urlBuilder
+                .ingredient(id)
+                .amount(amount)
+                .unit(unit)
+                .build();
+        return sendRequest(url);
     }
 
     private String requestIngredient(int id, double amount, String unit){
-        String url = new UrlBuilder(id, amount, unit).build();
-        String stringJson = sendRequest(url);
-        return stringJson;
+        String url = urlBuilder
+                .ingredient(id)
+                .amount(amount)
+                .unit(unit)
+                .build();
+        return sendRequest(url);
     }
 
     private String requestIngredientsQuery(String query){
-        String url = new UrlBuilder(query).build();
-        String stringJson = sendRequest(url);
-        return stringJson;
+        String url = urlBuilder
+                .query(query)
+                .build();
+        return sendRequest(url);
     }
 
 
