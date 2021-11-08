@@ -1,6 +1,6 @@
 package com.bwell.modules.eatwell.recipes.service;
 
-import com.bwell.modules.base.Entry;
+import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
@@ -12,5 +12,6 @@ public interface IRecipesService {
     List<Entry> getAllRecipes();
     Recipe addRecipe(Recipe recipe);
     boolean deleteRecipe(Long id);
-    NutrientsDto sumIngredientsNutrition(long id);
+    Nutrients sumIngredientsNutrition(long id);
+    Nutrients sumRecipesIngredientsNutrition(List<Recipe> recipe);
 }

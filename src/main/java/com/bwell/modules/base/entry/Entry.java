@@ -1,5 +1,7 @@
-package com.bwell.modules.base;
+package com.bwell.modules.base.entry;
 
+import com.bwell.modules.base.rating.Rating;
+import com.bwell.modules.base.content.model.ContentElement;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.restwell.ideas.model.Idea;
@@ -9,7 +11,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 

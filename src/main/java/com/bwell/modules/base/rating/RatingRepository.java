@@ -1,4 +1,4 @@
-package com.bwell.modules.base;
+package com.bwell.modules.base.rating;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package com.bwell.modules.fitwell.activities.service;
 
-import com.bwell.modules.base.Entry;
+import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.fitwell.activities.model.Activity;
 
 import java.util.List;

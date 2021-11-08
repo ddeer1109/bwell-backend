@@ -1,7 +1,7 @@
 package com.bwell.modules;
 
 import com.bwell.modules.base.BaseService;
-import com.bwell.modules.base.Entry;
+import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.user.data.model.User;
 import com.bwell.modules.user.data.service.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,7 +26,7 @@ public class BwellApplication {
     CommandLineRunner runner(BaseService baseService, UserService userService) {
         return args -> {
             // read json and write to db
-            User defaultUser = userService.saveUser(User.createEmpty());
+            User defaultUser = userService.saveUser(UserService.createEmptyUser());
             defaultUser.getDietPlan().setUser(defaultUser);
             User.defaultUserId = defaultUser.getId();
             ObjectMapper mapper = new ObjectMapper();

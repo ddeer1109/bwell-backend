@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    port: 5432
+    host: localhost
+    databaseName: bwell
+    url: jdbc:postgresql://localhost:5432/bwell
+    username: postgres
+    password: poki123
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+app:
+  tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+  tokenExpirationMsec: 864000000
+  authorizedRedirectUris:
+    - http://localhost:3000/oauth2/redirect

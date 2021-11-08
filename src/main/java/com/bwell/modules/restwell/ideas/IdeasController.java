@@ -1,7 +1,6 @@
 package com.bwell.modules.restwell.ideas;
 
-import com.bwell.modules.base.Entry;
-import com.bwell.modules.fitwell.activities.model.Activity;
+import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import com.bwell.modules.restwell.ideas.service.IIdeasService;
 import com.bwell.modules.restwell.ideas.service.IdeasService;

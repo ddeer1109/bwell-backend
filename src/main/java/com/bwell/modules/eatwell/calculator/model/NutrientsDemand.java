@@ -4,6 +4,8 @@ import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutritionElement;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.mapping.KeyValue;
@@ -118,15 +120,37 @@ public class NutrientsDemand {
         BigDecimal divide = nutrientAmount.divide(elementDemand.getAmount(), new MathContext(4));
         return divide;
     }
+//
+//    public IngredientCoverageDto getIngredientsCoverage(List<DetailedIngredient> ingredients){
+//        IngredientCoverageDto dto = new IngredientCoverageDto();
+//
+//        IngredientCoverageDto result = ingredients
+//                .stream()
+//                .map(this::getIngredientCoverage)
+//                .reduce(dto, IngredientCoverageDto::addCoverage);
+//        log.info("============= reduction effect : {} ", result);
+//        //
+////        ingredients.forEach(ingredient -> {
+////            IngredientCoverageDto ingredientCoverage = getIngredientCoverage(ingredient);
+////
+////            dto.addCoverage(ingredientCoverage);
+////
+////        });
+//
+//        return result;
+//    }
 
-    public IngredientCoverageDto getIngredientsCoverage(List<DetailedIngredient> ingredients){
+    public IngredientCoverageDto getIngredientsCoverage(NutrientsDto nutrientsDto){
         IngredientCoverageDto dto = new IngredientCoverageDto();
 
-        IngredientCoverageDto result = ingredients
-                .stream()
-                .map(this::getIngredientCoverage)
-                .reduce(dto, IngredientCoverageDto::addCoverage);
-        log.info("============= reduction effect : {} ", result);
+        NutritionElement calories = nutrientsDto.getCalories();
+        NutritionElement carbs = nutrientsDto.getCarbohydrates();
+        NutritionElement fat = nutrientsDto.getFat();
+        NutritionElement protein = nutrientsDto.getProtein();
+        dto.setCalories(calories.getAmount().divide(getElementDemand(calories.getType()).getAmount(), new MathContext(2)));
+        dto.setProtein(protein.getAmount().divide(getElementDemand(protein.getType()).getAmount(), new MathContext(2)));
+        dto.setCarbohydrates(carbs.getAmount().divide(getElementDemand(carbs.getType()).getAmount(), new MathContext(2)));
+        dto.setFat(fat.getAmount().divide(getElementDemand(fat.getType()).getAmount(), new MathContext(2)));
         //
 //        ingredients.forEach(ingredient -> {
 //            IngredientCoverageDto ingredientCoverage = getIngredientCoverage(ingredient);
@@ -135,7 +159,7 @@ public class NutrientsDemand {
 //
 //        });
 
-        return result;
+        return dto;
     }
 
     public NutrientsDemandDao createDao() {

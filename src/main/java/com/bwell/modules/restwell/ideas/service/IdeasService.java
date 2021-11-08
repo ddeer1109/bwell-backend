@@ -1,7 +1,10 @@
 package com.bwell.modules.restwell.ideas.service;
 
 import com.bwell.modules.base.*;
-import com.bwell.modules.eatwell.recipes.model.Recipe;
+import com.bwell.modules.base.content.ContentRepository;
+import com.bwell.modules.base.entry.Entry;
+import com.bwell.modules.base.entry.EntryRepository;
+import com.bwell.modules.base.rating.RatingRepository;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

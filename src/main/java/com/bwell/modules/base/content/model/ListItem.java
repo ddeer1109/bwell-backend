@@ -1,4 +1,4 @@
-package com.bwell.modules.base;
+package com.bwell.modules.base.content.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;

@@ -1,4 +1,4 @@
-package com.bwell.modules.base;
+package com.bwell.modules.base.content.model;
 
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientsList;
@@ -11,7 +11,6 @@ import org.hibernate.annotations.TypeDef;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 

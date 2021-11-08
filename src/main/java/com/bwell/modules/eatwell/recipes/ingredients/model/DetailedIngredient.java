@@ -1,6 +1,7 @@
 package com.bwell.modules.eatwell.recipes.ingredients.model;
 
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.mockcenter.MockObjectsFactory;
 import com.fasterxml.jackson.annotation.*;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -45,15 +46,12 @@ public class DetailedIngredient implements Serializable {
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
     private Ingredient ingredient;
 
-
     public Ingredient getIngredient() {
         return ingredient;
     }
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
-
-
 
     @Transient
     @JsonIgnore
@@ -128,9 +126,12 @@ public class DetailedIngredient implements Serializable {
     }
 
     public Nutrients getNutrition() {
+        if (nutrition == null){
+            nutrition = Nutrients.empty();
+            nutrition.setNutrients(MockObjectsFactory.nutritionElements());
+        }
         return nutrition;
     }
-
     @JsonPropertyOrder("2")
     public void setNutrition(Nutrients nutrition) {
         this.nutrition = nutrition;

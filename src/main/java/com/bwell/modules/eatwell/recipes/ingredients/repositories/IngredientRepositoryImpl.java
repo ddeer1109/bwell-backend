@@ -23,55 +23,59 @@ public class IngredientRepositoryImpl implements CommonIngredientsRepository {
 
     private final IngredientsRepository ingredientsRepository;
     private final UnitRepository unitRepository;
-    private final NutrientsRepository nutrientsRepository;
+//    private final NutrientsRepository nutrientsRepository;
     @Autowired
     public IngredientRepositoryImpl(DetailedIngredientsRepository custom,
                                     IngredientsRepository standard,
-                                    UnitRepository unit, NutrientsRepository nutrientsRepository) {
+                                    UnitRepository unit
+//                                    NutrientsRepository nutrientsRepository
+    ) {
         this.detailedIngredientsRepository = custom;
         this.ingredientsRepository = standard;
         this.unitRepository = unit;
-        this.nutrientsRepository = nutrientsRepository;
+//        this.nutrientsRepository = nutrientsRepository;
     }
 
     @Override
     public DetailedIngredient persistentSave(DetailedIngredient detailedIngr) {
-        Ingredient ingredientCompliantWithDB = persistentSave(detailedIngr.getIngredient());
-
-        detailedIngr.setUnit(
-                unitRepository
-                        .findUnitByNameEquals(detailedIngr.getUnit().getName())
-                        .orElse(ingredientCompliantWithDB
-                            .getUnits().stream()
-                            .filter(unit -> unit.equals(detailedIngr.getUnit()))
-                            .findFirst()
-                            .orElse(detailedIngr.getUnit())
-                    )
-        );
-        DetailedIngredient byId = detailedIngredientsRepository
-                .findById(detailedIngr.getId())
-                .orElseGet(() -> {
-                    long id = detailedIngredientsRepository
-                            .insertWithExistingIngredient(
-                                    detailedIngr.getIngredientId(),
-                                    detailedIngr.getAmount().doubleValue(),
-                                    detailedIngr.getUnit().getId());
-                    return detailedIngredientsRepository.getById(id);
-                });
-
-        Nutrients nutrition = detailedIngr.getNutrition();
-//        nutrition.setIngredientId(byId.getIngredientId());
-        nutrition.setIngredient(byId);
-        Nutrients nutrientsSaved = nutrientsRepository.save(nutrition);
-        byId.setNutrition(nutrientsSaved);
-
-        try{
-            return detailedIngredientsRepository.save(byId);
-        }catch (Exception e){
-            log.error("Saving Detailed ingredient ====== > {} ======> {}", byId.getName(), e.getLocalizedMessage());
-            e.printStackTrace();
-            return byId;
-        }
+        return detailedIngr;
+//        throw new UnsupportedOperationException();
+//        Ingredient ingredientCompliantWithDB = persistentSave(detailedIngr.getIngredient());
+//
+//        detailedIngr.setUnit(
+//                unitRepository
+//                        .findUnitByNameEquals(detailedIngr.getUnit().getName())
+//                        .orElse(ingredientCompliantWithDB
+//                            .getUnits().stream()
+//                            .filter(unit -> unit.equals(detailedIngr.getUnit()))
+//                            .findFirst()
+//                            .orElse(detailedIngr.getUnit())
+//                    )
+//        );
+//        DetailedIngredient byId = detailedIngredientsRepository
+//                .findById(detailedIngr.getId())
+//                .orElseGet(() -> {
+//                    long id = detailedIngredientsRepository
+//                            .insertWithExistingIngredient(
+//                                    detailedIngr.getIngredientId(),
+//                                    detailedIngr.getAmount().doubleValue(),
+//                                    detailedIngr.getUnit().getId());
+//                    return detailedIngredientsRepository.getById(id);
+//                });
+//
+//        Nutrients nutrition = detailedIngr.getNutrition();
+////        nutrition.setIngredientId(byId.getIngredientId());
+//        nutrition.setIngredient(byId);
+//        Nutrients nutrientsSaved = nutrientsRepository.save(nutrition);
+//        byId.setNutrition(nutrientsSaved);
+//
+//        try{
+//            return detailedIngredientsRepository.save(byId);
+//        }catch (Exception e){
+//            log.error("Saving Detailed ingredient ====== > {} ======> {}", byId.getName(), e.getLocalizedMessage());
+//            e.printStackTrace();
+//            return byId;
+//        }
     }
     @Override
     public List<Ingredient> persistentSave(List<Ingredient> ingredients) {

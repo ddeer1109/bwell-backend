@@ -15,6 +15,9 @@ public class NutrientsDto {
 
     public static NutrientsDto ofNutrients(Nutrients nutrients){
         NutrientsDto nutrientsDto = new NutrientsDto();
+        if (nutrients == null) {
+            nutrients = Nutrients.empty();
+        }
         nutrientsDto.calories = nutrients.get(Nutrient.Calories);
         nutrientsDto.carbohydrates = nutrients.get(Nutrient.Carbohydrates);
         nutrientsDto.fat = nutrients.get(Nutrient.Fat);

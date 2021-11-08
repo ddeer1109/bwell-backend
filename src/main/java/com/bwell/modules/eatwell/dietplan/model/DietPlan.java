@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity(name="diet_plan")
 @Data
@@ -34,4 +39,13 @@ public class DietPlan {
     @JoinColumn
     @OneToOne
     private Recipe supper;
+
+    @Transient
+    @JsonIgnore
+    public List<Recipe> getSetMeals(){
+        Recipe[] array = {breakfast, lunch, dinner, supper};
+        return Arrays.stream(array)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
 }

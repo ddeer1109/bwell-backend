@@ -62,39 +62,42 @@ public class IngredientService implements IIngredientService {
         return getIngredientDetails_API(ingredientDto);
     }
     public DetailedIngredient getIngredientDetails_API(IngredientDto dto) {
-        Optional<Long> detailedId = Optional.ofNullable(dto.getDetailedId());
-        return detailedIngredientsRepository
-                .findById(detailedId.orElse((long) 0))
-                .orElseGet(() -> {
-                    DetailedIngredient apiDetailedIngredient = spoonacularApi.getIngredient(dto.getId(), dto.getAmount(), dto.getUnit());
-                    if (dto.getDetailedId() != null && dto.getDetailedId() != 0)
-                        apiDetailedIngredient.setId(dto.getDetailedId());
-                    try {
-                        return commonRepository.persistentSave(apiDetailedIngredient);
-                    } catch (Exception e) {
-                        logger.info("Something went wrong with saveing {} {}, ", apiDetailedIngredient, e.getMessage());
-                        e.printStackTrace();
-                        return apiDetailedIngredient;
-                    }
-        });
+        return  spoonacularApi.getIngredient(dto.getId(), dto.getAmount(), dto.getUnit());
+        //        Optional<Long> detailedId = Optional.ofNullable(dto.getDetailedId());
+//        return detailedIngredientsRepository
+//                .findById(detailedId.orElse((long) 0))
+//                .orElseGet(() -> {
+//                    DetailedIngredient apiDetailedIngredient = spoonacularApi.getIngredient(dto.getId(), dto.getAmount(), dto.getUnit());
+//                    if (dto.getDetailedId() != null && dto.getDetailedId() != 0)
+//                        apiDetailedIngredient.setId(dto.getDetailedId());
+//                    try {
+//                        return commonRepository.persistentSave(apiDetailedIngredient);
+//                    } catch (Exception e) {
+//                        logger.info("Something went wrong with saveing {} {}, ", apiDetailedIngredient, e.getMessage());
+//                        e.printStackTrace();
+//                        return apiDetailedIngredient;
+//                    }
+//        });
 
     }
     public DetailedIngredient getIngredientDetails_API(DetailedIngredientDto dto) {
-            return detailedIngredientsRepository
-                    .findById(dto.getDetailedId())
-                    .orElseGet(() -> {
-                        DetailedIngredient ingredient = spoonacularApi.getIngredient(
-                                (int) dto.getId(), dto.getAmount(), dto.getUnit().getName()
-                        );
-                        ingredient.setId(dto.getDetailedId());
-                        try {
-                            return commonRepository.persistentSave(ingredient);
-                        } catch (Exception e) {
-                            logger.info("Something went wrong with saveing {} {}, ", ingredient, e.getMessage());
-                            e.printStackTrace();
-                            return ingredient;
-                        }
-                    });
+        return  spoonacularApi.getIngredient((int) dto.getId(), dto.getAmount(), dto.getUnit().getName());
+
+//            return detailedIngredientsRepository
+//                    .findById(dto.getDetailedId())
+//                    .orElseGet(() -> {
+//                        DetailedIngredient ingredient = spoonacularApi.getIngredient(
+//                                (int) dto.getId(), dto.getAmount(), dto.getUnit().getName()
+//                        );
+//                        ingredient.setId(dto.getDetailedId());
+//                        try {
+//                            return commonRepository.persistentSave(ingredient);
+//                        } catch (Exception e) {
+//                            logger.info("Something went wrong with saveing {} {}, ", ingredient, e.getMessage());
+//                            e.printStackTrace();
+//                            return ingredient;
+//                        }
+//                    });
     }
 }
 

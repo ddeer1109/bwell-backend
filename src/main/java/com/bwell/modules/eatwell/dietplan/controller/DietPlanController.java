@@ -1,17 +1,13 @@
 package com.bwell.modules.eatwell.dietplan.controller;
 
-import com.bwell.modules.base.Entry;
 import com.bwell.modules.eatwell.dietplan.model.DietPlan;
 import com.bwell.modules.eatwell.dietplan.service.IDietPlanService;
-import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.eatwell.recipes.service.IRecipesService;
-import com.bwell.modules.eatwell.recipes.service.RecipesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin("http://localhost:3000")

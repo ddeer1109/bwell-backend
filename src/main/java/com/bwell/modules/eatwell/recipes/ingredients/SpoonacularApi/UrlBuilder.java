@@ -2,7 +2,8 @@ package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 
 public class UrlBuilder {
 //    private String API_KEY = "1eac70c6679646c495c10b490246131b";
-    private String API_KEY = "c78a5fafd707476389cd614fcbfc24bf";
+//    private String API_KEY = "c78a5fafd707476389cd614fcbfc24bf";
+    private String API_KEY = "11e7a27c2c6c4d3abb6617b3c7521887";
     private int MAX_RESULTS = 10;
 
     private String baseUrl = "https://api.spoonacular.com/food/ingredients/";

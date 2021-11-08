@@ -1,8 +1,7 @@
 package com.bwell.modules.eatwell.recipes.model;
 
-import com.bwell.modules.base.Entry;
+import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
-import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @JsonTypeName("recipe")
 @JsonIgnoreProperties(ignoreUnknown = true)

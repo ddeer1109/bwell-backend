@@ -1,6 +1,10 @@
 package com.bwell.modules.fitwell.activities.service;
 
 import com.bwell.modules.base.*;
+import com.bwell.modules.base.content.ContentRepository;
+import com.bwell.modules.base.entry.Entry;
+import com.bwell.modules.base.entry.EntryRepository;
+import com.bwell.modules.base.rating.RatingRepository;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

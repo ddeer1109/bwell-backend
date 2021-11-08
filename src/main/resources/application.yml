@@ -1,17 +1,11 @@
 spring:
-  jpa:
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  datasource:
-    port: 5432
-    host: localhost
-    databaseName: bwell
-    url: jdbc:postgresql://localhost:5432/bwell
-    username: postgres
-    password: poki123
-    driverClassName: org.postgresql.Driver
-  sql:
-    init:
-      platform: postgres
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 732455086497-tse2q35l4cqqs2kat2qv2td1fc6odj47.apps.googleusercontent.com
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile

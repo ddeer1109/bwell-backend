@@ -1,5 +1,9 @@
 package com.bwell.modules.base;
 
+import com.bwell.modules.base.content.ContentRepository;
+import com.bwell.modules.base.entry.Entry;
+import com.bwell.modules.base.entry.EntryRepository;
+import com.bwell.modules.base.rating.RatingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

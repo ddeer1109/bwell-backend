@@ -7,9 +7,14 @@ import com.bwell.modules.eatwell.calculator.model.dtos.IngredientCoverageDto;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.calculator.repository.CalculationDataRepository;
 import com.bwell.modules.eatwell.calculator.repository.CalculatorResultsRepository;
+import com.bwell.modules.eatwell.dietplan.service.IDietPlanService;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
+import com.bwell.modules.eatwell.recipes.service.IRecipesService;
+import com.bwell.modules.eatwell.recipes.service.RecipesService;
 import com.bwell.modules.user.data.model.User;
 import com.bwell.modules.user.data.repository.UserRepository;
 import org.slf4j.Logger;
@@ -27,13 +32,18 @@ public class CalculatorService implements ICalculatorService {
     private final IngredientService ingredientService;
     private final UserRepository usersRepository;
     private final CalculationDataRepository calculationDataRepository;
+    private final IDietPlanService dietPlanService;
     private final Logger logger = LoggerFactory.getLogger(CalculatorService.class);
 
-    public CalculatorService(CalculatorResultsRepository resultsRepository, IngredientService ingredientService, UserRepository usersRepository, CalculationDataRepository calculationDataRepository) {
+    private final RecipesService recipeService;
+
+    public CalculatorService(CalculatorResultsRepository resultsRepository, IngredientService ingredientService, UserRepository usersRepository, CalculationDataRepository calculationDataRepository, IDietPlanService dietPlanService, RecipesService recipeService) {
         this.resultsRepository = resultsRepository;
         this.ingredientService = ingredientService;
         this.usersRepository = usersRepository;
         this.calculationDataRepository = calculationDataRepository;
+        this.dietPlanService = dietPlanService;
+        this.recipeService = recipeService;
     }
 
 
@@ -67,6 +77,10 @@ public class CalculatorService implements ICalculatorService {
         User user = usersRepository.getById(calculatorData.getUser().getId());
         dao.setUser(user);
         NutrientsDemandDao resultsSaved = resultsRepository.save(dao);
+        calculatorData.setCarbohydratesPercentage(dao.getCarbohydratesPercentage().doubleValue());
+        calculatorData.setProteinPercentage(dao.getProteinPercentage().doubleValue());
+        calculatorData.setFatPercentage(dao.getFatPercentage().doubleValue());
+        calculatorData.setUser(resultsSaved.getUser());
         CalculatorData calcDataSaved = calculationDataRepository.save(calculatorData);
 
         user.setCalculatorData(calcDataSaved);
@@ -77,7 +91,6 @@ public class CalculatorService implements ICalculatorService {
         return resultsSaved;
     }
 
-
     public IngredientCoverageDto getCoverageFor(long userId, IngredientDto ingredientDto) {
 
         NutrientsDemandDao dao = getDemandForUser(userId);
@@ -87,18 +100,50 @@ public class CalculatorService implements ICalculatorService {
 
         return nutrientsDemand.getIngredientCoverage(ingredientDetails_api);
     }
-
-    public IngredientCoverageDto getCoverageFor(long userId, List<IngredientDto> ingredientsDto) {
+//
+//    public IngredientCoverageDto getCoverageFor(long userId, List<IngredientDto> ingredientsDto) {
+//        return null;
+////        NutrientsDemandDao dao = getDemandForUser(userId);
+////
+////        List<DetailedIngredient> detailedIngredients = ingredientsDto
+////                .stream()
+////                .map(ingredientService::getIngredientDetails_API)
+////                .collect(Collectors.toList());
+////
+////        NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
+////
+////        return nutrientsDemand.getIngredientsCoverage(detailedIngredients);
+//    }
+    @Override
+    public IngredientCoverageDto getCoverageFor(long userId, long recipeId) {
 
         NutrientsDemandDao dao = getDemandForUser(userId);
 
-        List<DetailedIngredient> detailedIngredients = ingredientsDto
-                .stream()
-                .map(ingredientService::getIngredientDetails_API)
-                .collect(Collectors.toList());
+        NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
+        Nutrients nutrients = recipeService.sumIngredientsNutrition(recipeId);
+        logger.info("ASDFASDF {},", nutrients);
+        IngredientCoverageDto ingredientsCoverage = nutrientsDemand.getIngredientsCoverage(NutrientsDto.ofNutrients(nutrients));
+        logger.info("ASDFASDF ASDFASDF ASDFASDF ASDFASDF ASDFASDF {},", ingredientsCoverage);
+        return ingredientsCoverage;
+    }
+
+    @Override
+    public IngredientCoverageDto getCoverageOfDietPlan(long userId){
+        NutrientsDemandDao dao = getDemandForUser(userId);
 
         NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
 
-        return nutrientsDemand.getIngredientsCoverage(detailedIngredients);
+        Nutrients nutrients = recipeService.sumRecipesIngredientsNutrition(dietPlanService.getDietPlan(userId).getSetMeals());
+
+        return nutrientsDemand.getIngredientsCoverage(NutrientsDto.ofNutrients(nutrients));
+    }
+
+    @Override
+    public NutrientsDto getNutrientsSumOfDietPlan(long userId) {
+        Nutrients nutrients = recipeService.sumRecipesIngredientsNutrition(dietPlanService.getDietPlan(userId).getSetMeals());
+
+        return NutrientsDto.ofNutrients(nutrients);
+
+
     }
 }

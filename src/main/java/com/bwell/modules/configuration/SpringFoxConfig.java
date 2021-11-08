@@ -1,4 +1,4 @@
-package com.bwell.configuration;
+package com.bwell.modules.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

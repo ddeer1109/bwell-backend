@@ -6,12 +6,12 @@ import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.calculator.service.CalculatorService;
 import com.bwell.modules.eatwell.calculator.service.ICalculatorService;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -35,14 +35,25 @@ public class CalculatorController {
 
     }
 
-    @PostMapping("/{userId}/recipe")
+    @GetMapping("/{userId}/recipe/{recipeId}")
     public IngredientCoverageDto getCoverageFor(
-            @RequestBody List<IngredientDto> ingredientsDto,
-            @PathVariable(value = "userId") long userId) {
+            @PathVariable(value = "userId") long userId, @PathVariable long recipeId) {
 
-        return service.getCoverageFor(userId, ingredientsDto);
+        return service.getCoverageFor(userId, recipeId);
 
     }
+    @GetMapping("/{userId}/dietplan/coverage")
+    public IngredientCoverageDto getCoverageForNutrients(@PathVariable(value = "userId") long userId) {
+        return service.getCoverageOfDietPlan(userId);
+    }
+
+    @GetMapping("/{userId}/dietplan/sum")
+    public NutrientsDto getSumOfNutrients(@PathVariable(value = "userId") long userId) {
+        return service.getNutrientsSumOfDietPlan(userId);
+    }
+
+
+
 
     @GetMapping("/{id}")
     public NutrientsDemandDao getDemandForUser(@PathVariable(value = "id") long id) {
