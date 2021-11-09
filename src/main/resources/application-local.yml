@@ -1,6 +1,20 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_LOGIN}
+    password: ${DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+
 app:
   tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
   tokenExpirationMsec: 864000000
   API_KEY: ${API_KEY}
   authorizedRedirectUris:
-    - https://bwell-frontend.herokuapp.com/
+    - https://bwell-frontend.herokuapp.com/oauth2/redirect
