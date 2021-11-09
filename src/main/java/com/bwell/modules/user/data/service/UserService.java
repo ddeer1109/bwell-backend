@@ -36,7 +36,9 @@ public class UserService implements IUserService {
     public Credentials getCredentialsById(String id){
         return credRepo.findById(id).orElseThrow();
     }
+
     public User saveUser(User user) {
+        user = repository.findById(user.getId()).orElse(user);
         return repository.save(user);
     }
 
