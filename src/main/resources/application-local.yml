@@ -4,12 +4,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-#    port: 5432
-#    host: localhost
-#    databaseName: bwell
-#    url: jdbc:postgresql://localhost:5432/bwell
-#    username: postgres
-#    password: poki123
     driverClassName: org.postgresql.Driver
   sql:
     init:
