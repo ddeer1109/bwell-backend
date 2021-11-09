@@ -3,8 +3,6 @@ spring:
     database: POSTGRESQL
     hibernate:
       ddl-auto: create-drop
-  datasource:
-    driverClassName: org.postgresql.Driver
   sql:
     init:
       platform: postgres
