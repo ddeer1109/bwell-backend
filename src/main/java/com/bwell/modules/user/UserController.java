@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @Slf4j
 @RestController
 @CrossOrigin("https://bwell-frontend.herokuapp.com/")
@@ -38,7 +40,14 @@ public class UserController {
 
     @GetMapping("/default")
     public User getDefaultUser() {
-        return service.getUserById(User.defaultUserId);
+        try{
+            return service.getUserById(User.defaultUserId);
+        } catch (Exception e)
+        {
+            User emptyUser = UserService.createEmptyUser();
+            emptyUser.setId(new Random().nextLong());
+            return emptyUser;
+        }
     }
 
     @PostMapping("/{id}")
