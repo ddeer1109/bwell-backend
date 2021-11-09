@@ -49,12 +49,12 @@ public class UserController {
             return emptyUser;
         }
     }
-
-    @PostMapping("/{id}")
-    public User addUser(@RequestBody User user) {
-        System.out.println(user);
-        return service.saveUser(user);
-    }
+//
+//    @PostMapping("/{id}")
+//    public User addUser(@RequestBody User user) {
+//        System.out.println(user);
+//        return service.saveUser(user);
+//    }
 
     @PostMapping("/{id}")
     public User updateUser(@RequestBody User user){
