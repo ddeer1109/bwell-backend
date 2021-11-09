@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://bwell-frontend.herokuapp.com/")
 @RequestMapping("/api/v1/thinkwell/exercises")
 public class ExercisesController {
 
