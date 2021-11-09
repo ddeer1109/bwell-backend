@@ -43,6 +43,13 @@ public class User {
     @JsonIgnore
     private Credentials credentials;
 
+    @Transient
+    private String email;
+
+    public String getEmail() {
+        return getCredentials().getEmail();
+    }
+
     public Credentials getCredentials() {
         if (credentials == null)
             credentials = new Credentials();
