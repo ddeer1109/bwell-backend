@@ -60,6 +60,7 @@ public class UserService implements IUserService {
 
     public static User createEmptyUser(){
         User user = new User();
+        user.setId(0l);
         user.setDietPlan( new DietPlan());
         user.setFavourites(new Favourites());
         return user;
