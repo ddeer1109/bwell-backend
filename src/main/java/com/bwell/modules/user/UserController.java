@@ -35,7 +35,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        return service.getUserById(id);
+        User userById = service.getUserById(id);
+        System.out.println(userById);
+        return userById;
     }
 
     @GetMapping("/default")

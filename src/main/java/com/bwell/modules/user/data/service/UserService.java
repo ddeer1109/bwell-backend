@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class UserService implements IUserService {
@@ -38,7 +40,9 @@ public class UserService implements IUserService {
     }
 
     public User saveUser(User user) {
-        user = repository.findById(user.getId()).orElse(user);
+        Optional<User> inDb = repository.findById(user.getId());
+
+        inDb.ifPresent((dbUser) -> user.setCredentials(dbUser.getCredentials()));
         return repository.save(user);
     }
 
