@@ -1,13 +1,13 @@
 spring:
-  jpa:
-    database: POSTGRESQL
-    hibernate:
-      ddl-auto: create-drop
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_LOGIN}
-    password: ${DATABASE_PASSWORD}
-    driverClassName: org.postgresql.Driver
+#  jpa:
+#    database: POSTGRESQL
+#    hibernate:
+#      ddl-auto: create-drop
+#  datasource:
+#    url: ${DATABASE_URL}
+#    username: ${DATABASE_LOGIN}
+#    password: ${DATABASE_PASSWORD}
+#    driverClassName: org.postgresql.Driver
   sql:
     init:
       platform: postgres
