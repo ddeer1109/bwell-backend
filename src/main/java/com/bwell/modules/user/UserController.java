@@ -56,7 +56,7 @@ public class UserController {
         return service.saveUser(user);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public User updateUser(@RequestBody User user){
 
         System.out.println(user);
