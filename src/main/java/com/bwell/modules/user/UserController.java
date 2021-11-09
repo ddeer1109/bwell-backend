@@ -52,11 +52,15 @@ public class UserController {
 
     @PostMapping("/{id}")
     public User addUser(@RequestBody User user) {
+        System.out.println(user);
         return service.saveUser(user);
     }
 
     @PutMapping("/{id}")
     public User updateUser(@RequestBody User user){
+
+        System.out.println(user);
+
         return service.saveUser(user);
     }
 
