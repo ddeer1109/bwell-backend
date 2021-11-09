@@ -19,3 +19,4 @@ app:
   shouldCreate: ${SHOULD_CREATE}
   authorizedRedirectUris:
     - https://bwell-frontend.herokuapp.com/oauth2/redirect
+    - http://bwell-frontend.herokuapp.com/oauth2/redirect
