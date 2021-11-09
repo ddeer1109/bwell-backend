@@ -59,6 +59,7 @@ public class UserController {
 //    }
 
     @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@RequestBody User user){
 
         System.out.println(user);
