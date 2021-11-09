@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://bwell-frontend.herokuapp.com")
 @RequestMapping("/api/v1/eatwell/dietplan")
 public class DietPlanController {
 
