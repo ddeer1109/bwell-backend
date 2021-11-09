@@ -1,1 +1,1 @@
-web: java -jar target/bwell-0.0.1-SNAPSHOT.jar -Dserver.port=8080 -Dspring.profiles.active=local
+web: java -jar target/bwell-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=local
