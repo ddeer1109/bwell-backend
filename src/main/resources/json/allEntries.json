@@ -49,7 +49,7 @@
             "detailedId": 3,
             "ingredient": "ground pork",
             "amount": "150",
-            "unit": "ounce",
+            "unit": "g",
             "possibleUnits": [
               "g",
               "ounce",

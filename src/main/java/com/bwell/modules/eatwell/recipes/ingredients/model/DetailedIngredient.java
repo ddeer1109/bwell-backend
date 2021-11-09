@@ -126,10 +126,6 @@ public class DetailedIngredient implements Serializable {
     }
 
     public Nutrients getNutrition() {
-        if (nutrition == null){
-            nutrition = Nutrients.empty();
-            nutrition.setNutrients(MockObjectsFactory.nutritionElements());
-        }
         return nutrition;
     }
     @JsonPropertyOrder("2")

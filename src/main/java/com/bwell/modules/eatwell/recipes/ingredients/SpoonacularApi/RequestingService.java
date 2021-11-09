@@ -2,6 +2,8 @@ package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.mockcenter.MockObjectsFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -94,20 +96,16 @@ public class RequestingService {
         }
     }
 
-    public DetailedIngredient getIngredient(int id, int amount, String unit) {
-        String stringJson = requestIngredient(id, amount, unit);
-        try {
-            return mapper.readValue(stringJson, DetailedIngredient.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public DetailedIngredient getIngredient(int id, double amount, String unit) {
         String stringJson = requestIngredient(id, amount, unit);
         try {
-            return mapper.readValue(stringJson, DetailedIngredient.class);
+            DetailedIngredient detailedIngredient = mapper.readValue(stringJson, DetailedIngredient.class);
+            if (detailedIngredient.getNutrition() == null){
+                Nutrients empty = Nutrients.empty();
+                empty.setNutrients(MockObjectsFactory.nutritionElements());
+                detailedIngredient.setNutrition(empty);
+            }
+            return detailedIngredient;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
