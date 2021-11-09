@@ -1,6 +1,5 @@
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: POSTGRESQL
     hibernate:
       ddl-auto: create-drop
@@ -18,4 +17,4 @@ app:
   tokenExpirationMsec: 864000000
   API_KEY: ${API_KEY}
   authorizedRedirectUris:
-    - https://bwell-frontend.herokuapp.com/oauth2/redirect
+    - http://localhost:3000/oauth2/redirect
