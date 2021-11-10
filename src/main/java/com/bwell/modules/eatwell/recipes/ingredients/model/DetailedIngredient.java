@@ -37,9 +37,10 @@ public class DetailedIngredient implements Serializable {
     private Unit unit = new Unit("g");
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(cascade = CascadeType.ALL)
-    @Type(type = "jsonb")
-    @JsonManagedReference
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @Type(type = "jsonb")
+//    @JsonManagedReference
+    @Transient
     private Nutrients nutrition;
 
     @OneToOne(cascade = CascadeType.ALL)

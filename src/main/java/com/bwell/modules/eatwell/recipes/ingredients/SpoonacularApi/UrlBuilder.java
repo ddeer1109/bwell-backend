@@ -72,7 +72,7 @@ public class UrlBuilder {
             stringBuilder.append(String.format(apiParam, config.getApiKey()));
             stringBuilder.append(String.format(basicAmount, String.valueOf(amount), unit));
         }
-        query = "";
+        query = null;
         ingrId = 0;
         amount = 0;
         unit = "";

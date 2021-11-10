@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NutrientsDto {
+public class NutrientsDto implements Serializable {
     private NutritionElement calories;
     private NutritionElement protein;
     private NutritionElement fat;
@@ -23,5 +26,11 @@ public class NutrientsDto {
         nutrientsDto.fat = nutrients.get(Nutrient.Fat);
         nutrientsDto.protein = nutrients.get(Nutrient.Protein);
         return nutrientsDto;
+    }
+
+    public Nutrients toNutrients(){
+        Nutrients nutrients = new Nutrients();
+        nutrients.setNutrients(List.of(calories,protein,fat,carbohydrates));
+        return nutrients;
     }
 }

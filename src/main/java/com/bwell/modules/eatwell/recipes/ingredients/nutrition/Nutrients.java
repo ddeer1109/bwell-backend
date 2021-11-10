@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "nutrients")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@Entity
+//@Table(name = "nutrients")
+//@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+//@Entity
 public class Nutrients implements Serializable {
 
     @Transient
@@ -34,10 +34,10 @@ public class Nutrients implements Serializable {
     @Id
     @GeneratedValue(strategy = SEQUENCE)
     private long id;
-
-    @OneToOne
-    @JoinColumn(name="ingredient_id", referencedColumnName = "id")
-    @JsonBackReference
+//
+//    @OneToOne
+//    @JoinColumn(name="ingredient_id", referencedColumnName = "id")
+//    @JsonBackReference
     private DetailedIngredient ingredient;
 
     public DetailedIngredient getIngredient() {

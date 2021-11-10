@@ -2,6 +2,8 @@ package com.bwell.modules.eatwell.recipes.model;
 
 import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDao;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -13,11 +15,15 @@ import java.util.stream.Collectors;
 @JsonTypeName("recipe")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity(name="Recipe")
+@Table(name="Recipe")
 public class Recipe extends Entry {
 
     public Recipe() {
         setModule("recipe");
     }
+
+    @OneToOne
+    private NutrientsDao nutrients;
 
     @JsonIgnore
     public List<DetailedIngredientDto> getIngredients(){
