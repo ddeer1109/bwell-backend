@@ -92,7 +92,7 @@ public class RecipesService extends BaseService implements IRecipesService {
     private void cacheRecipeNutrients(long recipeId, Nutrients nutrientsSum) {
         NutrientsDao nutrientsDao = new NutrientsDao();
         Optional<Entry> byId = entry.findById(recipeId);
-        if (byId.isPresent()){
+        if (byId.isPresent() && nutrientsDaoRepository.findByRecipe_Id(recipeId).isEmpty()){
             nutrientsDao.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
             nutrientsDao.setRecipe((Recipe)byId.get());
             nutrientsDaoRepository.save(nutrientsDao);
