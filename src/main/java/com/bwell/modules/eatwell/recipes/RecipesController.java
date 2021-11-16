@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("https://bwell-frontend.herokuapp.com/")
+@CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/eatwell/recipes")
 public class RecipesController {
 

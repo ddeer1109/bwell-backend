@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("https://bwell-frontend.herokuapp.com")
+@CrossOrigin(value= {"https://localhost:3000.com/", "https://bwell-frontend.herokuapp.com/"})
 @RequestMapping("/api/v1/eatwell/calculator")
 public class CalculatorController {
 

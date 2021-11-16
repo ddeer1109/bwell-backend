@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("https://bwell-frontend.herokuapp.com/")
+@CrossOrigin({"https://bwell-frontend.herokuapp.com/", "https://bwell-frontend.herokuapp.com/"})
 @RequestMapping("/api/v1/fitwell/activities")
 public class ActivitiesController {
 

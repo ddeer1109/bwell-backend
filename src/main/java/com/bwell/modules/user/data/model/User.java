@@ -4,6 +4,7 @@ import com.bwell.modules.eatwell.calculator.model.CalculatorData;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.dietplan.model.DietPlan;
 import com.bwell.modules.user.favourites.model.Favourites;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -50,9 +51,15 @@ public class User {
         return getCredentials().getEmail();
     }
 
+    @JsonGetter("isVerified")
+    public boolean isVerified() {
+        return credentials.isVerified();
+    }
+
     public Credentials getCredentials() {
         if (credentials == null)
             credentials = new Credentials();
+            credentials.setUser(this);
         return credentials;
     }
 

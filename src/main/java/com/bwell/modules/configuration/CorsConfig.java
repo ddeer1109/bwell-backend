@@ -1,5 +1,6 @@
 package com.bwell.modules.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -13,6 +14,8 @@ import java.util.Collections;
 public class CorsConfig {
 
     private final long MAX_AGE_SECS = 3600;
+    @Value("${FRONTEND_HOST}")
+    private String frontendHost;
 
     @Bean
     public CorsFilter corsFilter() {
@@ -20,10 +23,12 @@ public class CorsConfig {
 
         final CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("https://bwell-frontend.herokuapp.com/"));
+        config.setAllowedOrigins(Collections.singletonList(frontendHost));
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setMaxAge(MAX_AGE_SECS);
+
+        System.out.println(frontendHost);
 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);

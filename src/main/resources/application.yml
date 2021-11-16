@@ -18,6 +18,6 @@ app:
   tokenExpirationMsec: 864000000
   API_KEY: ${API_KEY}
   shouldCreate: ${SHOULD_CREATE:true}
+  corsOrigin: ${FRONTEND_HOST:https://bwell-frontend.herokuapp.com/}
   authorizedRedirectUris:
-    - https://bwell-frontend.herokuapp.com/oauth2/redirect
-    - http://bwell-frontend.herokuapp.com/oauth2/redirect
+    - ${AUTH_REDIRECT_URI:https://bwell-frontend.herokuapp.com/oauth2/redirect}

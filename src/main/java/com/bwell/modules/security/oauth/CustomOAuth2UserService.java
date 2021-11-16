@@ -73,7 +73,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private Credentials register(OAuth2UserRequest userRequest, OAuth2UserInfo auth2UserInfo) {
-        User appUser = UserService.createEmptyUser();
+        User appUser = userRepository.save(UserService.createEmptyUser());
 
         appUser.getCredentials().setProvider(AuthProvider.valueOf(userRequest.getClientRegistration().getRegistrationId()));
         appUser.getCredentials().setProviderId(auth2UserInfo.getId());
@@ -81,8 +81,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         appUser.getCredentials().setEmail(auth2UserInfo.getEmail());
         appUser.getCredentials().setImageUrl(auth2UserInfo.getImgUrl());
         appUser.getCredentials().setUser(appUser);
-        userRepository.save(appUser);
-        return credentialsRepository.save(appUser.getCredentials());
+        appUser.getCredentials().setVerified(true);
+        appUser = userRepository.save(appUser);
+        Credentials credentials = credentialsRepository.save(appUser.getCredentials());
+        return credentials;
 
     }
 }

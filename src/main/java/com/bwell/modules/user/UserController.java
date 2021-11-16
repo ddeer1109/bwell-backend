@@ -15,7 +15,7 @@ import java.util.Random;
 
 @Slf4j
 @RestController
-@CrossOrigin("https://bwell-frontend.herokuapp.com/")
+@CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/users")
 public class UserController {
 

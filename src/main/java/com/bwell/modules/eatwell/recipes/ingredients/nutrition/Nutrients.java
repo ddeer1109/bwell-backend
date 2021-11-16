@@ -40,6 +40,7 @@ public class Nutrients implements Serializable {
 //    @JsonBackReference
     private DetailedIngredient ingredient;
 
+    @JsonIgnore
     public DetailedIngredient getIngredient() {
         return ingredient;
     }

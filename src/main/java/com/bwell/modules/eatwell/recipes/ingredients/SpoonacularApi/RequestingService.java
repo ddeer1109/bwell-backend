@@ -105,6 +105,7 @@ public class RequestingService {
                 empty.setNutrients(MockObjectsFactory.nutritionElements());
                 detailedIngredient.setNutrition(empty);
             }
+            detailedIngredient.getNutrition().setIngredient(detailedIngredient);
             return detailedIngredient;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
