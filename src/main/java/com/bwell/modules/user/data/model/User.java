@@ -52,6 +52,7 @@ public class User {
     }
 
     @JsonGetter("isVerified")
+    @Transient
     public boolean isVerified() {
         return credentials.isVerified();
     }
