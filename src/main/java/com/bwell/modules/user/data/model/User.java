@@ -56,6 +56,7 @@ public class User {
         return credentials.isVerified();
     }
 
+    @JsonIgnore
     public Credentials getCredentials() {
         if (credentials == null)
             credentials = new Credentials();
