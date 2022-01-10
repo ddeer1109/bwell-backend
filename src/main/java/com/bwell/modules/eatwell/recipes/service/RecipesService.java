@@ -136,18 +136,6 @@ public class RecipesService extends BaseService implements IRecipesService {
                             return nutr1;
                         }
                 );
-//
-//        Nutrients reduce = recipe
-//                .stream()
-//                .flatMap(rec -> rec.getIngredients().stream())
-//                .map( rec -> ingredientService.getIngredientDetails_API(rec).getNutrition())
-//                .reduce(
-//                        empty,
-//                        (nutr1, nutr2) -> {
-//                            nutr1.addNutrients(nutr2);
-//                            return nutr1;
-//                        }
-//                );
         return reduce;
 
     }

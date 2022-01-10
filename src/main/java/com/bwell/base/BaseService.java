@@ -5,6 +5,7 @@ import com.bwell.base.entry.Entry;
 import com.bwell.base.entry.EntryRepository;
 import com.bwell.base.rating.repository.RatingRepository;
 import com.bwell.security.UserPrincipal;
+import com.bwell.user.data.model.User;
 import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class BaseService implements IBaseService{
 
 
     @Override
-    public Entry addEntry(Entry entry) {
+    public Entry saveEntry(Entry entry) {
         rating.save(entry.getRating());
         content.saveAll(entry.getContent());
         Entry tempEntry = this.entry.save(entry);
@@ -43,12 +44,25 @@ public class BaseService implements IBaseService{
     }
     @Override
     public void saveAll(List<Entry> list) {
-        list.forEach(this::addEntry);
+        list.forEach(this::saveEntry);
     }
 
     @Override
     public boolean isAuthor(UserPrincipal user, long entryId){
-        return userService.getCredentialsById(user.getId()).getUser().getId()
-                .equals(entry.getById(entryId).getAuthor().getId());
+        try {
+            User author = entry.getById(entryId).getAuthor();
+            User user1 = userService.getCredentialsById(user.getId()).getUser();
+            return user1.getId()
+                    .equals(author.getId());
+        } catch (NullPointerException e) {
+            log.info("msg {}", e);
+            return false;
+        }
+
+    }
+
+    @Override
+    public Entry findEntryById(long id) {
+        return entry.findById(id).orElse(null);
     }
 }

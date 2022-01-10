@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @JsonTypeName("recipe")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity(name="Recipe")
-@Table(name="Recipe")
 public class Recipe extends Entry {
 
     public Recipe() {
