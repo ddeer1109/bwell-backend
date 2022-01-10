@@ -15,6 +15,7 @@ import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientDtoR
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.NutrientsDaoRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
+import com.bwell.modules.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +30,18 @@ public class RecipesService extends BaseService implements IRecipesService {
     private final NutrientsDaoRepository nutrientsDaoRepository;
     private final IngredientDtoRepository ingredientDtoRepository;
 
-    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating, IngredientService ingredientService, NutrientsDaoRepository nutrientsDaoRepository, IngredientDtoRepository ingredientDtoRepository) {
-        super(content, entry, rating);
+    public RecipesService(ContentRepository content,
+                          EntryRepository entry,
+                          RatingRepository rating,
+                          UserService user,
+                          IngredientService ingredientService,
+                          NutrientsDaoRepository nutrientsDaoRepository,
+                          IngredientDtoRepository ingredientDtoRepository) {
+        super(content, entry, rating, user);
         this.ingredientService = ingredientService;
         this.nutrientsDaoRepository = nutrientsDaoRepository;
         this.ingredientDtoRepository = ingredientDtoRepository;
     }
-
 //
 //    @Autowired
 //    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating, IngredientService ingrService) {
@@ -72,6 +78,7 @@ public class RecipesService extends BaseService implements IRecipesService {
         if (byRecipeId.isPresent()){
             return byRecipeId.get().getNutrients().toNutrients();
         }
+
         Nutrients nutrientsSum = Nutrients.empty();
         List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
 

@@ -28,6 +28,9 @@ public class UserController {
         return service.getCredentialsById(principal.getId());
     }
 
+
+
+
     @Autowired
     public UserController(UserService service) {
         this.service = service;

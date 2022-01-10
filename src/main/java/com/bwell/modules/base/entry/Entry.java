@@ -6,6 +6,7 @@ import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import com.bwell.modules.thinkwell.exercises.model.Exercise;
+import com.bwell.modules.user.data.model.User;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
@@ -31,6 +32,9 @@ public abstract class Entry {
     private String title;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private User author;
 
     private String module;
     @JoinColumn(name = "rating_id", referencedColumnName = "id")

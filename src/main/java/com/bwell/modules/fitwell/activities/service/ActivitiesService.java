@@ -6,6 +6,7 @@ import com.bwell.modules.base.entry.Entry;
 import com.bwell.modules.base.entry.EntryRepository;
 import com.bwell.modules.base.rating.RatingRepository;
 import com.bwell.modules.fitwell.activities.model.Activity;
+import com.bwell.modules.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,10 @@ import java.util.List;
 public class ActivitiesService extends BaseService implements IActivitiesService {
 
     @Autowired
-    public ActivitiesService(ContentRepository content, EntryRepository entry, RatingRepository rating) {
-        super(content, entry, rating);
+    public ActivitiesService(ContentRepository content, EntryRepository entry, RatingRepository rating, UserService userService) {
+        super(content, entry, rating, userService);
     }
+
 
     @Override
     public List<Entry> getAllActivities() {

@@ -8,6 +8,8 @@ import com.bwell.modules.eatwell.recipes.service.IRecipesService;
 import com.bwell.modules.eatwell.recipes.service.RecipesService;
 import com.bwell.modules.security.CurrentUser;
 import com.bwell.modules.security.UserPrincipal;
+import com.bwell.modules.user.data.model.Credentials;
+import com.bwell.modules.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,11 +24,14 @@ import java.util.List;
 public class RecipesController {
 
     private final IRecipesService service;
+    private final UserService userService;
 
     @Autowired
-    public RecipesController(RecipesService service) {
+    public RecipesController(IRecipesService service, UserService service1) {
         this.service = service;
+        this.userService = service1;
     }
+
 
 //    @PreAuthorize("hasRole('USER')")
     @GetMapping("/")
@@ -59,8 +64,8 @@ public class RecipesController {
 
 
     @DeleteMapping("/{id}")
-    public boolean deleteRecipe(@PathVariable("id") Long id) {
-        return service.deleteRecipe(id);
+    public boolean deleteRecipe(@PathVariable("id") Long entryId, @CurrentUser UserPrincipal userPrincipal) {
+        return service.isAuthor(userPrincipal, entryId) && service.deleteRecipe(entryId);
     }
 
 }
