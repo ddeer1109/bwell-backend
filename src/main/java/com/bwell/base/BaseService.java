@@ -31,6 +31,9 @@ public class BaseService implements IBaseService{
         this.userService = userService;
     }
 
+    public EntryRepository getEntry() {
+        return entry;
+    }
 
     @Override
     public Entry saveEntry(Entry entry) {
