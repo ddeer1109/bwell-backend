@@ -1,10 +1,10 @@
 package com.bwell.modules.eatwell.recipes.service;
 
-import com.bwell.modules.base.*;
-import com.bwell.modules.base.content.ContentRepository;
-import com.bwell.modules.base.entry.Entry;
-import com.bwell.modules.base.entry.EntryRepository;
-import com.bwell.modules.base.rating.RatingRepository;
+import com.bwell.base.*;
+import com.bwell.base.content.ContentRepository;
+import com.bwell.base.entry.Entry;
+import com.bwell.base.entry.EntryRepository;
+import com.bwell.base.rating.repository.RatingRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
@@ -15,7 +15,7 @@ import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientDtoR
 import com.bwell.modules.eatwell.recipes.ingredients.repositories.NutrientsDaoRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.user.data.service.UserService;
+import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

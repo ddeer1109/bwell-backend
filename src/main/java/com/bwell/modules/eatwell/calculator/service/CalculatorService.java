@@ -13,17 +13,12 @@ import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
-import com.bwell.modules.eatwell.recipes.service.IRecipesService;
 import com.bwell.modules.eatwell.recipes.service.RecipesService;
-import com.bwell.modules.user.data.model.User;
-import com.bwell.modules.user.data.repository.UserRepository;
+import com.bwell.user.data.model.User;
+import com.bwell.user.data.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CalculatorService implements ICalculatorService {

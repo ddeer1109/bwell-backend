@@ -1,8 +1,8 @@
 package com.bwell.modules.thinkwell.exercises;
 
-import com.bwell.modules.base.entry.Entry;
-import com.bwell.modules.security.CurrentUser;
-import com.bwell.modules.security.UserPrincipal;
+import com.bwell.base.entry.Entry;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
 import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.bwell.modules.thinkwell.exercises.service.ExerciseService;
 import com.bwell.modules.thinkwell.exercises.service.IExerciseService;

@@ -1,6 +1,6 @@
 package com.bwell.modules.restwell.ideas.model;
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

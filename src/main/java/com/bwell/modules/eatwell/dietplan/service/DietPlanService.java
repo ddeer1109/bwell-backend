@@ -1,11 +1,11 @@
 package com.bwell.modules.eatwell.dietplan.service;
 
-import com.bwell.modules.base.entry.EntryRepository;
+import com.bwell.base.entry.EntryRepository;
 import com.bwell.modules.eatwell.dietplan.model.DietPlan;
 import com.bwell.modules.eatwell.dietplan.repository.DietPlanRepository;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.user.data.model.User;
-import com.bwell.modules.user.data.repository.UserRepository;
+import com.bwell.user.data.model.User;
+import com.bwell.user.data.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

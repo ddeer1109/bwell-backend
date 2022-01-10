@@ -1,7 +1,7 @@
 package com.bwell.modules.restwell.ideas.service;
 
-import com.bwell.modules.base.IBaseService;
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.IBaseService;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.restwell.ideas.model.Idea;
 
 import java.util.List;

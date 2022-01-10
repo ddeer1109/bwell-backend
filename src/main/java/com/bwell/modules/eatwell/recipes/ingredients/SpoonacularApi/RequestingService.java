@@ -3,7 +3,7 @@ package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.Ingredient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
-import com.bwell.modules.mockcenter.MockObjectsFactory;
+import com.bwell.mockcenter.MockObjectsFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;

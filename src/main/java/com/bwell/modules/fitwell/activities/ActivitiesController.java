@@ -1,11 +1,11 @@
 package com.bwell.modules.fitwell.activities;
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.fitwell.activities.service.ActivitiesService;
 import com.bwell.modules.fitwell.activities.service.IActivitiesService;
-import com.bwell.modules.security.CurrentUser;
-import com.bwell.modules.security.UserPrincipal;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

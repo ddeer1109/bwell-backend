@@ -1,13 +1,11 @@
 package com.bwell.modules.eatwell.recipes.ingredients.model;
 
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
-import com.bwell.modules.mockcenter.MockObjectsFactory;
 import com.fasterxml.jackson.annotation.*;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;

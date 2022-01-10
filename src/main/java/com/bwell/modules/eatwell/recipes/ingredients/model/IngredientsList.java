@@ -1,6 +1,6 @@
 package com.bwell.modules.eatwell.recipes.ingredients.model;
 
-import com.bwell.modules.base.content.model.ContentElement;
+import com.bwell.base.content.model.ContentElement;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

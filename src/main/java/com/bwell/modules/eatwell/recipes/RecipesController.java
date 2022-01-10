@@ -1,18 +1,15 @@
 package com.bwell.modules.eatwell.recipes;
 
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.eatwell.recipes.service.IRecipesService;
-import com.bwell.modules.eatwell.recipes.service.RecipesService;
-import com.bwell.modules.security.CurrentUser;
-import com.bwell.modules.security.UserPrincipal;
-import com.bwell.modules.user.data.model.Credentials;
-import com.bwell.modules.user.data.service.UserService;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
+import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
