@@ -9,6 +9,7 @@ import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.bwell.user.data.model.User;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,6 +35,8 @@ public abstract class Entry {
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @JsonBackReference
+    @ToString.Exclude
     private User author;
 
     private String module;
