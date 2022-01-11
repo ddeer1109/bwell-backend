@@ -27,7 +27,9 @@ public class BwellApplication {
 
     @Bean
     CommandLineRunner runner(BaseService baseService, UserService userService, DatabasePopulationConfig config) {
-        if (!config.getDecision().equals("true") && baseService.getEntry().count() != 0)
+        long count = baseService.getEntry().count();
+        log.info("records count: {}", count);
+        if (!config.getDecision().equals("true") && count != 0)
             return null;
         return args -> {
             // read json and write to db
