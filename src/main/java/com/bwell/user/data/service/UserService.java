@@ -40,15 +40,15 @@ public class UserService implements IUserService {
     }
 
     public User saveUser(User user) {
-        Optional<User> inDb = repository.findById(user.getId());
-        if (inDb.isPresent()){
-            User userInDb = inDb.get();
-            userInDb.setFavourites(user.getFavourites());
-            userInDb.setDietPlan(user.getDietPlan());
-            userInDb.setCalculatorData(user.getCalculatorData());
-            userInDb.setNutrientsDemand(user.getNutrientsDemand());
-            return repository.save(userInDb);
-        }
+//        Optional<User> inDb = repository.findById(user.getId());
+//        if (inDb.isPresent()){
+//            User userInDb = inDb.get();
+//            userInDb.setFavourites(user.getFavourites());
+//            userInDb.setDietPlan(user.getDietPlan());
+//            userInDb.setCalculatorData(user.getCalculatorData());
+//            userInDb.setNutrientsDemand(user.getNutrientsDemand());
+//            return repository.save(userInDb);
+//        }
         return repository.save(user);
     }
 
