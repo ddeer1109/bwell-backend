@@ -63,6 +63,7 @@ public abstract class Entry {
 
     @JsonGetter("author")
     public Map<String, Object> getAuthorDto(){
+        if (author == null) return null;
         HashMap<String, Object> auth = new HashMap<>();
         auth.put("id", author.getId());
         auth.put("email", author.getEmail());
