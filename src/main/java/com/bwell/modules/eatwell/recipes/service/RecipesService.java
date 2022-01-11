@@ -75,6 +75,7 @@ public class RecipesService extends BaseService implements IRecipesService {
     @Override
     public Nutrients sumIngredientsNutrition(long recipeId){
         Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+
         if (byRecipeId.isPresent()){
             return byRecipeId.get().getNutrients().toNutrients();
         }

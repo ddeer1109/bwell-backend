@@ -18,9 +18,13 @@ public class DetailedIngredientDto implements Serializable {
 
     public IngredientDto simplifyToIngredientDto(){
         IngredientDto ingredientDto = new IngredientDto();
+        if(detailedId != 0L) {
+            ingredientDto.setDetailedId(detailedId);
+        }
         ingredientDto.setId((int)id);
         ingredientDto.setAmount((int)amount);
         ingredientDto.setUnit(unit.getName());
         return ingredientDto;
     }
+
 }
