@@ -12,7 +12,9 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -35,7 +37,6 @@ public abstract class Entry {
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @JsonBackReference
     @ToString.Exclude
     private User author;
 
@@ -60,6 +61,13 @@ public abstract class Entry {
         this.content = content;
     }
 
+    @JsonGetter("author")
+    public Map<String, Object> getAuthorDto(){
+        HashMap<String, Object> auth = new HashMap<>();
+        auth.put("id", author.getId());
+        auth.put("email", author.getEmail());
+        return auth;
+    }
 
     @JsonTypeId
     public String getModule() {
