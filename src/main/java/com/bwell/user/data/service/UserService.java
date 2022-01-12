@@ -40,17 +40,7 @@ public class UserService implements IUserService {
     }
 
     public User saveUser(User user) {
-        return repository.findById(user.getId())
-                .stream()
-                .map(dbUsr -> {
-                    dbUsr.setFavourites(user.getFavourites());
-                    dbUsr.setDietPlan(user.getDietPlan());
-                    dbUsr.setCalculatorData(user.getCalculatorData());
-                    dbUsr.setNutrientsDemand(user.getNutrientsDemand());
-                    return repository.save(dbUsr);
-                })
-                .findFirst()
-                .orElse(repository.save(user));
+        return repository.save(user);
     }
 
     @Override
