@@ -1,5 +1,6 @@
 package com.bwell.modules.eatwell.recipes.model;
 
+import com.bwell.base.content.model.ContentElement;
 import com.bwell.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDao;
@@ -20,8 +21,6 @@ public class Recipe extends Entry {
         setModule("recipe");
     }
 
-    @OneToOne
-    private NutrientsDao nutrients;
 
     @JsonIgnore
     public List<DetailedIngredientDto> getIngredients(){
@@ -30,5 +29,15 @@ public class Recipe extends Entry {
                 .flatMap((element) -> element.getIngredients().stream())
                 .collect(Collectors.toList());
     }
+    @JsonIgnore
+    public List<List<DetailedIngredientDto>> getDetailedIngredientsLists(){
+        return getContent().stream()
+                .filter(element -> element.getType().equals("ingredients_list"))
+                .map(ContentElement::getIngredients)
+                .collect(Collectors.toList());
+
+    }
+
+
 
 }

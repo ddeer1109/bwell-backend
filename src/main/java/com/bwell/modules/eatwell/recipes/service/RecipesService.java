@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -66,6 +67,14 @@ public class RecipesService extends BaseService implements IRecipesService {
         rating.save(recipe.getRating());
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
+//        List<DetailedIngredientDto> ingredients = recipe.getIngredients();
+//        ingredientDtoRepository.saveAll(ingredients.stream()
+//                .map(ing -> {
+//                    IngredientDto ingredientDto = ing.simplifyToIngredientDto();
+//                    ingredientDto.setRecipe(tempRecipe);
+//                    return ingredientDto;
+//                })
+//                .collect(Collectors.toList()));
 
         log.info("Returning {}", tempRecipe);
 
@@ -74,11 +83,10 @@ public class RecipesService extends BaseService implements IRecipesService {
 
     @Override
     public Nutrients sumIngredientsNutrition(long recipeId){
-        Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
-
-        if (byRecipeId.isPresent()){
-            return byRecipeId.get().getNutrients().toNutrients();
-        }
+//        Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+//        if (byRecipeId.isPresent()){
+//            return byRecipeId.get().getNutrients().toNutrients();
+//        }
 
         Nutrients nutrientsSum = Nutrients.empty();
         List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
@@ -92,7 +100,7 @@ public class RecipesService extends BaseService implements IRecipesService {
             nutrientsSum.addNutrients(nutrients);
         });
 
-        cacheRecipeNutrients(recipeId, nutrientsSum);
+//        cacheRecipeNutrients(recipeId, nutrientsSum);
 
         return nutrientsSum;
     }
@@ -100,7 +108,7 @@ public class RecipesService extends BaseService implements IRecipesService {
     private void cacheRecipeNutrients(long recipeId, Nutrients nutrientsSum) {
         NutrientsDao nutrientsDao = new NutrientsDao();
         Optional<Entry> byId = entry.findById(recipeId);
-        if (byId.isPresent() && nutrientsDaoRepository.findByRecipe_Id(recipeId).isEmpty()){
+        if (byId.isPresent()){
             nutrientsDao.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
             nutrientsDao.setRecipe((Recipe)byId.get());
             nutrientsDaoRepository.save(nutrientsDao);
@@ -111,8 +119,7 @@ public class RecipesService extends BaseService implements IRecipesService {
         DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto);
         Nutrients ingredientNutrition = ingredientDetails_api.getNutrition();
 
-        IngredientDto ingredient = dto.simplifyToIngredientDto();
-        nutrientsDaoRepository.save(NutrientsDao.create(ingredientDtoRepository.save(ingredient), NutrientsDto.ofNutrients(ingredientNutrition)));
+//        nutrientsDaoRepository.save(NutrientsDao.create(ingredientDtoRepository.save(ingredient), NutrientsDto.ofNutrients(ingredientNutrition)));
         return ingredientNutrition;
     }
 
