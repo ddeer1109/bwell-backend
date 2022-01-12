@@ -23,7 +23,7 @@ public class IngredientDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IngredientDto that = (IngredientDto) o;
-        return id == that.id && Double.compare(that.amount, amount) == 0 && Objects.equals(unit, that.unit) && Objects.equals(detailedId, that.detailedId);
+        return id == that.id && Double.compare(that.amount, amount) == 0 && Objects.equals(unit, that.unit);
     }
 
     @Override

@@ -68,6 +68,15 @@ public class RecipesService extends BaseService implements IRecipesService {
         rating.save(recipe.getRating());
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
+        tempRecipe.getIngredients()
+                .forEach(ingr -> {
+                    Optional<NutrientsDao> byIngredient_detailedId = nutrientsDaoRepository.findByIngredient_DetailedId(ingr.getDetailedId());
+                    byIngredient_detailedId.ifPresent(nutrDao -> {
+                        if (!nutrDao.getIngredient().equals(ingr.simplifyToIngredientDto())) {
+                            nutrientsDaoRepository.deleteById(nutrDao.getIngredient().getDetailedId());
+                        }
+                    });
+                });
         nutrientsDaoRepository
                 .findByRecipe_Id(tempRecipe.getId())
                 .ifPresent(nutr -> nutrientsDaoRepository.deleteById(nutr.getId()));
@@ -127,13 +136,14 @@ public class RecipesService extends BaseService implements IRecipesService {
     }
 
     private Nutrients cacheIngredientNutrients(DetailedIngredientDto dto) {
-        DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto);
-        Nutrients ingredientNutrition = ingredientDetails_api.getNutrition();
+        DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto.simplifyToIngredientDto());
+        IngredientDto inDb = ingredientDtoRepository.save(ingredientDetails_api.createDto().simplifyToIngredientDto());
 
-        IngredientDto ingredient = dto.simplifyToIngredientDto();
-        IngredientDto inDb = ingredientDtoRepository.save(ingredient);
-        nutrientsDaoRepository.save(NutrientsDao.create(inDb, NutrientsDto.ofNutrients(ingredientNutrition)));
-        return ingredientNutrition;
+        Nutrients nutrition = ingredientDetails_api.getNutrition();
+        NutrientsDto nutrientsDto = NutrientsDto.ofNutrients(nutrition);
+        NutrientsDao nutrientsDao = NutrientsDao.create(inDb, nutrientsDto);
+
+        return nutrientsDaoRepository.save(nutrientsDao).getNutrients().toNutrients();
     }
 
     @Override
