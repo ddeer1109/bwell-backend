@@ -8,6 +8,7 @@ import com.bwell.base.rating.repository.RatingRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
 import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDao;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
@@ -99,19 +100,26 @@ public class RecipesService extends BaseService implements IRecipesService {
                         .orElseGet(() -> cacheIngredientNutrients(dto));
             nutrientsSum.addNutrients(nutrients);
         });
-
-//        cacheRecipeNutrients(recipeId, nutrientsSum);
+        Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+        if (byRecipeId.isEmpty() || !byRecipeId.get().getNutrients().getCalories().equals(nutrientsSum.get(Nutrient.Calories))){
+            cacheRecipeNutrients(recipeId, nutrientsSum);
+        }
 
         return nutrientsSum;
     }
 
     private void cacheRecipeNutrients(long recipeId, Nutrients nutrientsSum) {
         NutrientsDao nutrientsDao = new NutrientsDao();
-        Optional<Entry> byId = entry.findById(recipeId);
-        if (byId.isPresent()){
+        Optional<NutrientsDao> byRecipe_id = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+        if (byRecipe_id.isEmpty()){
+            Optional<Entry> byId = entry.findById(recipeId);
             nutrientsDao.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
             nutrientsDao.setRecipe((Recipe)byId.get());
             nutrientsDaoRepository.save(nutrientsDao);
+        } else {
+            NutrientsDao nutrientsDao1 = byRecipe_id.get();
+            nutrientsDao1.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
+            nutrientsDaoRepository.save(nutrientsDao1);
         }
     }
 
@@ -119,7 +127,9 @@ public class RecipesService extends BaseService implements IRecipesService {
         DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto);
         Nutrients ingredientNutrition = ingredientDetails_api.getNutrition();
 
-//        nutrientsDaoRepository.save(NutrientsDao.create(ingredientDtoRepository.save(ingredient), NutrientsDto.ofNutrients(ingredientNutrition)));
+        IngredientDto ingredient = dto.simplifyToIngredientDto();
+        IngredientDto inDb = ingredientDtoRepository.save(ingredient);
+        nutrientsDaoRepository.save(NutrientsDao.create(inDb, NutrientsDto.ofNutrients(ingredientNutrition)));
         return ingredientNutrition;
     }
 

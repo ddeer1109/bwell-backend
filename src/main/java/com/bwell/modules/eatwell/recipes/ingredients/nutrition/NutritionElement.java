@@ -96,13 +96,12 @@ public class NutritionElement implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NutritionElement nutritionElement = (NutritionElement) o;
-        return title.equals(nutritionElement.title);
+        NutritionElement that = (NutritionElement) o;
+        return type == that.type && Objects.equals(title, that.title) && Objects.equals(amount, that.amount) && Objects.equals(unit, that.unit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title);
+        return Objects.hash(type, title, amount, unit);
     }
-
 }

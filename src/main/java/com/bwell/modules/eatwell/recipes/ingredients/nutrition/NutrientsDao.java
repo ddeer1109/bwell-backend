@@ -21,13 +21,13 @@ public class NutrientsDao implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @JoinColumn
+    @JoinColumn(unique = true)
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Recipe recipe;
 
+    @JoinColumn(unique = true)
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn
     private IngredientDto ingredient;
 
     @Type(type = "jsonb")

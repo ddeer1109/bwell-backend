@@ -20,7 +20,6 @@
         "ingredients": [
           {
             "id": 11529,
-            "detailedId": 1,
             "ingredient": "tomatoes",
             "amount": "400",
             "unit": "g",
@@ -46,7 +45,6 @@
           },
           {
             "id": 10219,
-            "detailedId": 3,
             "ingredient": "ground pork",
             "amount": "150",
             "unit": "g",
@@ -60,7 +58,6 @@
           },
           {
             "id": 11215,
-            "detailedId": 4,
             "ingredient": "garlic",
             "amount": "2",
             "unit": "piece",
@@ -78,7 +75,6 @@
           },
           {
             "id": 20420,
-            "detailedId": 5,
             "ingredient": "Pasta",
             "amount": "150",
             "unit": "g",
@@ -124,7 +120,6 @@
         "ingredients": [
           {
             "id": 1001,
-            "detailedId": 6,
             "ingredient": "Butter",
             "amount": "2",
             "unit": "tablespoon",
@@ -142,7 +137,6 @@
           },
           {
             "id": 11124,
-            "detailedId": 7,
             "ingredient": "carrots",
             "amount": "3",
             "unit": "large",
@@ -166,7 +160,6 @@
           },
           {
             "id": 5006,
-            "detailedId": 9,
             "ingredient": "chicken",
             "amount": "1",
             "unit": "unit",
@@ -182,7 +175,6 @@
           },
           {
             "id": 20081,
-            "detailedId": 10,
 
             "ingredient": "flour",
             "amount": "20",
@@ -229,7 +221,6 @@
         "ingredients": [
           {
             "id": 1042046,
-            "detailedId": 55,
             "ingredient": "yellow mustard",
             "amount": "3",
             "unit": "teaspoon",
@@ -244,7 +235,6 @@
           },
           {
             "id": 11935,
-            "detailedId": 33,
             "ingredient": "ketchup",
             "amount": "3",
             "unit": "teaspoon",
@@ -260,7 +250,6 @@
           },
           {
             "id": 2009,
-            "detailedId": 77,
             "ingredient": "chilli powder",
             "amount": "2",
             "unit": "teaspoon",
@@ -276,7 +265,6 @@
           },
           {
             "id": 4582,
-            "detailedId": 7554,
             "ingredient": "oil",
             "amount": "1",
             "unit": "tablespoon",
@@ -300,7 +288,6 @@
         "ingredients": [
           {
             "id": 10072,
-            "detailedId": 555,
             "ingredient": "pork shoulder",
             "amount": "200",
             "unit": "g",
@@ -316,7 +303,6 @@
           },
           {
             "id": 11282,
-            "detailedId": 6667,
             "ingredient": "onion",
             "amount": "5",
             "unit": "medium",

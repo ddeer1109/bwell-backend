@@ -15,21 +15,9 @@ public class IngredientDto implements Serializable {
     private double amount;
     private String unit;
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
     private Long detailedId;
 
-    public Long getDetailedId(){
-        if (detailedId == 0L){
-            setDetailedId(IdGenerator.nextId());
-        }
-        return detailedId;
-    }
-
-    public void setDetailedId(){
-        if (detailedId == 0L){
-            setDetailedId(IdGenerator.nextId());
-        }
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
