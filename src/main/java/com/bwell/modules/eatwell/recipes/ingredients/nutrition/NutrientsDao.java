@@ -22,12 +22,12 @@ public class NutrientsDao implements Serializable {
     private Long id;
 
     @JoinColumn(unique = true)
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @ToString.Exclude
     private Recipe recipe;
 
     @JoinColumn(unique = true)
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     private IngredientDto ingredient;
 
     @Type(type = "jsonb")
