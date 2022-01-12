@@ -135,7 +135,7 @@ public class DetailedIngredient implements Serializable {
     @Transient
     public DetailedIngredientDto createDto(){
         DetailedIngredientDto detailedIngredientDto = new DetailedIngredientDto();
-        detailedIngredientDto.setDetailedId(id);
+//        detailedIngredientDto.setDetailedId(id);
         detailedIngredientDto.setId(ingredient.getId());
         detailedIngredientDto.setIngredient(ingredient.getName());
         detailedIngredientDto.setAmount(amount.doubleValue());

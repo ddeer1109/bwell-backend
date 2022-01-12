@@ -10,6 +10,7 @@ import com.bwell.user.data.model.User;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public abstract class Entry {
     @GeneratedValue(strategy = SEQUENCE)
     private long id;
     private String title;
+    @Column( length = 10000, columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne

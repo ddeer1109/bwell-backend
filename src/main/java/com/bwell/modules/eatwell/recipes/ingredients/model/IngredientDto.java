@@ -16,6 +16,7 @@ public class IngredientDto implements Serializable {
     private String unit;
 
     @Id
+    @GeneratedValue
     private Long detailedId;
 
     @Override

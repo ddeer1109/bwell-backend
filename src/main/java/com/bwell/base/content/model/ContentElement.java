@@ -42,6 +42,7 @@ public abstract class ContentElement implements Serializable {
     @Column(columnDefinition =  "jsonb")
     private List<DetailedIngredientDto> ingredients;
     @Type(type = "text")
+    @Column( length = 10000, columnDefinition = "TEXT")
     private String text;
     @Type(type = "jsonb")
     @Column(columnDefinition =  "jsonb")

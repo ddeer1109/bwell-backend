@@ -1,8 +1,10 @@
+
 spring:
   jpa:
     database: POSTGRESQL
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+    generate-ddl: true
   datasource:
     port: 5432
     host: localhost
@@ -22,3 +24,4 @@ app:
   shouldCreate: ${SHOULD_CREATE:true}
   authorizedRedirectUris:
     - http://localhost:3000/oauth2/redirect
+#debug: true

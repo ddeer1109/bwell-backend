@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class RequestingService {
     private final HttpClient client;
     private final ObjectMapper mapper;
@@ -98,6 +101,7 @@ public class RequestingService {
 
     public DetailedIngredient getIngredient(int id, double amount, String unit) {
         String stringJson = requestIngredient(id, amount, unit);
+        log.info("requesting from API : ======= {} : {}", LocalDateTime.now(), stringJson);
         try {
             DetailedIngredient detailedIngredient = mapper.readValue(stringJson, DetailedIngredient.class);
             if (detailedIngredient.getNutrition() == null){
@@ -115,6 +119,7 @@ public class RequestingService {
 
     public List<Ingredient> queryIngredient(String query){
         String stringJson = requestIngredientsQuery(query);
+        log.info("requesting from API : ======= {} : {}", LocalDateTime.now(), stringJson);
         try {
             JsonNode jsonNode = mapper.readTree(stringJson);
             List<Ingredient> list = mapper.readValue(jsonNode.get("results").toString(), new TypeReference<List<Ingredient>>(){});
