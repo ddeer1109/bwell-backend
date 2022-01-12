@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface NutrientsDaoRepository extends JpaRepository<NutrientsDao, Long> {
     Optional<NutrientsDao> findByRecipe_Id(long id);
     Optional<NutrientsDao> findByIngredient_DetailedId(long id);
-    boolean deleteByRecipe_Id(long recipeId);
+    boolean deleteAllByRecipe_Id(long recipeId);
 }
