@@ -68,15 +68,7 @@ public class RecipesService extends BaseService implements IRecipesService {
         rating.save(recipe.getRating());
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
-        tempRecipe.getIngredients()
-                .forEach(ingr -> {
-                    Optional<NutrientsDao> byIngredient_detailedId = nutrientsDaoRepository.findByIngredient_DetailedId(ingr.getDetailedId());
-                    byIngredient_detailedId.ifPresent(nutrDao -> {
-                        if (!nutrDao.getIngredient().equals(ingr.simplifyToIngredientDto())) {
-                            nutrientsDaoRepository.deleteById(nutrDao.getIngredient().getDetailedId());
-                        }
-                    });
-                });
+
         nutrientsDaoRepository
                 .findByRecipe_Id(tempRecipe.getId())
                 .ifPresent(nutr -> nutrientsDaoRepository.deleteById(nutr.getId()));
@@ -108,8 +100,8 @@ public class RecipesService extends BaseService implements IRecipesService {
             log.info("now doing this {}", dto);
             Nutrients nutrients = nutrientsDaoRepository
                     .findByIngredient_DetailedId(dto.getDetailedId())
-                        .map(nutrientsDao -> nutrientsDao.getNutrients().toNutrients())
-                        .orElseGet(() -> cacheIngredientNutrients(dto));
+                    .map(nutrientsDao -> nutrientsDao.getNutrients().toNutrients())
+                    .orElseGet(() -> cacheIngredientNutrients(dto));
             nutrientsSum.addNutrients(nutrients);
         });
         Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
@@ -136,6 +128,7 @@ public class RecipesService extends BaseService implements IRecipesService {
     }
 
     private Nutrients cacheIngredientNutrients(DetailedIngredientDto dto) {
+        log.info("dto v1: {} ", dto);
         DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto.simplifyToIngredientDto());
         IngredientDto inDb = ingredientDtoRepository.save(ingredientDetails_api.createDto().simplifyToIngredientDto());
 
