@@ -68,6 +68,7 @@ public class RecipesService extends BaseService implements IRecipesService {
         rating.save(recipe.getRating());
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
+        nutrientsDaoRepository.deleteByRecipe_Id(tempRecipe.getId());
 //        List<DetailedIngredientDto> ingredients = recipe.getIngredients();
 //        ingredientDtoRepository.saveAll(ingredients.stream()
 //                .map(ing -> {
