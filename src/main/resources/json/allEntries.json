@@ -20,9 +20,8 @@
         "ingredients": [
           {
             "id": 11529,
-            "detailedId": 1,
             "ingredient": "tomatoes",
-            "amount": "200",
+            "amount": "400",
             "unit": "g",
             "possibleUnits": [
               "small",
@@ -46,10 +45,9 @@
           },
           {
             "id": 10219,
-            "detailedId": 3,
             "ingredient": "ground pork",
-            "amount": "300",
-            "unit": "ounce",
+            "amount": "150",
+            "unit": "g",
             "possibleUnits": [
               "g",
               "ounce",
@@ -60,7 +58,6 @@
           },
           {
             "id": 11215,
-            "detailedId": 4,
             "ingredient": "garlic",
             "amount": "2",
             "unit": "piece",
@@ -78,9 +75,8 @@
           },
           {
             "id": 20420,
-            "detailedId": 5,
             "ingredient": "Pasta",
-            "amount": "400",
+            "amount": "150",
             "unit": "g",
             "possibleUnits": [
               "square",
@@ -124,7 +120,6 @@
         "ingredients": [
           {
             "id": 1001,
-            "detailedId": 6,
             "ingredient": "Butter",
             "amount": "2",
             "unit": "tablespoon",
@@ -142,7 +137,6 @@
           },
           {
             "id": 11124,
-            "detailedId": 7,
             "ingredient": "carrots",
             "amount": "3",
             "unit": "large",
@@ -166,9 +160,8 @@
           },
           {
             "id": 5006,
-            "detailedId": 9,
             "ingredient": "chicken",
-            "amount": "1.5",
+            "amount": "1",
             "unit": "unit",
             "possibleUnits": [
               "chicken",
@@ -182,7 +175,6 @@
           },
           {
             "id": 20081,
-            "detailedId": 10,
 
             "ingredient": "flour",
             "amount": "20",
@@ -229,7 +221,6 @@
         "ingredients": [
           {
             "id": 1042046,
-            "detailedId": 55,
             "ingredient": "yellow mustard",
             "amount": "3",
             "unit": "teaspoon",
@@ -244,7 +235,6 @@
           },
           {
             "id": 11935,
-            "detailedId": 33,
             "ingredient": "ketchup",
             "amount": "3",
             "unit": "teaspoon",
@@ -260,7 +250,6 @@
           },
           {
             "id": 2009,
-            "detailedId": 77,
             "ingredient": "chilli powder",
             "amount": "2",
             "unit": "teaspoon",
@@ -276,7 +265,6 @@
           },
           {
             "id": 4582,
-            "detailedId": 7554,
             "ingredient": "oil",
             "amount": "1",
             "unit": "tablespoon",
@@ -300,9 +288,8 @@
         "ingredients": [
           {
             "id": 10072,
-            "detailedId": 555,
             "ingredient": "pork shoulder",
-            "amount": "1000",
+            "amount": "200",
             "unit": "g",
             "possibleUnits": [
               "pound",
@@ -316,7 +303,6 @@
           },
           {
             "id": 11282,
-            "detailedId": 6667,
             "ingredient": "onion",
             "amount": "5",
             "unit": "medium",
@@ -342,85 +328,13 @@
       },
       {
         "header": "Przygotowanie",
-        "text": "Deklaracja funkcji async definiuje funkcję asynchroniczną, która zwraca obiekt  AsyncFunction (en-US). Funkcja asynchroniczna to funkcja, która działa asynchroniczne poprzez zdarzenie pętli używając bezwarunkowego Promise do zwrócenia wyniku. Składnia i struktura kodu używanego przy funkcjach asynchronicznych jest jednakże bardziej podobna do znanych ze standardowych funkcji synchronicznych.\n\nMożesz zdefiniować funkcje asynchroniczne również poprzez użycie async function expression (en-US).",
+        "text": "Rwana wieprzowina (ang. pulled pork) czyli długo pieczona w niskiej temperaturze (lub wolno gotowana w wolnowarze) łopatka wieprzowa. Na koniec mięso staje się tak miękkie, że rozpada się pod naciskiem widelca i rozrywa na cienkie włókna. Tak przygotowane mięso to główny składnik KANAPKI Z PULLED PORK.",
         "order": 3,
         "type": "text_area"
       }
     ]
   },
-  {
-    "id": 2,
-    "module": "recipe",
-    "title": "Jajecznica",
-    "description": "asdfasdfadfasdfasdfas",
-    "rating": {
-      "up": 0,
-      "down": 0
-    },
-    "content": [
-      {
-        "header": "asdf",
-        "text": "asdfasdfadfasdfasdfas",
-        "order": 0,
-        "type": "text_area"
-      },
-      {
-        "header": "asd",
-        "ingredients": [
-          {
-            "id": 10011111,
-            "detailedId": 65345,
-            "ingredient": "banana leaves",
-            "amount": "3",
-            "unit": "g",
-            "possibleUnits": [
-              {
-                "name": "piece"
-              },
-              {
-                "name": "g"
-              },
-              {
-                "name": "oz"
-              }
-            ]
-          },
-          {
-            "id": 9266,
-            "detailedId": 432145,
-            "ingredient": "pineapple",
-            "amount": "3",
-            "unit": "piece",
-            "possibleUnits": [
-              {
-                "name": "fruit"
-              },
-              {
-                "name": "piece"
-              },
-              {
-                "name": "slice"
-              },
-              {
-                "name": "g"
-              },
-              {
-                "name": "serving"
-              },
-              {
-                "name": "oz"
-              },
-              {
-                "name": "cup"
-              }
-            ]
-          }
-        ],
-        "order": 1,
-        "type": "ingredients_list"
-      }
-    ]
-  },
+
   {
     "module": "activity",
     "title": "Strenghts exercise",

@@ -1,5 +1,6 @@
 package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ class NutrientTest {
 
     @Test
     void create() {
-        int amount = 10;
+        double amount = 10.0;
         NutritionElement fat = Nutrient.Fat.create(amount);
         NutritionElement carbs = Nutrient.Carbohydrates.create(amount);
         NutritionElement protein = Nutrient.Protein.create(amount);

@@ -41,10 +41,10 @@ class NutrientsTest {
     
         nutrients.updateNutrientsAmounts(calculationProportion);
         assertAll(
-                () -> assertEquals(nutrients.get(Nutrient.Fat).getAmount(), BigDecimal.valueOf(initAmount).multiply(calculationProportion)),
-                () -> assertEquals(nutrients.get(Nutrient.Protein).getAmount(), BigDecimal.valueOf(initAmount).multiply(calculationProportion)),
-                () -> assertEquals(nutrients.get(Nutrient.Carbohydrates).getAmount(), BigDecimal.valueOf(initAmount).multiply(calculationProportion)),
-                () -> assertEquals(nutrients.get(Nutrient.Calories).getAmount(), BigDecimal.valueOf(initAmountCalories).multiply(calculationProportion))
+                () -> assertEquals(nutrients.get(Nutrient.Fat).getAmount().doubleValue(), BigDecimal.valueOf(initAmount).multiply(calculationProportion).doubleValue()),
+                () -> assertEquals(nutrients.get(Nutrient.Protein).getAmount().doubleValue(), BigDecimal.valueOf(initAmount).multiply(calculationProportion).doubleValue()),
+                () -> assertEquals(nutrients.get(Nutrient.Carbohydrates).getAmount().doubleValue(), BigDecimal.valueOf(initAmount).multiply(calculationProportion).doubleValue()),
+                () -> assertEquals(nutrients.get(Nutrient.Calories).getAmount().doubleValue(), BigDecimal.valueOf(initAmountCalories).multiply(calculationProportion).doubleValue())
         );
     }
 }

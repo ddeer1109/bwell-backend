@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin({"https://bwell-frontend.herokuapp.com/", "https://bwell-frontend.herokuapp.com/"})
 @RequestMapping("/api/v1/eatwell/ingredient")
 public class IngredientController {
     private final IIngredientService service;

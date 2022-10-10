@@ -1,32 +1,34 @@
 package com.bwell.modules.eatwell.recipes;
 
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.modules.eatwell.recipes.service.IRecipesService;
-import com.bwell.modules.eatwell.recipes.service.RecipesService;
-import com.bwell.modules.security.CurrentUser;
-import com.bwell.modules.security.UserPrincipal;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
+import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/eatwell/recipes")
 public class RecipesController {
 
     private final IRecipesService service;
+    private final UserService userService;
 
     @Autowired
-    public RecipesController(RecipesService service) {
+    public RecipesController(IRecipesService service, UserService service1) {
         this.service = service;
+        this.userService = service1;
     }
+
 
 //    @PreAuthorize("hasRole('USER')")
     @GetMapping("/")
@@ -59,8 +61,8 @@ public class RecipesController {
 
 
     @DeleteMapping("/{id}")
-    public boolean deleteRecipe(@PathVariable("id") Long id) {
-        return service.deleteRecipe(id);
+    public boolean deleteRecipe(@PathVariable("id") Long entryId, @CurrentUser UserPrincipal userPrincipal) {
+        return service.isAuthor(userPrincipal, entryId) && service.deleteRecipe(entryId);
     }
 
 }

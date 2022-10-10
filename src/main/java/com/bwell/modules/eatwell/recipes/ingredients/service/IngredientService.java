@@ -2,10 +2,7 @@ package com.bwell.modules.eatwell.recipes.ingredients.service;
 
 import com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi.RequestingService;
 import com.bwell.modules.eatwell.recipes.ingredients.model.*;
-import com.bwell.modules.eatwell.recipes.ingredients.repositories.CommonIngredientsRepository;
-import com.bwell.modules.eatwell.recipes.ingredients.repositories.DetailedIngredientsRepository;
-import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientsRepository;
-import com.bwell.modules.eatwell.recipes.ingredients.repositories.UnitRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +20,27 @@ public class IngredientService implements IIngredientService {
     private IngredientsRepository ingredientsRepository;
     private UnitRepository unitRepository;
 
-    @Autowired
-    public IngredientService(RequestingService spoonacularApi,
-                             CommonIngredientsRepository commonRepository,
-                             DetailedIngredientsRepository detailedIngredientsRepository,
-                             IngredientsRepository ingredientsRepository,
-                             UnitRepository unitRepository) {
+    public IngredientService(RequestingService spoonacularApi, CommonIngredientsRepository commonRepository, DetailedIngredientsRepository detailedIngredientsRepository, IngredientsRepository ingredientsRepository, UnitRepository unitRepository) {
         this.spoonacularApi = spoonacularApi;
         this.commonRepository = commonRepository;
         this.detailedIngredientsRepository = detailedIngredientsRepository;
         this.ingredientsRepository = ingredientsRepository;
         this.unitRepository = unitRepository;
+//        this.nutrientsRepository = nutrientsRepository;
     }
+//
+//    @Autowired
+//    public IngredientService(RequestingService spoonacularApi,
+//                             CommonIngredientsRepository commonRepository,
+//                             DetailedIngredientsRepository detailedIngredientsRepository,
+//                             IngredientsRepository ingredientsRepository,
+//                             UnitRepository unitRepository) {
+//        this.spoonacularApi = spoonacularApi;
+//        this.commonRepository = commonRepository;
+//        this.detailedIngredientsRepository = detailedIngredientsRepository;
+//        this.ingredientsRepository = ingredientsRepository;
+//        this.unitRepository = unitRepository;
+//    }
 
     public List<DetailedIngredient> getDetailedIngredients() {
         return detailedIngredientsRepository.findAll();

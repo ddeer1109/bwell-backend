@@ -1,33 +1,55 @@
 package com.bwell.modules.eatwell.recipes.service;
 
-import com.bwell.modules.base.*;
-import com.bwell.modules.base.content.ContentRepository;
-import com.bwell.modules.base.entry.Entry;
-import com.bwell.modules.base.entry.EntryRepository;
-import com.bwell.modules.base.rating.RatingRepository;
+import com.bwell.base.*;
+import com.bwell.base.content.ContentRepository;
+import com.bwell.base.entry.Entry;
+import com.bwell.base.entry.EntryRepository;
+import com.bwell.base.rating.repository.RatingRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredient;
 import com.bwell.modules.eatwell.recipes.ingredients.model.DetailedIngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.model.IngredientDto;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrient;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDao;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.IngredientDtoRepository;
+import com.bwell.modules.eatwell.recipes.ingredients.repositories.NutrientsDaoRepository;
 import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.mockcenter.MockObjectsFactory;
+import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class RecipesService extends BaseService implements IRecipesService {
 
     private final IngredientService ingredientService;
-    @Autowired
-    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating, IngredientService ingrService) {
-        super(content, entry, rating);
-        ingredientService = ingrService;
+    private final NutrientsDaoRepository nutrientsDaoRepository;
+    private final IngredientDtoRepository ingredientDtoRepository;
+
+    public RecipesService(ContentRepository content,
+                          EntryRepository entry,
+                          RatingRepository rating,
+                          UserService user,
+                          IngredientService ingredientService,
+                          NutrientsDaoRepository nutrientsDaoRepository,
+                          IngredientDtoRepository ingredientDtoRepository) {
+        super(content, entry, rating, user);
+        this.ingredientService = ingredientService;
+        this.nutrientsDaoRepository = nutrientsDaoRepository;
+        this.ingredientDtoRepository = ingredientDtoRepository;
     }
+//
+//    @Autowired
+//    public RecipesService(ContentRepository content, EntryRepository entry, RatingRepository rating, IngredientService ingrService) {
+//        super(content, entry, rating);
+//        ingredientService = ingrService;
+//    }
 
     @Override
     public Recipe getRecipe(Long id) {
@@ -47,6 +69,18 @@ public class RecipesService extends BaseService implements IRecipesService {
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
 
+        nutrientsDaoRepository
+                .findByRecipe_Id(tempRecipe.getId())
+                .ifPresent(nutr -> nutrientsDaoRepository.deleteById(nutr.getId()));
+//        List<DetailedIngredientDto> ingredients = recipe.getIngredients();
+//        ingredientDtoRepository.saveAll(ingredients.stream()
+//                .map(ing -> {
+//                    IngredientDto ingredientDto = ing.simplifyToIngredientDto();
+//                    ingredientDto.setRecipe(tempRecipe);
+//                    return ingredientDto;
+//                })
+//                .collect(Collectors.toList()));
+
         log.info("Returning {}", tempRecipe);
 
         return tempRecipe;
@@ -54,16 +88,59 @@ public class RecipesService extends BaseService implements IRecipesService {
 
     @Override
     public Nutrients sumIngredientsNutrition(long recipeId){
-        Nutrients nutrientsSum = Nutrients.empty();
-        List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
+//        Optional<NutrientsDao> byRecipeId = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+//        if (byRecipeId.isPresent()){
+//            return byRecipeId.get().getNutrients().toNutrients();
+//        }
 
-        ingredients.forEach(dto -> {
-            log.info("now doing this {}", dto);
-            DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto);
-            Nutrients ingredientNutrition = ingredientDetails_api.getNutrition();
-            nutrientsSum.addNutrients(ingredientNutrition);
-        });
-        return nutrientsSum;
+
+        return nutrientsDaoRepository.findByRecipe_Id(recipeId).orElseGet(() -> {
+            Nutrients nutrientsSum = Nutrients.empty();
+            List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
+
+            ingredients.forEach(dto -> {
+                log.info("now doing this {}", dto);
+                Nutrients nutrients = cacheIngredientNutrients(dto);
+//                        .findByIngredient_DetailedId(dto.getDetailedId())
+//                        .map(nutrientsDao -> nutrientsDao.getNutrients().toNutrients())
+//                        .orElseGet(() -> cacheIngredientNutrients(dto));
+                nutrientsSum.addNutrients(nutrients);
+            });
+            return cacheRecipeNutrients(recipeId, nutrientsSum);
+        }).getNutrients().toNutrients();
+//        if (byRecipeId.isEmpty() || !byRecipeId.get().getNutrients().getCalories().equals(nutrientsSum.get(Nutrient.Calories))){
+//            cacheRecipeNutrients(recipeId, nutrientsSum);
+//        }
+//
+//        return nutrientsSum;
+    }
+
+    private NutrientsDao cacheRecipeNutrients(long recipeId, Nutrients nutrientsSum) {
+        NutrientsDao nutrientsDao = new NutrientsDao();
+        Optional<NutrientsDao> byRecipe_id = nutrientsDaoRepository.findByRecipe_Id(recipeId);
+        if (byRecipe_id.isEmpty()){
+            Optional<Entry> byId = entry.findById(recipeId);
+            nutrientsDao.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
+            nutrientsDao.setRecipe((Recipe)byId.get());
+            return nutrientsDaoRepository.save(nutrientsDao);
+        } else {
+            NutrientsDao nutrientsDao1 = byRecipe_id.get();
+            nutrientsDao1.setNutrients(NutrientsDto.ofNutrients(nutrientsSum));
+            return nutrientsDaoRepository.save(nutrientsDao1);
+        }
+    }
+
+    private Nutrients cacheIngredientNutrients(DetailedIngredientDto dto) {
+        log.info("dto v1: {} ", dto);
+        DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto.simplifyToIngredientDto());
+//        IngredientDto inDb = ingredientDtoRepository.save(ingredientDetails_api.createDto().simplifyToIngredientDto());
+
+        Nutrients nutrition = ingredientDetails_api.getNutrition();
+        return nutrition;
+//        NutrientsDto nutrientsDto = NutrientsDto.ofNutrients(nutrition);
+//        NutrientsDao nutrientsDao = NutrientsDao.create(inDb, nutrientsDto);
+//
+//        return nutrientsDaoRepository.save(nutrientsDao).getNutrients().toNutrients();
     }
 
     @Override
@@ -79,8 +156,7 @@ public class RecipesService extends BaseService implements IRecipesService {
 
         Nutrients reduce = recipe
                 .stream()
-                .flatMap(rec -> rec.getIngredients().stream())
-                .map( rec -> ingredientService.getIngredientDetails_API(rec).getNutrition())
+                .map(rec -> sumIngredientsNutrition(rec.getId()))
                 .reduce(
                         empty,
                         (nutr1, nutr2) -> {

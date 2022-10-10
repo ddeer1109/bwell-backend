@@ -1,9 +1,11 @@
 package com.bwell.modules.restwell.ideas;
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.restwell.ideas.model.Idea;
 import com.bwell.modules.restwell.ideas.service.IIdeasService;
 import com.bwell.modules.restwell.ideas.service.IdeasService;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/restwell/ideas")
 public class IdeasController {
 
@@ -39,7 +41,7 @@ public class IdeasController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteIdea(@PathVariable("id") Long id) {
-        return service.deleteIdea(id);
+    public boolean deleteIdea(@PathVariable("id") Long id, @CurrentUser UserPrincipal user) {
+        return service.isAuthor(user, id) && service.deleteIdea(id);
     }
 }

@@ -1,13 +1,11 @@
 package com.bwell.modules.eatwell.recipes.ingredients.model;
 
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
-import com.bwell.modules.mockcenter.MockObjectsFactory;
 import com.fasterxml.jackson.annotation.*;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
@@ -37,9 +35,10 @@ public class DetailedIngredient implements Serializable {
     private Unit unit = new Unit("g");
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @OneToOne(cascade = CascadeType.ALL)
-    @Type(type = "jsonb")
-    @JsonManagedReference
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @Type(type = "jsonb")
+//    @JsonManagedReference
+    @Transient
     private Nutrients nutrition;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -126,10 +125,6 @@ public class DetailedIngredient implements Serializable {
     }
 
     public Nutrients getNutrition() {
-        if (nutrition == null){
-            nutrition = Nutrients.empty();
-            nutrition.setNutrients(MockObjectsFactory.nutritionElements());
-        }
         return nutrition;
     }
     @JsonPropertyOrder("2")
@@ -140,7 +135,7 @@ public class DetailedIngredient implements Serializable {
     @Transient
     public DetailedIngredientDto createDto(){
         DetailedIngredientDto detailedIngredientDto = new DetailedIngredientDto();
-        detailedIngredientDto.setDetailedId(id);
+//        detailedIngredientDto.setDetailedId(id);
         detailedIngredientDto.setId(ingredient.getId());
         detailedIngredientDto.setIngredient(ingredient.getName());
         detailedIngredientDto.setAmount(amount.doubleValue());

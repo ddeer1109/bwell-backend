@@ -9,3 +9,15 @@ spring:
             scope:
               - email
               - profile
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+app:
+  tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+  tokenExpirationMsec: 864000000
+  API_KEY: ${API_KEY}
+  shouldCreate: ${SHOULD_CREATE:true}
+  corsOrigin: ${FRONTEND_HOST:https://bwell-frontend.herokuapp.com/}
+  authorizedRedirectUris:
+    - ${AUTH_REDIRECT_URI:https://bwell-frontend.herokuapp.com/oauth2/redirect}

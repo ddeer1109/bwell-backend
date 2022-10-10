@@ -1,6 +1,8 @@
 package com.bwell.modules.thinkwell.exercises;
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
 import com.bwell.modules.thinkwell.exercises.model.Exercise;
 import com.bwell.modules.thinkwell.exercises.service.ExerciseService;
 import com.bwell.modules.thinkwell.exercises.service.IExerciseService;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/thinkwell/exercises")
 public class ExercisesController {
 
@@ -39,7 +41,7 @@ public class ExercisesController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteExercise(@PathVariable("id") Long id) {
-        return service.deleteExercise(id);
+    public boolean deleteExercise(@PathVariable("id") Long id, @CurrentUser UserPrincipal user) {
+        return service.isAuthor(user, id) && service.deleteExercise(id);
     }
 }

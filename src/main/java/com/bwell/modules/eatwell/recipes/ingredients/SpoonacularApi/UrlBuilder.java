@@ -1,6 +1,6 @@
 package com.bwell.modules.eatwell.recipes.ingredients.SpoonacularApi;
 
-import com.bwell.modules.configuration.ApiKeyConfig;
+import com.bwell.configuration.ApiKeyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -72,7 +72,7 @@ public class UrlBuilder {
             stringBuilder.append(String.format(apiParam, config.getApiKey()));
             stringBuilder.append(String.format(basicAmount, String.valueOf(amount), unit));
         }
-        query = "";
+        query = null;
         ingrId = 0;
         amount = 0;
         unit = "";

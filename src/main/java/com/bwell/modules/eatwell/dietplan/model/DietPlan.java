@@ -1,12 +1,11 @@
 package com.bwell.modules.eatwell.dietplan.model;
 
 import com.bwell.modules.eatwell.recipes.model.Recipe;
-import com.bwell.modules.user.data.model.User;
+import com.bwell.user.data.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;

@@ -1,9 +1,11 @@
 package com.bwell.modules.fitwell.activities;
 
-import com.bwell.modules.base.entry.Entry;
+import com.bwell.base.entry.Entry;
 import com.bwell.modules.fitwell.activities.model.Activity;
 import com.bwell.modules.fitwell.activities.service.ActivitiesService;
 import com.bwell.modules.fitwell.activities.service.IActivitiesService;
+import com.bwell.security.CurrentUser;
+import com.bwell.security.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin({"https://bwell-frontend.herokuapp.com/", "https://bwell-frontend.herokuapp.com/"})
 @RequestMapping("/api/v1/fitwell/activities")
 public class ActivitiesController {
 
@@ -40,7 +42,7 @@ public class ActivitiesController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteActivity(@PathVariable("id") Long id) {
-        return service.deleteActivity(id);
+    public boolean deleteActivity(@PathVariable("id") Long id, @CurrentUser UserPrincipal user) {
+        return service.isAuthor(user, id) && service.deleteActivity(id);
     }
 }
