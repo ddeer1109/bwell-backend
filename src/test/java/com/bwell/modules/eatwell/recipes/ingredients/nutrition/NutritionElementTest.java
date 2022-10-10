@@ -1,6 +1,7 @@
 package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -47,11 +48,11 @@ class NutritionElementTest {
         BigDecimal carbsInKcal = carbs.getAmount().multiply(caloriesMultiplicandForCarbs);
 
         assertAll(
-                        () -> assertEquals(calories.gramsToKcal(), calories.getAmount()),
-                        () -> assertNotEquals(calories.gramsToKcal(), calories.getAmount().subtract(BigDecimal.TEN)),
-                        () -> assertEquals(protein.gramsToKcal(), proteinInKcal),
-                        () -> assertEquals(fats.gramsToKcal(), fatInKcal),
-                        () -> assertEquals(carbs.gramsToKcal(), carbsInKcal)
+                        () -> assertEquals(calories.gramsToKcal().getAmount(), calories.getAmount()),
+                        () -> assertNotEquals(calories.gramsToKcal().getAmount(), calories.getAmount().subtract(BigDecimal.TEN)),
+                        () -> assertEquals(protein.gramsToKcal().getAmount(), proteinInKcal),
+                        () -> assertEquals(fats.gramsToKcal().getAmount(), fatInKcal),
+                        () -> assertEquals(carbs.gramsToKcal().getAmount(), carbsInKcal)
                 );
     }
 }

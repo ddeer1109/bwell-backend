@@ -4,15 +4,15 @@ services:
   app:
     "ports":
       - 127.0.0.1:8080:8080
-    image: apijar:latest
+    image: apijar/compose
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: app3
     depends_on:
       - db3
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db3:5432/bwell
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=poki123
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    env_file:
+      - docker/web-variables.env
 
   db3:
     image: 'postgres:13.1-alpine'
@@ -20,7 +20,5 @@ services:
     - 127.0.0.1:5432:5432
     container_name: db3
     restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=poki123
-      - POSTGRES_DB=bwell
+    env_file:
+      - docker/db-variables.env
