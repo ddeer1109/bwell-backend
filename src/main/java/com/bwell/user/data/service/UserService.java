@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,11 +36,24 @@ public class UserService implements IUserService {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
-    public Credentials getCredentialsById(String id){
-        return credRepo.findById(id).orElseThrow();
+
+    public Credentials  getCredentialsById(String id){
+        if (id == null) {
+            throw new UsernameNotFoundException("No service principal available");
+        }
+        return credRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User {} {} not found", "ID", id));
     }
 
+    public Credentials  getCredentialsById(UserPrincipal principal){
+        if (principal == null || principal.getId() == null) {
+            throw new UsernameNotFoundException("No service principal available");
+        }
+        return credRepo.findById(principal.getId()).orElseThrow(() -> new ResourceNotFoundException("User {} {} not found", "ID", principal.getId()));
+    }
+
+
     public User saveUser(User user) {
+        log.info("user - {}", user);
         return repository.findById(user.getId())
                 .stream()
                 .map(dbUsr -> {
@@ -55,8 +69,9 @@ public class UserService implements IUserService {
 
     @Override
     public UserDetails loadById(String id) {
-        Credentials user = credRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User ", "id", id));
-        return UserPrincipal.create(user);
+//        Credentials user = credRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User ", "id", id));
+//        Credentials user =
+        return UserPrincipal.create(credRepo.findById(id).orElse(null));
     }
 
     public static User createEmptyUser(){

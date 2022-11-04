@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserPrincipal implements UserDetails, OAuth2User {
+    public static final SimpleGrantedAuthority ROLE_USER = new SimpleGrantedAuthority("ROLE_USER");
     private final String id;
 
     private final String email;
@@ -29,21 +30,26 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     public static UserPrincipal create(User appUser){
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        return new UserPrincipal(
+        UserPrincipal userPrincipal = new UserPrincipal(
                 appUser.getCredentials().getId(),
                 appUser.getCredentials().getEmail(),
                 appUser.getCredentials().getPassword(),
                 authorities
         );
+        return userPrincipal;
     }
     public static UserPrincipal create(Credentials appUser){
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-        return new UserPrincipal(
+        if (appUser == null) {
+            return new UserPrincipal(null, null, null, Collections.emptyList());
+        }
+        List<GrantedAuthority> authorities = Collections.singletonList(ROLE_USER);
+        UserPrincipal userPrincipal = new UserPrincipal(
                 appUser.getId(),
                 appUser.getEmail(),
                 appUser.getPassword(),
                 authorities
         );
+        return userPrincipal;
     }
 
     public static UserPrincipal UserPrincipal(User appUser, Map<String, Object> attributes){
@@ -51,6 +57,10 @@ public class UserPrincipal implements UserDetails, OAuth2User {
         userPrincipal.setAttributes(attributes);
         return userPrincipal;
 
+    }
+
+    public boolean hasUserRole() {
+        return authorities.contains(ROLE_USER);
     }
 
     @Override
@@ -111,5 +121,14 @@ public class UserPrincipal implements UserDetails, OAuth2User {
         return email;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserPrincipal{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                ", attributes=" + attributes +
+                '}';
+    }
 }

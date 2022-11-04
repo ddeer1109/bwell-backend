@@ -84,12 +84,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.PUT)
-                .authenticated()
+                .hasRole("USER")
+
 
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST)
-                .authenticated()
+                .antMatchers(HttpMethod.POST, "/**")
+                .hasRole("USER")
+
 
                 .and()
                 .authorizeRequests()

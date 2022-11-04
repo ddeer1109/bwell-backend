@@ -29,8 +29,10 @@ public class UserVote {
 
     public UserVote(){}
 
+
+
     public enum Vote {
-        DOWN,UP;
+        DOWN,UP
     }
 
     public static UserVote create(User user, Entry entry, Vote voteValue){

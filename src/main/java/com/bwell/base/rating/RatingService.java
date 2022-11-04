@@ -9,12 +9,14 @@ import com.bwell.base.rating.repository.UserVoteRepository;
 import com.bwell.security.UserPrincipal;
 import com.bwell.user.data.model.User;
 import com.bwell.user.data.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class RatingService implements IRatingService {
     private EntryRepository entryRepo;
@@ -74,14 +76,11 @@ public class RatingService implements IRatingService {
 
     @Override
     public UserVote getUserVoteOnEntry(UserPrincipal user, Long entryId) {
-        if (user == null){
-            return null;
-        }
-        return userVoteRepo.getByEntry_IdAndUser_Id(
-                    entryId,
-                    userService.getCredentialsById(user.getId()).getUser().getId()
-        )
-                .orElse(null);
+        return Optional
+                .ofNullable(user)
+                .flatMap(userPrincipal -> userVoteRepo.getByEntry_IdAndUser_Id(entryId, userService.getCredentialsById(userPrincipal.getId()).getUser().getId()))
+                .orElseThrow(() -> new UsernameNotFoundException("unloggd user dont have votes"));
+
     }
 
 }

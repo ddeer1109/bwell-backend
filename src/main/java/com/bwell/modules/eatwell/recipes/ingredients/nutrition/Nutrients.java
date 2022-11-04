@@ -26,18 +26,13 @@ import static javax.persistence.GenerationType.SEQUENCE;
 //@Entity
 public class Nutrients implements Serializable {
 
-    @Transient
-    @JsonIgnore
     private List<String> PROCESSED_NUTRIENTS = Arrays.asList("Calories", "Protein", "Fat", "Carbohydrates");
 
-
-    @Id
-    @GeneratedValue(strategy = SEQUENCE)
     private long id;
 //
 //    @OneToOne
 //    @JoinColumn(name="ingredient_id", referencedColumnName = "id")
-//    @JsonBackReference
+    @JsonBackReference
     private DetailedIngredient ingredient;
 
     @JsonIgnore

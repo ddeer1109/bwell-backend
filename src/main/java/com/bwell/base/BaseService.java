@@ -4,6 +4,7 @@ import com.bwell.base.content.ContentRepository;
 import com.bwell.base.entry.Entry;
 import com.bwell.base.entry.EntryRepository;
 import com.bwell.base.rating.repository.RatingRepository;
+import com.bwell.exception.ResourceNotFoundException;
 import com.bwell.security.UserPrincipal;
 import com.bwell.user.data.model.User;
 import com.bwell.user.data.service.UserService;
@@ -57,7 +58,7 @@ public class BaseService implements IBaseService{
             User user1 = userService.getCredentialsById(user.getId()).getUser();
             return user1.getId()
                     .equals(author.getId());
-        } catch (NullPointerException e) {
+        } catch (ResourceNotFoundException e) {
             log.info("msg {}", e);
             return false;
         }

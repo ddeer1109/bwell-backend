@@ -20,8 +20,8 @@ import com.bwell.user.data.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -30,19 +30,19 @@ public class RecipesService extends BaseService implements IRecipesService {
 
     private final IngredientService ingredientService;
     private final NutrientsDaoRepository nutrientsDaoRepository;
-    private final IngredientDtoRepository ingredientDtoRepository;
+    private final Map<Long, Nutrients> recipesNutrientsCache = new ConcurrentHashMap<>();
+    private final Map<IngredientDto.IngredientRecord, Nutrients> ingredientNutrientCache = new ConcurrentHashMap<>();
+
 
     public RecipesService(ContentRepository content,
                           EntryRepository entry,
                           RatingRepository rating,
                           UserService user,
                           IngredientService ingredientService,
-                          NutrientsDaoRepository nutrientsDaoRepository,
-                          IngredientDtoRepository ingredientDtoRepository) {
+                          NutrientsDaoRepository nutrientsDaoRepository) {
         super(content, entry, rating, user);
         this.ingredientService = ingredientService;
         this.nutrientsDaoRepository = nutrientsDaoRepository;
-        this.ingredientDtoRepository = ingredientDtoRepository;
     }
 //
 //    @Autowired
@@ -68,10 +68,10 @@ public class RecipesService extends BaseService implements IRecipesService {
         rating.save(recipe.getRating());
         content.saveAll(recipe.getContent());
         Recipe tempRecipe = entry.save(recipe);
-
-        nutrientsDaoRepository
-                .findByRecipe_Id(tempRecipe.getId())
-                .ifPresent(nutr -> nutrientsDaoRepository.deleteById(nutr.getId()));
+//
+//        nutrientsDaoRepository
+//                .findByRecipe_Id(tempRecipe.getId())
+//                .ifPresent(nutr -> nutrientsDaoRepository.deleteById(nutr.getId()));
 //        List<DetailedIngredientDto> ingredients = recipe.getIngredients();
 //        ingredientDtoRepository.saveAll(ingredients.stream()
 //                .map(ing -> {
@@ -92,22 +92,34 @@ public class RecipesService extends BaseService implements IRecipesService {
 //        if (byRecipeId.isPresent()){
 //            return byRecipeId.get().getNutrients().toNutrients();
 //        }
+        log.info("Currently cached recipe {} ", recipesNutrientsCache);
 
-
-        return nutrientsDaoRepository.findByRecipe_Id(recipeId).orElseGet(() -> {
-            Nutrients nutrientsSum = Nutrients.empty();
+        return Optional.ofNullable(recipesNutrientsCache.get(recipeId)).or(() -> {
             List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
 
-            ingredients.forEach(dto -> {
-                log.info("now doing this {}", dto);
-                Nutrients nutrients = cacheIngredientNutrients(dto);
-//                        .findByIngredient_DetailedId(dto.getDetailedId())
-//                        .map(nutrientsDao -> nutrientsDao.getNutrients().toNutrients())
-//                        .orElseGet(() -> cacheIngredientNutrients(dto));
-                nutrientsSum.addNutrients(nutrients);
+            return ingredients.stream().map(this::requestIngredientNutrients).reduce((nutrients, nutrients2) -> {
+                nutrients.addNutrients(nutrients2);
+                return nutrients;
+            }).map(nutrients -> {
+                recipesNutrientsCache.put(recipeId, nutrients);
+                return nutrients;
             });
-            return cacheRecipeNutrients(recipeId, nutrientsSum);
-        }).getNutrients().toNutrients();
+        }).orElse(Nutrients.empty());
+//
+//        return nutrientsDaoRepository.findByRecipe_Id(recipeId).orElseGet(() -> {
+//            Nutrients nutrientsSum = Nutrients.empty();
+//            List<DetailedIngredientDto> ingredients = getRecipe(recipeId).getIngredients();
+//
+//            ingredients.forEach(dto -> {
+//                log.info("now doing this {}", dto);
+//                Nutrients nutrients = cacheIngredientNutrients(dto);
+////                        .findByIngredient_DetailedId(dto.getDetailedId())
+////                        .map(nutrientsDao -> nutrientsDao.getNutrients().toNutrients())
+////                        .orElseGet(() -> cacheIngredientNutrients(dto));
+//                nutrientsSum.addNutrients(nutrients);
+//            });
+//            return cacheRecipeNutrients(recipeId, nutrientsSum);
+//        }).getNutrients().toNutrients();
 //        if (byRecipeId.isEmpty() || !byRecipeId.get().getNutrients().getCalories().equals(nutrientsSum.get(Nutrient.Calories))){
 //            cacheRecipeNutrients(recipeId, nutrientsSum);
 //        }
@@ -130,13 +142,17 @@ public class RecipesService extends BaseService implements IRecipesService {
         }
     }
 
-    private Nutrients cacheIngredientNutrients(DetailedIngredientDto dto) {
-        log.info("dto v1: {} ", dto);
-        DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto.simplifyToIngredientDto());
+    private Nutrients requestIngredientNutrients(DetailedIngredientDto dto) {
+        IngredientDto.IngredientRecord record = dto.simplifyToIngredientDto().getRecord();
+        log.info("Ingredients cache {} ", ingredientNutrientCache.toString());
+        return ingredientNutrientCache.computeIfAbsent(record, (ingredientRecord -> {
+            log.info("dto v1: {} ", dto);
+            DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(dto.simplifyToIngredientDto());
+            Nutrients nutrition = ingredientDetails_api.getNutrition();
+            return nutrition;
+        }));
 //        IngredientDto inDb = ingredientDtoRepository.save(ingredientDetails_api.createDto().simplifyToIngredientDto());
 
-        Nutrients nutrition = ingredientDetails_api.getNutrition();
-        return nutrition;
 //        NutrientsDto nutrientsDto = NutrientsDto.ofNutrients(nutrition);
 //        NutrientsDao nutrientsDao = NutrientsDao.create(inDb, nutrientsDto);
 //

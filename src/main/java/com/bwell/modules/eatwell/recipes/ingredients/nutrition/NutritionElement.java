@@ -1,5 +1,6 @@
 package com.bwell.modules.eatwell.recipes.ingredients.nutrition;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -28,11 +29,11 @@ public class NutritionElement implements Serializable {
     private BigDecimal amount;
     private String unit;
 
-
+    @JsonGetter("name")
     public String getTitle() {
         return title;
     }
-
+    @JsonSetter("name")
     public void setTitle(String title) {
         this.title = title;
         try {

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Random;
 
@@ -22,13 +23,12 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    @PreAuthorize("hasRole('USER')")
-    public Credentials getCurrentUser(@CurrentUser UserPrincipal principal){
-        return service.getCredentialsById(principal.getId());
+//    @PreAuthorize("hasRole('USER')")
+    public Credentials getCurrentUser(@CurrentUser UserPrincipal principal) {
+
+        Credentials credentialsById = service.getCredentialsById(principal);
+        return credentialsById;
     }
-
-
-
 
     @Autowired
     public UserController(UserService service) {
@@ -37,9 +37,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        User userById = service.getUserById(id);
-        System.out.println(userById);
-        return userById;
+        try{
+            return service.getUserById(id);
+        } catch (ResponseStatusException e)
+        {
+            return null;
+        }
     }
 
     @GetMapping("/default")

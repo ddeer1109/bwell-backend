@@ -6,6 +6,7 @@ import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
@@ -35,12 +36,12 @@ public class DetailedIngredient implements Serializable {
     private Unit unit = new Unit("g");
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @Type(type = "jsonb")
-//    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @Type(type = "jsonb")
+    @JsonManagedReference
     @Transient
     private Nutrients nutrition;
-
+//
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
     private Ingredient ingredient;
@@ -52,14 +53,14 @@ public class DetailedIngredient implements Serializable {
         this.ingredient = ingredient;
     }
 
-    @Transient
-    @JsonIgnore
+//    @Transient
+//    @JsonIgnore
     public long getIngredientId() {
         return ingredient.getId();
     }
 
-    @JsonSetter("id")
-    @JsonPropertyOrder("1")
+//    @JsonSetter("id")
+//    @JsonPropertyOrder("1")
     public void setIngredientId(long id) {
         if (ingredient == null) {
             ingredient = new Ingredient();
@@ -127,9 +128,13 @@ public class DetailedIngredient implements Serializable {
     public Nutrients getNutrition() {
         return nutrition;
     }
-    @JsonPropertyOrder("2")
+//    @JsonPropertyOrder("2")
     public void setNutrition(Nutrients nutrition) {
         this.nutrition = nutrition;
+        //        if (this.nutrition == null) {
+//            this.nutrition = new Nutrients();
+//        }
+//        this.nutrition.setNutrients(nutrition.getNutrients());
     }
 
     @Transient
