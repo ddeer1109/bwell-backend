@@ -37,9 +37,9 @@ public class BwellApplication {
         return args -> {
             // read json and write to db
             log.info("!!!! ==>>>!!!! ==>>>!!!! ==>>>!!!! ==>>>!!!! ==>>>!!!! ==>>>");
-            User defaultUser = userService.saveUser(UserService.createEmptyUser());
-            defaultUser.getDietPlan().setUser(defaultUser);
-            User.defaultUserId = defaultUser.getId();
+//            User defaultUser = userService.saveUser(UserService.createEmptyUser());
+//            defaultUser.getDietPlan().setUser(defaultUser);
+//            User.defaultUserId = defaultUser.getId();
             ObjectMapper mapper = new ObjectMapper();
             TypeReference<List<Entry>> typeReference = new TypeReference<List<Entry>>(){};
             InputStream inputStream = TypeReference.class.getResourceAsStream("/json/allEntries.json");

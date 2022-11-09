@@ -16,7 +16,6 @@ spring:
   sql:
     init:
       platform: postgres
-
 app:
   tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
   tokenExpirationMsec: 864000000
@@ -24,4 +23,6 @@ app:
   shouldCreate: ${SHOULD_CREATE:true}
   authorizedRedirectUris:
     - http://localhost:3000/oauth2/redirect
+logging:
+  level: debug
 #debug: true

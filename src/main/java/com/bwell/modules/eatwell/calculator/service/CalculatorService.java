@@ -16,11 +16,13 @@ import com.bwell.modules.eatwell.recipes.ingredients.service.IngredientService;
 import com.bwell.modules.eatwell.recipes.service.RecipesService;
 import com.bwell.user.data.model.User;
 import com.bwell.user.data.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class CalculatorService implements ICalculatorService {
 
     private final CalculatorResultsRepository resultsRepository;
@@ -87,58 +89,52 @@ public class CalculatorService implements ICalculatorService {
     }
 
     public IngredientCoverageDto getCoverageFor(long userId, IngredientDto ingredientDto) {
-
+        log.info("Coverage for Ingredient - before: {}", RecipesService.getRequestsCounter());
         NutrientsDemandDao dao = getDemandForUser(userId);
         DetailedIngredient ingredientDetails_api = ingredientService.getIngredientDetails_API(ingredientDto);
 
         NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
 
+        log.info("Coverage for Ingredient - after: {}", RecipesService.getRequestsCounter());
+
+
         return nutrientsDemand.getIngredientCoverage(ingredientDetails_api);
     }
-//
-//    public IngredientCoverageDto getCoverageFor(long userId, List<IngredientDto> ingredientsDto) {
-//        return null;
-////        NutrientsDemandDao dao = getDemandForUser(userId);
-////
-////        List<DetailedIngredient> detailedIngredients = ingredientsDto
-////                .stream()
-////                .map(ingredientService::getIngredientDetails_API)
-////                .collect(Collectors.toList());
-////
-////        NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
-////
-////        return nutrientsDemand.getIngredientsCoverage(detailedIngredients);
-//    }
+
     @Override
     public IngredientCoverageDto getCoverageFor(long userId, long recipeId) {
+        log.info("Coverage for Recipe - before: {}", RecipesService.getRequestsCounter());
 
         NutrientsDemandDao dao = getDemandForUser(userId);
 
         NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
         Nutrients nutrients = recipeService.sumIngredientsNutrition(recipeId);
-        logger.info("ASDFASDF {},", nutrients);
         IngredientCoverageDto ingredientsCoverage = nutrientsDemand.getIngredientsCoverage(NutrientsDto.ofNutrients(nutrients));
-        logger.info("ASDFASDF ASDFASDF ASDFASDF ASDFASDF ASDFASDF {},", ingredientsCoverage);
+        log.info("Coverage for Recipe - after: {}", RecipesService.getRequestsCounter());
         return ingredientsCoverage;
     }
 
     @Override
     public IngredientCoverageDto getCoverageOfDietPlan(long userId){
+        log.info("Coverage for DietPlan - before: {}", RecipesService.getRequestsCounter());
+
         NutrientsDemandDao dao = getDemandForUser(userId);
 
         NutrientsDemand nutrientsDemand = NutrientsDemand.ofDao(dao);
 
         Nutrients nutrients = recipeService.sumRecipesIngredientsNutrition(dietPlanService.getDietPlan(userId).getSetMeals());
+        log.info("Coverage for DietPlan - after: {}", RecipesService.getRequestsCounter());
 
         return nutrientsDemand.getIngredientsCoverage(NutrientsDto.ofNutrients(nutrients));
     }
 
     @Override
     public NutrientsDto getNutrientsSumOfDietPlan(long userId) {
+        log.info("Coverage for SumDietplan - before: {}", RecipesService.getRequestsCounter());
+
         Nutrients nutrients = recipeService.sumRecipesIngredientsNutrition(dietPlanService.getDietPlan(userId).getSetMeals());
+        log.info("Coverage for SumDietplan - after: {}", RecipesService.getRequestsCounter());
 
         return NutrientsDto.ofNutrients(nutrients);
-
-
     }
 }

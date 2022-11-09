@@ -27,6 +27,15 @@ public class DetailedIngredient implements Serializable {
     @Column(name="id")
     private long id;
 
+    @Override
+    public String toString() {
+        return ingredient.getName() +" {" +
+                " amount = " + amount +
+                ", unit = " + unit +
+                ", nutrition = " + nutrition +
+                " }";
+    }
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private BigDecimal amount;
 
@@ -38,7 +47,7 @@ public class DetailedIngredient implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(cascade = CascadeType.ALL)
     @Type(type = "jsonb")
-    @JsonManagedReference
+//    @JsonManagedReference
     @Transient
     private Nutrients nutrition;
 //

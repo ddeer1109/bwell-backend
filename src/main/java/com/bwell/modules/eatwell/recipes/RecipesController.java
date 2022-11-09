@@ -2,9 +2,12 @@ package com.bwell.modules.eatwell.recipes;
 
 
 import com.bwell.base.entry.Entry;
+import com.bwell.modules.eatwell.recipes.ingredients.nutrition.Nutrients;
 import com.bwell.modules.eatwell.recipes.ingredients.nutrition.NutrientsDto;
 import com.bwell.modules.eatwell.recipes.model.Recipe;
+import com.bwell.modules.eatwell.recipes.service.IRecipeServiceWithNutritionExtension;
 import com.bwell.modules.eatwell.recipes.service.IRecipesService;
+import com.bwell.modules.eatwell.recipes.service.RecipeIngredientsDto;
 import com.bwell.security.CurrentUser;
 import com.bwell.security.UserPrincipal;
 import com.bwell.user.data.service.UserService;
@@ -20,13 +23,11 @@ import java.util.List;
 @RequestMapping("/api/v1/eatwell/recipes")
 public class RecipesController {
 
-    private final IRecipesService service;
-    private final UserService userService;
+    private final IRecipeServiceWithNutritionExtension service;
 
     @Autowired
-    public RecipesController(IRecipesService service, UserService service1) {
+    public RecipesController(IRecipeServiceWithNutritionExtension service) {
         this.service = service;
-        this.userService = service1;
     }
 
 
@@ -45,7 +46,12 @@ public class RecipesController {
     public NutrientsDto getRecipeIngredientsSum(@PathVariable("id") Long id){
         return NutrientsDto.ofNutrients(service.sumIngredientsNutrition(id));
     }
-//
+
+    @GetMapping("/{id}/ingredients/nutrition")
+    public RecipeIngredientsDto getNutrientsOfRecipeIngredients(@PathVariable("id") Long recipeId) {
+        return service.getNutrientsOfRecipeIngredients(service.getRecipe(recipeId));
+    }
+    //
 //    @PostMapping("/recipes/nutrition")
 //    public NutrientsDto getRecipesIngredientsSum(@RequestBody List<Recipe> recipes){
 //        return NutrientsDto.ofNutrients(service.sumRecipesIngredientsNutrition(recipes));

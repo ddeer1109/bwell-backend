@@ -95,7 +95,7 @@ public class RequestingService implements IIRequestingService {
                 empty.setNutrients(MockObjectsFactory.nutritionElements());
                 detailedIngredient.setNutrition(empty);
             }
-            detailedIngredient.getNutrition().setIngredient(detailedIngredient);
+//            detailedIngredient.getNutrition().setIngredient(detailedIngredient);
             return detailedIngredient;
         } catch (JsonProcessingException e) {
             e.printStackTrace();

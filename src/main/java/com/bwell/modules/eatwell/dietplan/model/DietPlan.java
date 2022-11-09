@@ -4,6 +4,8 @@ import com.bwell.modules.eatwell.recipes.model.Recipe;
 import com.bwell.user.data.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Entity(name="diet_plan")
 @Data
+@EqualsAndHashCode
 public class DietPlan {
 
     @Id
@@ -20,7 +23,9 @@ public class DietPlan {
     private Long id;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne( mappedBy = "dietPlan")
+    @JsonIgnore
+    @ToString.Exclude
     private User user;
 
     @JoinColumn

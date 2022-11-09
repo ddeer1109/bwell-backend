@@ -10,13 +10,6 @@ public class CalculatorFactory {
     static {
         CALCULATORS = new HashMap<>();
         CALCULATORS.put(StrategyCodes.HarrisBenedict, BasalDemandCalculator_HarrisBenedict::new);
-//        CALCULATORS.put(StrategyCodes.HarrisBenedict, () -> new BasalDemandCalculator_HarrisBenedict());
-//        CALCULATORS.put(StrategyCodes.HarrisBenedict, new Command() {
-//            @Override
-//            public CalculatorStrategy create() {
-//                return new BasalDemandCalculator_HarrisBenedict();
-//            }
-//        });
         CALCULATORS.put(StrategyCodes.Miffin, BasalDemandCalculator_Miffin::new);
         CALCULATORS.put(StrategyCodes.Complete, CompleteDemandCalculator_::new);
     }

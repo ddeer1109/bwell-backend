@@ -33,6 +33,7 @@ public class DetailedIngredientDto implements Serializable {
         ingredientDto.setDetailedId(detailedId);
         ingredientDto.setAmount((int)amount);
         ingredientDto.setUnit(unit.getName());
+        ingredientDto.setName(ingredient);
         return ingredientDto;
     }
 

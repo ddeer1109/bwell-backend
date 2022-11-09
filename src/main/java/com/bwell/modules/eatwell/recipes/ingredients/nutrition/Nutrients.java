@@ -24,43 +24,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 //@Table(name = "nutrients")
 //@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 //@Entity
-public class Nutrients implements Serializable {
-
-    private List<String> PROCESSED_NUTRIENTS = Arrays.asList("Calories", "Protein", "Fat", "Carbohydrates");
-
-    private long id;
-//
-//    @OneToOne
-//    @JoinColumn(name="ingredient_id", referencedColumnName = "id")
-    @JsonBackReference
-    private DetailedIngredient ingredient;
+public class Nutrients implements Serializable, Comparable<Nutrients> {
 
     @JsonIgnore
-    public DetailedIngredient getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(DetailedIngredient ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public long getId(){
-        return id;
-    }
-
-    public void setId(long id){
-        id = id;
-    }
-
-    public long getIngredientId(){
-        return ingredient.getId();
-    }
-
-    public void setIngredientId(long id){
-        if (ingredient == null)
-            ingredient = new DetailedIngredient();
-        ingredient.setId(id);
-    }
+    private final List<String> PROCESSED_NUTRIENTS = Arrays.asList("Calories", "Protein", "Fat", "Carbohydrates");
 
     @Type(type = "jsonb")
     @Column(columnDefinition =  "jsonb")
@@ -83,16 +50,19 @@ public class Nutrients implements Serializable {
         });
     }
 
-    public void addNutrients(Nutrients incomingNutrients){
+    public Nutrients addNutrients(Nutrients incomingNutrients){
 
-        incomingNutrients.getNutrients().forEach(incomingNutritionElement -> {
+        List<NutritionElement> elements = incomingNutrients.getNutrients().stream().map(incomingNutritionElement -> {
             Nutrient elementType = incomingNutritionElement.getType();
             BigDecimal incomingNutritionElementAmount = incomingNutritionElement.getAmount();
 
             NutritionElement instanceNutritionElement = get(elementType);
             BigDecimal currentAmount = instanceNutritionElement.getAmount();
-            instanceNutritionElement.setAmount(currentAmount.add(incomingNutritionElementAmount));
-        });
+//            instanceNutritionElement.setAmount(currentAmount.add(incomingNutritionElementAmount));
+            NutritionElement nutritionElement = Nutrient.valueOf(elementType.name).create(currentAmount.add(incomingNutritionElementAmount));
+            return nutritionElement;
+        }).collect(Collectors.toList());
+        return ofNutritionElementsList(elements);
 
     }
 
@@ -103,6 +73,21 @@ public class Nutrients implements Serializable {
                 .map(nutrient -> nutrient.create(0))
                 .collect(Collectors.toList());
         nutrients.setNutrients(emptyNutrElements);
+        return nutrients;
+    }
+
+    public static Nutrients ofNutritionElementsList(List<NutritionElement> elements) {
+
+        Collection<NutritionElement> values = elements.stream().collect(Collectors.toMap(
+                NutritionElement::getTitle,
+                e -> Nutrient.valueOf(e.getTitle()).create(e.getAmount()),
+                (a, b) -> {
+                    a.setAmount(a.getAmount().add(b.getAmount()));
+                    return a;
+                }
+        )).values();
+        Nutrients nutrients = new Nutrients();
+        nutrients.nutrients = values.stream().collect(Collectors.toList());
         return nutrients;
     }
 
@@ -139,10 +124,29 @@ public class Nutrients implements Serializable {
 
     @Override
     public String toString() {
-        return "Nutrients{" +
-//                "id=" + ingredient.getName() +
-                ", nutrients=" + nutrients +
-                '}';
+        return "Nutrients{ " + nutrients +
+                " }";
+    }
+
+
+
+    @Override
+    public int compareTo(Nutrients o) {
+        if (o == null) {
+            return 1;
+        }
+
+
+        BigDecimal amount = o.get(Nutrient.Calories).getAmount();
+        BigDecimal amount1 = get(Nutrient.Calories).getAmount();
+
+
+        System.out.println("AMOUNT 1: " + amount);
+        System.out.println("AMOUNT 2: " + amount1);
+        return amount1
+                .compareTo(amount);
+
+
     }
 }
 

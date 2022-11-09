@@ -47,18 +47,7 @@ public class MockRequestingServiceContextConfiguration {
         return new RequestingService(urlBuilder, jacksonObjectMapper) {
             @Override
             public String sendRequest(String url) {
-                try {
-                    String path = "src/test/resources/ingredient-request.json";
-                    String s = new String(Files.readAllBytes(Paths.get(path)));
-                    System.out.println(s);
-                    return s;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    return "";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return "";
-                }
+                return getStringFromJsonFile();
             }
 
             @Override
@@ -67,5 +56,20 @@ public class MockRequestingServiceContextConfiguration {
             }
             // implement methods
         };
+    }
+
+    private String getStringFromJsonFile() {
+        try {
+            String path = "src/test/resources/ingredient-request.json";
+            String s = new String(Files.readAllBytes(Paths.get(path)));
+            System.out.println(s);
+            return s;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

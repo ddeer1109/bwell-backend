@@ -76,10 +76,13 @@ public class RatingService implements IRatingService {
 
     @Override
     public UserVote getUserVoteOnEntry(UserPrincipal user, Long entryId) {
+        if (user == null) {
+            throw new UsernameNotFoundException("unloggd user dont have votes");
+        }
         return Optional
                 .ofNullable(user)
                 .flatMap(userPrincipal -> userVoteRepo.getByEntry_IdAndUser_Id(entryId, userService.getCredentialsById(userPrincipal.getId()).getUser().getId()))
-                .orElseThrow(() -> new UsernameNotFoundException("unloggd user dont have votes"));
+                .orElse(null);
 
     }
 

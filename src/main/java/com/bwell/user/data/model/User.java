@@ -3,7 +3,7 @@ package com.bwell.user.data.model;
 import com.bwell.modules.eatwell.calculator.model.CalculatorData;
 import com.bwell.modules.eatwell.calculator.model.dtos.NutrientsDemandDao;
 import com.bwell.modules.eatwell.dietplan.model.DietPlan;
-import com.bwell.user.favourites.model.Favourites;
+import com.bwell.user.favourites.Favourites;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -21,7 +21,7 @@ public class User {
 
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "favourites")
+    @JoinColumn(name="favourites_id", referencedColumnName = "id")
     private Favourites favourites;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

@@ -12,6 +12,7 @@ public class IngredientDto implements Serializable {
     private int id;
     private double amount;
     private String unit;
+    private String name;
 
     @Id
     @GeneratedValue
@@ -31,22 +32,40 @@ public class IngredientDto implements Serializable {
     }
 
     public IngredientRecord getRecord() {
-        return IngredientRecord.generate(id, amount, unit);
+        return IngredientRecord.generate(id, amount, unit, name);
     }
 
     public final static class IngredientRecord {
         private final int id;
         private final double amount;
         private final String unit;
+        private final String name;
 
-        private IngredientRecord(int id, double amount, String unit) {
+        public int getId() {
+            return id;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        private IngredientRecord(int id, double amount, String unit, String name) {
             this.id = id;
             this.amount = amount;
             this.unit = unit;
+            this.name = name;
         }
 
-        static IngredientRecord generate(int id, double amount, String unit) {
-            return new IngredientRecord(id, amount, unit);
+        static IngredientRecord generate(int id, double amount, String unit, String name) {
+            return new IngredientRecord(id, amount, unit, name);
         }
 
         @Override
@@ -54,12 +73,22 @@ public class IngredientDto implements Serializable {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             IngredientRecord that = (IngredientRecord) o;
-            return id == that.id && Double.compare(that.amount, amount) == 0 && unit.equals(that.unit);
+            return id == that.id && Double.compare(that.amount, amount) == 0 && Objects.equals(unit, that.unit) && Objects.equals(name, that.name);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, amount, unit);
+            return Objects.hash(id, amount, unit, name);
+        }
+
+        @Override
+        public String toString() {
+            return "IR{" +
+                    "id=" + id +
+                    ", amount=" + amount +
+                    ", unit='" + unit + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
 }

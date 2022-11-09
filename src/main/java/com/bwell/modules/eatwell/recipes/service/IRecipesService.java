@@ -12,6 +12,7 @@ public interface IRecipesService  extends IBaseService {
     List<Entry> getAllRecipes();
     Recipe addRecipe(Recipe recipe);
     boolean deleteRecipe(Long id);
-    Nutrients sumIngredientsNutrition(long id);
-    Nutrients sumRecipesIngredientsNutrition(List<Recipe> recipe);
+
+
+
 }

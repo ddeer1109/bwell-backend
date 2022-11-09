@@ -25,7 +25,7 @@ public class Unit implements Serializable {
 
     @Override
     public String toString() {
-        return "Unit{" +
+        return "Unit{ " +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

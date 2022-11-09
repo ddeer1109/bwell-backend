@@ -86,11 +86,10 @@ public class NutritionElement implements Serializable {
 
     @Override
     public String toString() {
-        return "NutritionElement{" +
-                "title='" + title + '\'' +
-                ", amount=" + amount +
-                ", unit='" + unit + '\'' +
-                '}';
+        return title+" { " +
+                " amount = " + amount +
+                ", unit = '" + unit + '\'' +
+                " }";
     }
 
     @Override

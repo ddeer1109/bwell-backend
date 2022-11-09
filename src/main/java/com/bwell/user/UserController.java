@@ -5,6 +5,7 @@ import com.bwell.security.UserPrincipal;
 import com.bwell.user.data.model.Credentials;
 import com.bwell.user.data.model.User;
 import com.bwell.user.data.service.UserService;
+import com.bwell.user.favourites.Favourites;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,13 +18,13 @@ import java.util.Random;
 @RestController
 @CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/users")
+
 public class UserController {
 
     private final UserService service;
 
 
     @GetMapping("/profile")
-//    @PreAuthorize("hasRole('USER')")
     public Credentials getCurrentUser(@CurrentUser UserPrincipal principal) {
 
         Credentials credentialsById = service.getCredentialsById(principal);
@@ -36,6 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
+
     public User getUserById(@PathVariable Long id) {
         try{
             return service.getUserById(id);
@@ -46,6 +49,8 @@ public class UserController {
     }
 
     @GetMapping("/default")
+//    @PreAuthorize("hasRole('USER')")
+
     public User getDefaultUser() {
         try{
             return service.getUserById(User.defaultUserId);
@@ -58,17 +63,24 @@ public class UserController {
     }
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public User addUser(@RequestBody User user) {
         System.out.println(user);
         return service.saveUser(user);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public User updateUser(@RequestBody User user){
 
         System.out.println(user);
 
         return service.saveUser(user);
+    }
+
+    @PostMapping("/favourites")
+    public Favourites saveFavourites(@RequestBody Favourites favs) {
+        return service.saveFavourites(favs);
     }
 
 

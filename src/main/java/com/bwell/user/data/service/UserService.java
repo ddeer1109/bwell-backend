@@ -7,7 +7,8 @@ import com.bwell.user.data.model.Credentials;
 import com.bwell.user.data.model.User;
 import com.bwell.user.data.repository.CredentialsRepository;
 import com.bwell.user.data.repository.UserRepository;
-import com.bwell.user.favourites.model.Favourites;
+import com.bwell.user.favourites.Favourites;
+import com.bwell.user.favourites.FavouritesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,19 +17,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
 public class UserService implements IUserService {
 
-    UserRepository repository;
-
-    CredentialsRepository credRepo;
+    private final UserRepository repository;
+    private final FavouritesRepository favouritesRepository;
+    private final CredentialsRepository credRepo;
 
     @Autowired
-    public UserService(UserRepository repository, CredentialsRepository credRepo) {
+    public UserService(UserRepository repository, FavouritesRepository favouritesRepository, CredentialsRepository credRepo) {
         this.repository = repository;
+        this.favouritesRepository = favouritesRepository;
         this.credRepo = credRepo;
     }
 
@@ -51,20 +51,24 @@ public class UserService implements IUserService {
         return credRepo.findById(principal.getId()).orElseThrow(() -> new ResourceNotFoundException("User {} {} not found", "ID", principal.getId()));
     }
 
-
+    public Favourites saveFavourites(Favourites favs){
+        return favouritesRepository.save(favs);
+    }
     public User saveUser(User user) {
         log.info("user - {}", user);
-        return repository.findById(user.getId())
-                .stream()
-                .map(dbUsr -> {
-                    dbUsr.setFavourites(user.getFavourites());
-                    dbUsr.setDietPlan(user.getDietPlan());
-                    dbUsr.setCalculatorData(user.getCalculatorData());
-                    dbUsr.setNutrientsDemand(user.getNutrientsDemand());
-                    return repository.save(dbUsr);
-                })
-                .findFirst()
-                .orElse(repository.save(user));
+       return  repository.saveAndFlush(user);
+//        return repository.save(user);
+//        return repository.findById(user.getId())
+//                .stream()
+//                .map(dbUsr -> {
+//                    dbUsr.setFavourites(user.getFavourites());
+//                    dbUsr.setDietPlan(user.getDietPlan());
+//                    dbUsr.setCalculatorData(user.getCalculatorData());
+//                    dbUsr.setNutrientsDemand(user.getNutrientsDemand());
+//                    return repository.save(dbUsr);
+//                })
+//                .findFirst()
+//                .orElse(repository.save(user));
     }
 
     @Override

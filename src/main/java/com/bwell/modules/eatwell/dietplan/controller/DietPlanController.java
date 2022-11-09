@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("${FRONTEND_HOST}")
 @RequestMapping("/api/v1/eatwell/dietplan")
+@PreAuthorize("hasRole('USER')")
 public class DietPlanController {
 
     private final IDietPlanService service;
